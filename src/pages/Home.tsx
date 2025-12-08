@@ -43,7 +43,7 @@ export default function Home() {
                 <div className="flex justify-center items-center flex-col gap-20">
                     {
                         aboutItems.map((item, index) => (
-                            <AboutCard imageUrl={BackgroundImage} key={index} side={item.side} />
+                            <AboutCard key={index} {...item} />
                         ))
                     }
                 </div>
