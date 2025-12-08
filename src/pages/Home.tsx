@@ -14,9 +14,9 @@ export default function Home() {
                     <h2 className="text-2xl font-light">Universidade Federal do Piauí</h2>
                 </div>
                 <div className="text-white flex flex-wrap items-center justify-center gap-5">
-                    <button className="cursor-pointer border border-white py-1.5 px-15 rounded-lg hover:bg-white hover:text-darkgray transition-colors duration-300">Ver boletins</button>
+                    <button className="cursor-pointer border border-white py-1.5 px-15 rounded-lg hover:bg-white hover:text-darkgray transition-colors duration-300 min-w-55">Ver boletins</button>
                     <div className="hidden sm:block w-px h-10 bg-white rounded-full" />
-                    <button className="cursor-pointer bg-darkpink py-1.5 px-15 rounded-lg hover:bg-pink transition-colors duration-300">Saiba mais</button>
+                    <button className="cursor-pointer bg-darkpink py-1.5 px-15 rounded-lg hover:bg-pink transition-colors duration-300 min-w-55">Saiba mais</button>
                 </div>
             </div>
 

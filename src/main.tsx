@@ -5,6 +5,7 @@ import Institutional from './pages/Institutional'
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom'
 import './index.css'
 import Layout from './Layout'
+import Equipe from './pages/Equipe'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -13,6 +14,7 @@ createRoot(document.getElementById('root')!).render(
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/institutional" element={<Institutional />} />
+          <Route path="/equipe" element={<Equipe />} />
         </Route>
       </Routes>
     </Router>

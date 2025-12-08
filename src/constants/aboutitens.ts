@@ -16,8 +16,8 @@ export const aboutItems:AboutItem[] = [
     }, {
         title: "EQUIPE",
         description: "Promover e publicar eventos, pesquisas e ensaios produzidos a partir do Grupo de Análise de Economia Política (GAEP) e do Programa de Pesquisas sobre o Nordeste (ProNordeste), ambos da Universidade Federal do Piauí (UFPI) em parceria  com docentes de outras IES`s.",
-        imageUrl: "/image_2.jpeg",
-        url: "#",
+        imageUrl: "/image_1.jpeg",
+        url: "/equipe",
         side: "left"
     }
 ]

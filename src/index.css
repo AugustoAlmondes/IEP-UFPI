@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-*{
+* {
   font-family: 'Inter', sans-serif;
   /* font-weight: 400; */
 }
@@ -11,4 +11,14 @@
   --color-white: #E8E8E8;
   --color-darkpink: #7F1146;
   --color-pink: #E470A8;
+}
+
+@layer components {
+  .btn-pink {
+    @apply text-white cursor-pointer bg-darkpink py-1.5 px-15 rounded-lg hover:bg-pink transition-colors duration-300 border-white min-w-55;
+  }
+
+  .btn-outline {
+    @apply cursor-pointer border border-white py-1.5 px-15 rounded-lg hover:bg-white hover:text-darkgray transition-colors duration-300 min-w-55;
+  }
 }

@@ -19,12 +19,12 @@ export default function Institutional() {
                 }}
             >
                 <div className="text-white text-center">
-                    <h1 className="text-4xl font-bold mb-8">{institutionalItem.title}</h1>
-                    <h2 className="text-1xl font-light mx-60">{institutionalItem.description}</h2>
+                    <h1 className="text-5xl font-bold mb-8">{institutionalItem.title}</h1>
+                    <h2 className="text-1xl font-light text-justify max-w-[700px]">{institutionalItem.description}</h2>
                 </div>
                 <div className="text-white flex flex-wrap items-center justify-center gap-5">
                     <a href="\">
-                        <button className="cursor-pointer border border-white py-1.5 px-15 rounded-lg hover:bg-white hover:text-darkgray transition-colors duration-300">Voltar ao início</button>
+                        <button className="cursor-pointer border border-white py-1.5 px-15 rounded-lg hover:bg-white hover:text-darkgray transition-colors duration-300 min-w-55">Voltar ao início</button>
                     </a>
                 </div>
             </div>
