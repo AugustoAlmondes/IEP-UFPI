@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Logo from "../assets/width_766.webp";
 import { navItems } from "../constants/navitems";
+import { Link } from "react-router-dom";
 export default function Header() {
 
     const [isScrolled, setIsScrolled] = useState(false);
@@ -40,7 +41,9 @@ export default function Header() {
                             key={index}
                             className="hover:text-pink cursor-pointer transition-colors duration-200"
                         >
-                            {item.label}
+                            <Link to={item.href} className="inherit">
+                                {item.label}
+                            </Link>
                         </li>
                     ))}
             </ul>
