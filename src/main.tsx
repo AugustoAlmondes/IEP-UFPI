@@ -6,9 +6,24 @@ import { Route, Routes, BrowserRouter as Router } from 'react-router-dom'
 import './index.css'
 import Layout from './Layout'
 import Equipe from './pages/Equipe'
+import { ToastContainer } from 'react-toastify'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
+  
+    <ToastContainer
+      position="top-center"
+      autoClose={2000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      theme='dark'
+      rtl={false}
+      pauseOnFocusLoss={false}
+      pauseOnHover={false}
+      draggable
+    />
+
     <Router>
       <Routes>
         <Route element={<Layout />}>

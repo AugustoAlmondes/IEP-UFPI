@@ -5,7 +5,7 @@ export const teamMembers: TeamMember[] = [
         name: "Augusto Almondes",
         position: "Desenvolvedor",
         imageUrl: "https://github.com/augustoalmondes.png",
-        url: "https://github.com/augustoalmondes",
+        url: "https://github.com/AugustoAlmondes",
     },
     {
         name: "João Vitor",
