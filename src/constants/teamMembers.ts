@@ -17,7 +17,7 @@ export const teamMembers: TeamMember[] = [
         name: "Matheus Lima",
         position: "Desenvolvedor",
         imageUrl: "https://github.com/MatheusLima.png",
-        url: "https://github.com/MatheusLima",
+        // url: "https://github.com/MatheusLima",
     },
     {
         name: "Rafael Pinto",
@@ -29,7 +29,6 @@ export const teamMembers: TeamMember[] = [
         name: "Thiago Lima",
         position: "Desenvolvedor",
         imageUrl: "https://github.com/Thiago.png",
-        url: "https://github.com/ThiagoLima",
     },
     {
         name: "Vitoria Lima",

@@ -1,5 +1,6 @@
 // import './Equipe.module.css';
 // import styles from './Equipe.module.css';
+import TeamCard from "../components/TeamCard";
 import { teamMembers } from "../constants/teamMembers";
 
 export default function Equipe() {
@@ -28,22 +29,14 @@ export default function Equipe() {
             </div>
 
             <div className="bg-white pb-20">
-                <h2 className="text-5xl text-darkpink font-bold text-center">MEMBROS</h2>
-
-                {/* VIEW USER CARD COMPONENT */}
-                {/* <div className="grid grid-cols-3 items-center justify-center gap-10"> */}
-                <div className="w-max">
-                    <div className={`flex items-start flex-col`}>
-                        <div className="w-[300px] h-[300px] relative">
-                            <img src="https://github.com/augustoalmondes.png" alt="Augusto Almondes" />
-                            <div className="absolute h-7 w-full bg-darkpink bottom-0" />
-                        </div>
-                        <h3 className="w-full my-5 text-lg">Augusto Almondes (Desenvolvedor)</h3>
-                        <button className="btn-pink text ">Ver perfil</button>
-                    </div>
+                <h2 className="text-5xl text-darkpink font-bold text-center mb-10">MEMBROS</h2>
+                <div className="grid grid-cols-3 items-center justify-center gap-10">
+                    {
+                        teamMembers.map((member, index) => (
+                            <TeamCard key={index} member={member} />
+                        ))
+                    }
                 </div>
-
-                {/* </div> */}
             </div>
 
         </>
