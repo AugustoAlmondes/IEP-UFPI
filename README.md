@@ -1,73 +1,86 @@
-# React + TypeScript + Vite
+# IEP — Sistema de Informação (UFPI)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Front-end application for the IEP course project at UFPI. Built with React, TypeScript and Vite as a lightweight, fast development and build setup. This repository contains the client-side code and tooling for the information system prototype.
 
-Currently, two official plugins are available:
+## Key features
+- React + TypeScript for type-safe UI development
+- Vite for fast HMR and builds
+- ESLint + recommended TypeScript rules
+- Opinionated project structure for scalability
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Getting started
 
-## React Compiler
+Prerequisites:
+- Node.js (16+ recommended)
+- npm or yarn
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Install dependencies:
+```bash
+npm install
+# or
+yarn
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Run in development:
+```bash
+npm run dev
+# or
+yarn dev
 ```
+
+Build for production:
+```bash
+npm run build
+# or
+yarn build
+```
+
+Preview production build locally:
+```bash
+npm run preview
+# or
+yarn preview
+```
+
+Linting:
+```bash
+npm run lint
+# or
+yarn lint
+```
+
+## Recommended scripts (package.json)
+- dev: start Vite dev server
+- build: produce optimized production build
+- preview: preview the production build locally
+- lint: run ESLint
+- format: run prettier (if configured)
+- test: run unit tests (if configured)
+
+## Project structure (example)
+- src/
+  - main.tsx — app entry
+  - App.tsx — root component
+  - pages/ — route views
+  - components/ — reusable UI components
+  - hooks/ — custom React hooks
+  - services/ — API clients and data access
+  - styles/ — global styles and tokens
+- public/ — static assets
+- index.html
+- tsconfig.json
+- vite.config.ts
+- eslint.config.js
+
+## Configuration notes
+- Use type-aware ESLint rules for better TypeScript linting (see tsconfig.project references).
+- If you want to enable the React Compiler or alternative fast refresh implementations, follow official React/Vite docs.
+
+## Contributing
+- Follow the existing code style and run linter before commits.
+- Create feature branches and open PRs with a clear description and testing steps.
+
+## License
+Specify your license here (e.g., MIT) or follow your institution's guidelines.
+
+For questions or setup issues, open an issue in this repository.
