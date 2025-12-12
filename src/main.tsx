@@ -2,15 +2,20 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import Home from './pages/Home'
 import Institutional from './pages/Institutional'
-import { Route, Routes, BrowserRouter as Router } from 'react-router-dom'
+import {
+  Route,
+  Routes,
+  BrowserRouter as Router
+} from 'react-router-dom'
 import './index.css'
 import Layout from './Layout'
 import Equipe from './pages/Equipe'
 import { ToastContainer } from 'react-toastify'
+import Login from './pages/Login'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-  
+
     <ToastContainer
       position="top-center"
       autoClose={2000}
@@ -30,6 +35,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/" element={<Home />} />
           <Route path="/institutional" element={<Institutional />} />
           <Route path="/equipe" element={<Equipe />} />
+          {/* <Route path="/login" element={<Login />} /> */}
         </Route>
       </Routes>
     </Router>
