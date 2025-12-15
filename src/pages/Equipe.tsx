@@ -30,7 +30,7 @@ export default function Equipe() {
     return (
         <>
             <div className=" bg-white">
-                <div className="w-full h-[600px] flex flex-col items-center gap-10 justify-center relative bg-[url(image_1.jpeg)] bg-cover bg-center bg-filter bg-blend-multiply bg-black/70">
+                <div className="w-full h-[800px] flex flex-col items-center gap-10 justify-center relative bg-[url(image_1.jpeg)] bg-cover bg-center bg-filter bg-blend-multiply bg-black/70">
                     <div className="text-white text-center">
                         <h1 className="text-5xl font-bold mb-8">
                             NOSSA EQUIPE
