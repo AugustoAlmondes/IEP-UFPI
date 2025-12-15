@@ -35,8 +35,8 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/" element={<Home />} />
           <Route path="/institutional" element={<Institutional />} />
           <Route path="/equipe" element={<Equipe />} />
-          {/* <Route path="/login" element={<Login />} /> */}
         </Route>
+        <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
   </StrictMode>,
