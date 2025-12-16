@@ -1,7 +1,8 @@
 import { TbPointFilled } from "react-icons/tb";
+import { IoIosAddCircle } from "react-icons/io";
 
 
-export default function FormNewsletter() {
+export default function FormNewsletter() {    
     return (
         <div className="bg-white pb-20 pt-30 px-4">
             <h2 className="text-4xl sm:text-5xl text-darkpink font-bold text-center mb-10">
@@ -49,13 +50,38 @@ export default function FormNewsletter() {
                     </div>
                 </section>
                 
-                <section className="flex items-center mb-10">
-                    <div className="flex items-center">
-                        <TbPointFilled className="text-darkpink text-xl mr-2" />
-                        <h3 className="text-xl font-bold">
-                            Autores
-                        </h3>
+                <section className="items-center mb-10">
+                    <div className="flex justify-between items-center w-full">
+                        <div className="items-center w-full flex">
+                            <TbPointFilled className="text-darkpink text-xl mr-2" />
+                            <h3 className="text-xl font-bold">
+                                Autores
+                            </h3>
+                        </div>
+                        <div>
+                            <IoIosAddCircle className="text-pink cursor-pointer" size={28}/>
+                        </div>
                     </div>
+
+                    <div className="flex text-base my-4 w-full gap-6">
+                        <div className="w-full">
+                            <label>Nome Completo</label>
+                            <input 
+                            type="text" 
+                            placeholder="Digite o nome do autor" 
+                            required
+                            className="text-base placeholder-opacity-18 w-full border-1 border-pink bg-[var(--color-gray2)] rounded-md px-4 h-7"/>
+                        </div>
+                        <div className="w-full">
+                            <label>Cargo</label>
+                            <input 
+                                type="text" 
+                                placeholder="Digite o cargo do autor" 
+                                required
+                                className="text-base placeholder-opacity-18 w-full border-1 border-pink bg-[var(--color-gray2)] rounded-md px-4 h-7"/>
+                        </div>
+                    </div>
+
                 </section>
                 
                 <section className="flex items-center mb-10">
