@@ -9,7 +9,7 @@ import { contactItems } from '../constants/contactItems';
 
 export default function Footer() {
     return (
-        <footer className="bg-darkgray text-white grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4gap-10 py-10 px-6 lg:px-15">
+        <footer className="bg-darkgray text-white grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 py-10 px-6 lg:px-15">
 
             {/* Coluna 1 */}
             <div>
