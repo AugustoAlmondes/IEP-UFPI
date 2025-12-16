@@ -14,7 +14,7 @@ export default function Footer() {
             grid 
             grid-cols-1 
             sm:grid-cols-2 
-            lg:grid-cols-4 
+            lg:grid-cols-4
             gap-10 
             py-10 
             px-6 
@@ -27,8 +27,8 @@ export default function Footer() {
                     <img className="w-20" src={Logo} />
                     <div>
                         <h3 className="text-2xl font-bold">IEP/UFPI</h3>
-                        <p>Instituto de Economia Política</p>
-                        <p>Universidade Federal do Piauí</p>
+                        <p className='text-sm'>Instituto de Economia Política</p>
+                        <p className='text-sm'>Universidade Federal do Piauí</p>
                     </div>
                 </div>
 
@@ -42,13 +42,12 @@ export default function Footer() {
                 </div>
             </div>
 
-            {/* Coluna 2 */}
             <div>
                 <h3 className="text-pink font-semibold">Atalhos</h3>
-                <ul className="flex flex-col gap-3 mt-5">
+                <ul className="flex flex-col gap-1 mt-5">
                     {navItems.map((item, index) => (
                         <li key={index}>
-                            <a href={item.href} className="hover:text-pink transition-colors duration-200">
+                            <a href={item.href} className="hover:text-pink text-sm transition-colors duration-200">
                                 {item.label}
                             </a>
                         </li>
@@ -56,12 +55,11 @@ export default function Footer() {
                 </ul>
             </div>
 
-            {/* Coluna 3 */}
             <div>
                 <h3 className="text-pink font-semibold">Endereços</h3>
-                <ul className="flex flex-col gap-3 mt-5">
+                <ul className="flex flex-col gap-1 mt-5">
                     {contactItems.map((item, index) => (
-                        <li key={index} className="flex items-center gap-2 text-pink">
+                        <li key={index} className="flex items-center gap-2 text-pink text-sm">
                             {item.icon}
                             <p className="text-white">{item.label}</p>
                         </li>
@@ -69,7 +67,6 @@ export default function Footer() {
                 </ul>
             </div>
 
-            {/* Coluna 4 */}
             <div>
                 <h3 className="text-pink font-semibold">Patrocínios</h3>
                 <div className="flex flex-wrap gap-3 mt-5">

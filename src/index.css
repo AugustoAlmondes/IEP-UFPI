@@ -16,14 +16,14 @@
 
 @layer components {
   .btn-pink {
-    @apply text-white cursor-pointer bg-darkpink py-1.5 px-15 rounded-lg hover:bg-pink transition-colors duration-300 border-white min-w-55;
+    @apply text-white cursor-pointer border text-sm border-darkpink bg-darkpink py-1 px-8 rounded-lg hover:bg-pink transition-colors duration-300  min-w-[180px];
   }
 
   .btn-lightpink {
-    @apply text-white cursor-pointer bg-pink py-1.5 px-15 rounded-lg hover:bg-pink transition-colors duration-300 border-white min-w-55;
+    @apply text-white cursor-pointer border text-sm border-pink bg-pink py-1 px-8 rounded-lg hover:bg-pink transition-colors duration-300;
   }
 
   .btn-outline {
-    @apply cursor-pointer border border-white py-1.5 px-15 rounded-lg hover:bg-white hover:text-darkgray transition-colors duration-300 min-w-55;
+    @apply cursor-pointer border border-white py-1 text-sm px-8 rounded-lg hover:bg-white hover:text-darkgray transition-colors duration-300;
   }
 }

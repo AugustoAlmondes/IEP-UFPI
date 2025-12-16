@@ -30,7 +30,7 @@ export default function Header() {
             <img className="h-13" src={Logo} alt="logo" />
 
             {/* Menu Desktop */}
-            <ul className="text-white list-none gap-15 items-center mr-8 hidden md:flex">
+            <ul className="text-white list-none gap-15 items-center mr-8 hidden md:flex text-sm">
                 {navItems.map((item, index) => (
                     <li
                         key={index}
@@ -69,7 +69,7 @@ export default function Header() {
                     </button>
                 </div>
 
-                <ul className="text-white list-none flex flex-col gap-6 p-6 text-lg">
+                <ul className="text-white list-none flex flex-col gap-6 p-6">
                     {navItems.map((item, index) => (
                         <li key={index}>
                             <Link

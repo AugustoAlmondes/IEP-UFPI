@@ -13,7 +13,7 @@ export default function BoletinCard({BackgroundImage}: {BackgroundImage: string}
                 <div className="mr-15">
                     <h3 className="text-lg font-medium">Título de item</h3>
                     <p className="text-sm text-justify font-light">Algum texto informativo falando sobre o item acima. Esse é um exemplo de como deve ficar</p>
-                    <button className="cursor-pointer bg-darkpink py-1 px-10 rounded-lg hover:bg-pink transition-colors duration-300 mt-3">Saiba mais</button>
+                    <button className="btn-pink mt-4">Saiba mais</button>
                 </div>
             </div>
         </>
