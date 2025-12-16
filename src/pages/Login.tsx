@@ -48,40 +48,41 @@ export default function Login() {
             ">
                 <h2 className="
                     text-pink 
-                    text-4xl 
-                    sm:text-5xl 
+                    text-3xl 
+                    sm:text-4xl 
                     text-center 
                     font-extrabold 
                     mb-14 
-                    sm:mb-20
+                    sm:mb-15
                 ">
                     LOGIN
                 </h2>
 
                 {/* Email */}
                 <div className="relative mb-10 w-full max-w-xs">
-                    <label className="text-white absolute -top-7">
+                    <label className="text-white absolute -top-5 left-2 font-light text-sm">
                         Email
                     </label>
                     <MdEmail
-                        size={25}
-                        className="text-pink absolute bottom-2 -left-8"
+                        size={20}
+                        className="text-pink absolute bottom-2 -left-7"
                     />
                     <input
                         type="text"
                         className="
-                            bg-[#D9D9D9]/35 
+                            bg-gray2/35 
                             text-white 
                             border 
                             outline-0 
                             border-pink/40 
                             focus:border-pink/70 
                             px-4 
-                            py-2 
+                            py-1 
                             w-full 
                             rounded-md 
                             placeholder:text-white/40 
                             placeholder:font-extralight
+                            placeholder:text-sm
                         "
                         placeholder="Digite seu Email"
                     />
@@ -89,46 +90,47 @@ export default function Login() {
 
                 {/* Senha */}
                 <div className="relative w-full max-w-xs">
-                    <label className="text-white absolute -top-7">
+                    <label className="text-white absolute -top-5 left-2 font-light text-sm">
                         Senha
                     </label>
 
                     <div className="absolute bottom-2 right-3">
                         {viewPassword ? (
                             <IoEyeOff
-                                size={25}
+                                size={17}
                                 onClick={() => setViewPassword(false)}
-                                className="text-white/40 cursor-pointer"
+                                className="text-white/60 cursor-pointer"
                             />
                         ) : (
                             <IoEye
-                                size={25}
+                                size={17}
                                 onClick={() => setViewPassword(true)}
-                                className="text-white/40 cursor-pointer"
+                                className="text-white/60 cursor-pointer"
                             />
                         )}
                     </div>
 
                     <RiKeyFill
-                        size={25}
-                        className="text-pink absolute bottom-2 -left-8"
+                        size={20}
+                        className="text-pink absolute bottom-2 -left-7"
                     />
 
                     <input
                         type={viewPassword ? "password" : "text"}
                         className="
-                            bg-[#D9D9D9]/35 
+                            bg-gray2/35
                             text-white 
                             border 
                             outline-0 
                             border-pink/40 
                             focus:border-pink/70 
                             px-4 
-                            py-2 
+                            py-1 
                             w-full 
                             rounded-md 
                             placeholder:text-white/40 
                             placeholder:font-extralight
+                            placeholder:text-sm
                         "
                         placeholder="Digite sua Senha"
                     />
