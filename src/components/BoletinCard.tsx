@@ -13,7 +13,7 @@ export default function BoletinCard({BackgroundImage}: {BackgroundImage: string}
                 <div className="mr-15">
                     <h3 className="text-lg font-medium">Título de item</h3>
                     <p className="text-sm text-justify font-light">Algum texto informativo falando sobre o item acima. Esse é um exemplo de como deve ficar</p>
-                    <button className="btn-pink mt-4">Saiba mais</button>
+                    <button className="btn-pink mt-4">Ver Boletim</button>
                 </div>
             </div>
         </>

@@ -21,13 +21,12 @@ export default function Header() {
     return (
         <header
             className={`
-                ${isScrolled ? "md:h-16 md:bg-darkgray/70 md:backdrop-blur-md" : "h-20 bg-darkgray"} 
-                flex justify-between w-full px-10 items-center fixed z-20 shadow-xl 
-                transition-all duration-300
+                ${isScrolled ? "md:h-16 bg-darkgray/70 backdrop-blur-md" : "h-20 bg-darkgray"} 
+                flex justify-between w-full px-10 items-center fixed z-20 shadow-xl transition-all duration-300
             `}
         >
             {/* Logo */}
-            <img className="h-13" src={Logo} alt="logo" />
+            <img className={`${isScrolled? "h-8 my-2": "h-13"} transition-all duration-200`} src={Logo} alt="logo" />
 
             {/* Menu Desktop */}
             <ul className="text-white list-none gap-15 items-center mr-8 hidden md:flex text-sm">
@@ -54,7 +53,7 @@ export default function Header() {
             {/* MENU MOBILE */}
             <div
                 className={`
-                    fixed top-0 right-0 h-full w-64 bg-darkgray shadow-xl 
+                    fixed top-0 right-0 h-screen w-64 bg-darkgray shadow-xl 
                     transform ${isOpen ? "translate-x-0" : "translate-x-full"}
                     transition-transform duration-300 z-30
                 `}

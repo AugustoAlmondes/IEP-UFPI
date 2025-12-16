@@ -138,7 +138,7 @@ export default function Login() {
 
                 <div className="w-64 h-1 border bg-pink/40 my-10"></div>
 
-                <button className="btn-pink w-full max-w-xs">
+                <button className="btn-pink">
                     Entrar
                 </button>
             </div>
