@@ -36,6 +36,7 @@ export default function Footer() {
                 <h3 className="text-pink font-semibold">Atalhos</h3>
                 <ul className="flex flex-col gap-1 mt-5">
                     {navItems.map((item, index) => (
+                        item.label != "Login" &&
                         <li key={index}>
                             <a href={item.href} className="hover:text-pink text-sm transition-colors duration-200">
                                 {item.label}

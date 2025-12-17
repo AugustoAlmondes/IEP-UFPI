@@ -35,13 +35,13 @@ export default function Equipe() {
                         <h1 className="text-5xl font-bold mb-8">
                             NOSSA EQUIPE
                         </h1>
-                        <h2 className="text-1xl font-light text-justify max-w-[700px] mx-10 md-m-0">
+                        <h2 className="text-md font-light text-justify max-w-[700px] mx-10 md-m-0">
                             Nossa equipe é formada por profissionais dedicados e multidisciplinares, com o objetivo de unir talentos, experiências e perspectivas para desenvolver soluções que impulsionam o crescimento da organização e entregam valor real às pessoas que atendemos.
                         </h2>
                     </div>
                     <div className="text-white flex flex-col items-center justify-center gap-5">
                         <button
-                            className="btn-outline"
+                            className="btn-outline w-[200px]"
                             onClick={() => {
                                 memberSectionRef.current?.scrollIntoView({
                                     block: "start", behavior: "smooth"
@@ -49,7 +49,7 @@ export default function Equipe() {
                             }}
                         >Ver membros</button>
                         <button
-                            className="btn-pink"
+                            className="btn-pink w-[200px]"
                             onClick={() => {
                                 formSectionRef.current?.scrollIntoView({
                                     block: "start", behavior: "smooth"
@@ -61,12 +61,12 @@ export default function Equipe() {
 
             </div>
 
-            <div ref={memberSectionRef} className="bg-white pb-20 pt-30 px-4">
-                <h2 className="text-4xl sm:text-5xl text-darkpink font-bold text-center mb-10">
+            <div ref={memberSectionRef} className="bg-white pb-40 pt-30 px-4">
+                <h2 className="text-3xl sm:text-4xl text-darkpink font-bold text-center mb-10">
                     MEMBROS
                 </h2>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-4xl mx-auto">
                     {teamMembers.map((member, index) => (
                         <TeamCard key={index} member={member} />
                     ))}
@@ -74,11 +74,11 @@ export default function Equipe() {
             </div>
 
             <div ref={formSectionRef} className="min-h-100 bg-darkgray text-white">
-                <h1 className="text-5xl font-bold pt-15 pb-5 text-center">
+                <h1 className="text-4xl font-bold pt-15 pb-5 text-center">
                     FAÇA PARTE DA EQUIPE
                 </h1>
                 <div className="w-full">
-                    <h3 className="text-md m-auto max-w-200 text-center">
+                    <h3 className="text-sm m-auto max-w-200 text-center">
                         Se você é um profissional talentoso e deseja fazer parte da nossa equipe, entre em contato conosco. Juntos, podemos alcançar grandes resultados e transformar a maneira como a organização é operada.
                     </h3>
                 </div>
@@ -92,9 +92,14 @@ export default function Equipe() {
                         <div className="flex flex-col gap-4">
 
                             <div className="flex flex-col">
-                                <label className="font-extralight mb-1" htmlFor="email">Endereço do E-mail *</label>
+                                <label
+                                    className="font-extralight text-sm mb-1"
+                                    htmlFor="email"
+                                >
+                                    Endereço do E-mail *
+                                </label>
                                 <input
-                                    className="bg-white px-3 py-2 w-full placeholder:text-[#808080] placeholder:font-extralight placeholder:text-sm rounded-md text-black"
+                                    className="bg-white px-2 py-1 w-full placeholder:text-[#808080] placeholder:font-extralight placeholder:text-sm rounded-md text-black"
                                     type="email"
                                     {...register("email")}
                                     required
@@ -103,9 +108,14 @@ export default function Equipe() {
                             </div>
 
                             <div className="flex flex-col">
-                                <label className="font-extralight mb-1" htmlFor="name">Nome *</label>
+                                <label
+                                    className="font-extralight text-sm mb-1"
+                                    htmlFor="name"
+                                >
+                                    Nome *
+                                </label>
                                 <input
-                                    className="bg-white px-3 py-2 w-full placeholder:text-[#808080] placeholder:font-extralight placeholder:text-sm rounded-md text-black"
+                                    className="bg-white px-2 py-1 w-full placeholder:text-[#808080] placeholder:font-extralight placeholder:text-sm rounded-md text-black"
                                     type="text"
                                     {...register("name")}
                                     required
@@ -114,9 +124,13 @@ export default function Equipe() {
                             </div>
 
                             <div className="flex flex-col">
-                                <label className="font-extralight mb-1" htmlFor="instituition">Instituição *</label>
+                                <label
+                                    className="font-extralight text-sm mb-1"
+                                    htmlFor="instituition">
+                                    Instituição *
+                                </label>
                                 <input
-                                    className="bg-white px-3 py-2 w-full placeholder:text-[#808080] placeholder:font-extralight placeholder:text-sm rounded-md text-black"
+                                    className="bg-white px-2 py-1 w-full placeholder:text-[#808080] placeholder:font-extralight placeholder:text-sm rounded-md text-black"
                                     type="text"
                                     {...register("instituition")}
                                     placeholder="Digite sua insituição"
@@ -127,7 +141,7 @@ export default function Equipe() {
                         </div>
 
                         <div className="flex flex-col h-full">
-                            <label className="font-extralight mb-1" htmlFor="description">Descrição *</label>
+                            <label className="font-extralight text-sm mb-1" htmlFor="description">Descrição *</label>
                             <textarea
                                 className="bg-white px-3 py-2 w-full h-full min-h-[100px] resize-none placeholder:text-[#808080] placeholder:font-extralight placeholder:text-sm rounded-md text-black"
                                 id="description"
