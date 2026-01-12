@@ -1,6 +1,6 @@
 import { TbPointFilled } from "react-icons/tb";
 import { IoIosAddCircle } from "react-icons/io";
-
+import ImageUpload from "../components/ImageUpload";
 
 export default function FormNewsletter() {    
     return (
@@ -24,14 +24,14 @@ export default function FormNewsletter() {
                             type="text" 
                             placeholder="Digite o título do boletim" 
                             required
-                            className="text-base placeholder-opacity-18 w-full border-1 border-pink bg-[var(--color-gray2)] rounded-md px-4 h-7"/>
+                            className="text-base placeholder-opacity-18 w-full border-1 border-[var(--color-gray)] bg-[var(--color-gray2)] rounded-md px-4 h-7 focus:outline-none focus:border-pink-500"/>
                     </div>
 
                     <div className="flex text-base my-4 w-full gap-6">
                         <div className="w-full">
                             <label>Categoria</label>
                             <select
-                                className="text-base placeholder-opacity-18 w-full border-1 border-pink bg-[var(--color-gray2)] rounded-md px-4 h-7"
+                                className="text-base placeholder-opacity-18 w-full border-1 border-[var(--color-gray)] bg-[var(--color-gray2)] rounded-md px-4 h-7 focus:outline-none focus:border-pink-500"
                                 required
                                 >
                                 <option value="">Selecione uma categoria</option>
@@ -45,7 +45,7 @@ export default function FormNewsletter() {
                                 type="date" 
                                 placeholder="Digite o título do boletim" 
                                 required
-                                className="text-base placeholder-opacity-18 w-full border-1 border-pink bg-[var(--color-gray2)] rounded-md px-4 h-7"/>
+                                className="text-base placeholder-opacity-18 w-full border-1 border-[var(--color-gray)] bg-[var(--color-gray2)] rounded-md px-4 h-7 focus:outline-none focus:border-pink-500"/>
                         </div>
                     </div>
                 </section>
@@ -70,7 +70,7 @@ export default function FormNewsletter() {
                             type="text" 
                             placeholder="Digite o nome do autor" 
                             required
-                            className="text-base placeholder-opacity-18 w-full border-1 border-pink bg-[var(--color-gray2)] rounded-md px-4 h-7"/>
+                            className="text-base placeholder-opacity-18 w-full border-1 border-[var(--color-gray)] bg-[var(--color-gray2)] rounded-md px-4 h-7 focus:outline-none focus:border-pink-500"/>
                         </div>
                         <div className="w-full">
                             <label>Cargo</label>
@@ -78,26 +78,68 @@ export default function FormNewsletter() {
                                 type="text" 
                                 placeholder="Digite o cargo do autor" 
                                 required
-                                className="text-base placeholder-opacity-18 w-full border-1 border-pink bg-[var(--color-gray2)] rounded-md px-4 h-7"/>
+                                className="text-base placeholder-opacity-18 w-full border-1 border-[var(--color-gray)] bg-[var(--color-gray2)] rounded-md px-4 h-7 focus:outline-none focus:border-pink-500"/>
                         </div>
                     </div>
 
                 </section>
                 
-                <section className="flex items-center mb-10">
+                <section className="mb-10">
                     <div className="flex items-center">
+                        <TbPointFilled className="text-darkpink text-xl mr-2" />
+                        <h3 className="text-xl font-bold">
+                            Conteúdo
+                        </h3>
+                    </div>
 
-                    <TbPointFilled className="text-darkpink text-xl mr-2" />
-                    <h3 className="text-xl font-bold">
-                        Conteúdo
-                    </h3>
+                    <div className="text-base my-4">
+                        <label>Texto</label>
+                        <textarea
+                            // type="text" 
+                            placeholder="Digite o conteúdo do boletim" 
+                            required
+                            className="text-base placeholder-opacity-18 w-full h-60 border-1 border-[var(--color-gray)] bg-[var(--color-gray2)] rounded-md px-4 h-7 focus:outline-none focus:border-pink-500"/>
+                    </div>
+
+                    <div className="flex text-base my-4 w-full gap-6">
+                        <div className="w-full">
+                            <label>Referência</label>
+                            <input 
+                            type="text" 
+                            placeholder="Digite a referência" 
+                            required
+                            className="text-base placeholder-opacity-18 w-full border-1 border-[var(--color-gray)] bg-[var(--color-gray2)] rounded-md px-4 h-7 focus:outline-none focus:border-pink-500"/>
+                        </div>
+                        <div className="w-full">
+                            <label>Revisão e Edição</label>
+                            <input 
+                                type="text" 
+                                placeholder="Digite o nome do responsável" 
+                                required
+                                className="text-base placeholder-opacity-18 w-full border-1 border-[var(--color-gray)] bg-[var(--color-gray2)] rounded-md px-4 h-7 focus:outline-none focus:border-pink-500"/>
+                        </div>
+                    </div>
+
+                    <ImageUpload />
+
+                    <div className="text-base my-4">
+                        <label>Legenda</label>
+                        <input 
+                            type="text" 
+                            placeholder="Digite a legenda da imagem"
+                            required
+                            className="text-base placeholder-opacity-18 w-full border-1 border-[var(--color-gray)] bg-[var(--color-gray2)] rounded-md px-4 h-7 focus:outline-none focus:border-pink-500"/>
                     </div>
                 </section>
 
+                <div className="flex justify-end">
+                    <button
+                        className="bg-darkpink text-white px-12 py-2 rounded-lg font-medium cursor-pointer hover:opacity-90 transition-colors duration-300"
+                    >
+                        Postar boletim
+                    </button>
+                </div>
             </form>
-
-            
-
         </div>
     )
 }
