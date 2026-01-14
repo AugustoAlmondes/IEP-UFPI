@@ -8,14 +8,14 @@ export const teamMembers: TeamMember[] = [
         url: "https://github.com/AugustoAlmondes",
     },
     {
-        name: "João Vitor",
+        name: "João Vitor Nascimento",
         position: "Desenvolvedor",
         imageUrl: "https://github.com/JoaoVitor.png",
         url: "https://github.com/JoaoVitor",
     },
     {
         name: "Matheus Lima",
-        position: "Desenvolvedor",
+        position: "Gerente",
         imageUrl: "https://github.com/MatheusLima.png",
         // url: "https://github.com/MatheusLima",
     },

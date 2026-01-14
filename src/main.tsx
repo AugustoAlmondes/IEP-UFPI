@@ -13,6 +13,7 @@ import Equipe from './pages/Equipe'
 import { ToastContainer } from 'react-toastify'
 import Login from './pages/Login'
 import FormNewsletter from './pages/FormNewsletter'
+import Settings from './pages/Settings'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -37,6 +38,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/institutional" element={<Institutional />} />
           <Route path="/equipe" element={<Equipe />} />
           <Route path="/form-newsletter" element={<FormNewsletter />} />
+          <Route path="/settings" element={<Settings />} />
         </Route>
         <Route path="/login" element={<Login />} />
       </Routes>
