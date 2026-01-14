@@ -20,7 +20,7 @@
   }
 
   .btn-lightpink {
-    @apply text-white cursor-pointer border text-sm border-pink bg-pink py-1 px-8 rounded-lg hover:bg-pink transition-colors duration-300;
+    @apply text-white cursor-pointer border text-sm border-pink bg-pink py-1 px-8 rounded-lg hover:bg-pink/70 transition-colors duration-300;
   }
 
   .btn-outline {
