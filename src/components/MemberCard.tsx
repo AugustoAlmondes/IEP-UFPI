@@ -1,38 +1,68 @@
 import type { TeamMember } from "../types/teamMember";
 import { IoTrashOutline } from "react-icons/io5";
 
-
 export default function TeamCard({ member }: { member: TeamMember }) {
     return (
-        <>
-            <div className="bg-gray2 mx-8 mb-8 h-30 flex items-center text-base placeholder-opacity-18 border-1 border-gray rounded-md px-4 hover:outline-none hover:border-pink-500">
-                <div className="w-[130px] h-[130px] relative p-4">
-                    <img src={member.imageUrl} alt="Augusto Almondes" />
+        <div className="
+        bg-gray2 
+        mx-4 sm:mx-8 
+        mb-6 
+        flex flex-col sm:flex-row 
+        items-start sm:items-center 
+        border border-gray 
+        rounded-md 
+        px-4 py-4 
+        hover:border-pink-500
+        transition
+    ">
+            {/* Imagem */}
+            <div className="w-full sm:w-[130px] flex justify-center sm:justify-start mb-4 sm:mb-0">
+                <div className="w-[100px] h-[100px] sm:w-[130px] sm:h-[130px]">
+                    <img
+                        src={member.imageUrl}
+                        alt={member.name}
+                        className="w-full h-full object-cover rounded-md"
+                    />
                 </div>
-
-                <div className="ml-5 grid grid-cols-3 gap-x-4 items-center">
-                    <div className="w-80">
-                        <p className="text-sm">Nome Completo</p>
-                        <p className="text-base font-bold">{member.name}</p>
-                    </div>
-
-                    <div>
-                        <p className="text-sm">Cargo</p>
-                        <p className="text-base font-bold">{member.position}</p>
-                    </div>
-
-                    <div>
-                        <p className="text-sm">Link</p>
-                        <p className="text-base font-bold">
-                            {member.url ? member.url : "Não informado"}
-                        </p>
-                    </div>  
-
-                </div>
-                    <div className="justify-end align-center ml-auto mr-4">
-                        <IoTrashOutline className="text-pink cursor-pointer hover:darkpink" size={28} />
-                    </div>
             </div>
-        </>
+
+            {/* Informações */}
+            <div className="
+        sm:ml-5 
+        grid 
+        grid-cols-1 sm:grid-cols-3 
+        gap-y-4 sm:gap-x-4 
+        w-full
+        ">
+                <div>
+                    <p className="text-sm text-gray-400">Nome Completo</p>
+                    <p className="text-base font-bold">{member.name}</p>
+                </div>
+
+                <div>
+                    <p className="text-sm text-gray-400">Cargo</p>
+                    <p className="text-base font-bold">{member.position}</p>
+                </div>
+
+                <div>
+                    <p className="text-sm text-gray-400">Link</p>
+                    <p className="text-base font-bold break-all">
+                        {member.url || "Não informado"}
+                    </p>
+                </div>
+            </div>
+
+            {/* Ações */}
+            <div className="
+        w-full sm:w-auto 
+        flex justify-end 
+        mt-4 sm:mt-0 
+        sm:ml-auto">
+                <IoTrashOutline
+                    className="text-pink cursor-pointer hover:text-darkpink transition"
+                    size={28}
+                />
+            </div>
+        </div>
     );
 }

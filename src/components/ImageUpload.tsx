@@ -20,8 +20,8 @@ const ImageUpload: React.FC = () => {
 
   return (
     <div
-      className={`border-2 border-dashed rounded-xl px-5 py-10 text-center cursor-pointer bg-[var(--color-gray2)] mb-5 transition-colors duration-300 ${
-        imageUrl ? "border-pink-500" : "border-[var(--color-gray)]"
+      className={`border-2 border-dashed rounded-xl px-5 py-10 text-center cursor-pointer bg-gray2 mb-5 transition-colors duration-300 ${
+        imageUrl ? "border-pink-500" : "border-gray"
       }`}
       onClick={handleClick}
     >
@@ -33,7 +33,9 @@ const ImageUpload: React.FC = () => {
         accept="image/*"
       />
       <div className="flex flex-col items-center gap-2.5">
-        <FaUpload className="text-2xl text-gray-500" />
+        { !fileName &&
+          <FaUpload className="text-2xl text-gray-500" />
+        }
         <span className="text-base font-semibold text-gray-700">
           {fileName || "Carregar imagem"}
         </span>
@@ -44,13 +46,15 @@ const ImageUpload: React.FC = () => {
             className="mt-2 max-h-40 rounded-lg object-contain"
           />
         )}
-        <p className="text-sm text-gray-500 m-0">
-          Clique para selecionar uma imagem (JPG, PNG ou GIF)
-        </p>
+        {
+          !fileName &&
+          <p className="text-sm text-gray-500 m-0">
+            Clique para selecionar uma imagem (JPG, PNG ou GIF)
+          </p>
+        }
         <button
           type="button"
-          className="bg-pink text-white px-4 py-2 rounded-lg text-sm font-medium mt-2 cursor-pointer transition-colors duration-300 hover:bg-darkpink"
-        >
+          className="btn-lightpink">
           Carregar
         </button>
       </div>
