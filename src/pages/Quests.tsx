@@ -5,48 +5,75 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import { FaCircle } from 'react-icons/fa6';
 import { IoMdArrowDropup } from 'react-icons/io';
+import { quests } from "../constants/quests";
 
 export default function Quests() {
     return (
         <>
-            <section className="bg-white min-h-screen pb-40 pt-30">
+            <section className="bg-white h-80vh pb-40 pt-50">
                 <h2 className="text-3xl sm:text-4xl text-darkpink font-bold text-center mb-10">
                     PERGUNTAS FREQUENTES
                 </h2>
 
-                <div className='mt-10 px-40'>
-                    <Accordion sx={{ 
-                        backgroundColor: 'transparent',
-                        border: 'none',
-                        boxShadow: 'none',
-                        maxWidth: '800px'
-                        }}>
-                        <AccordionSummary
-                            expandIcon={<IoMdArrowDropup size={25} />}
-                            aria-controls="panel1-content"
-                            id="panel1-header"
-                        >
-                            <Box
-                                className="flex items-center gap-2">
-                                <FaCircle
-                                    size={10}
-                                    color="#7F1146"
-                                />
-                                <Typography
-                                component="h2"
-                                sx={{
-                                    fontSize:"15px"
-                                }}
-                                >Pergunta 1</Typography>
-                            </Box>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                            <Typography>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                malesuada lacus ex, sit amet blandit leo lobortis eget.
-                            </Typography>
-                        </AccordionDetails>
-                    </Accordion>
+                <div className='mt-10 px-40 flex flex-col center justify-center'>
+                    {
+                        quests.map((quest, index) => {
+                            return (
+                                <Accordion
+                                    sx={{
+                                        backgroundColor: 'transparent',
+                                        border: 'none',
+                                        boxShadow: 'none',
+                                        maxWidth: '800px',
+                                        marginBottom: '20px',
+                                        '& .MuiButtonBase-root': {
+                                            height: 'max-content',
+                                        },
+                                        index
+                                    }}>
+                                    <AccordionSummary
+                                        expandIcon={<IoMdArrowDropup size={25} />}
+                                        aria-controls="panel1-content"
+                                        id="panel1-header"
+                                        sx={{
+                                            maxWidth: 'max-content',
+                                            margin: '0',
+                                            '& .MuiAccordionSummary-content': {
+                                                margin: 0
+                                            }
+                                        }}
+                                    >
+                                        <Box
+                                            className="flex items-center gap-2">
+                                            <FaCircle
+                                                size={10}
+                                                color="#7F1146"
+                                            />
+                                            <Typography
+                                                component="h2"
+                                                sx={{
+                                                    fontSize: "20px"
+                                                }}
+                                            >
+                                                {quest.title}
+                                            </Typography>
+                                        </Box>
+                                    </AccordionSummary>
+                                    <AccordionDetails
+                                        sx={{
+                                            marginLeft: '30px',
+                                            borderLeft: '2px solid #7F1146',
+                                            textAlign: 'justify',
+                                        }}
+                                    >
+                                        <Typography>
+                                            {quest.answer}
+                                        </Typography>
+                                    </AccordionDetails>
+                                </Accordion>
+                            )
+                        })
+                    }
                 </div>
             </section>
         </>
