@@ -3,6 +3,9 @@ import { IoIosAddCircle } from "react-icons/io";
 import ImageUpload from "../components/ImageUpload";
 import MemberCard from "../components/MemberCard";
 import { teamMembers } from "../constants/teamMembers";
+import { sponsors } from "../constants/sponsors";
+import SponsorCard from "../components/SponsorCard";
+
 
 export default function FormNewsletter() {
     return (
@@ -103,8 +106,16 @@ export default function FormNewsletter() {
                             Adicionar Patrocinador
                         </button>
                     </div>
+
                 </section>
             </form>
+            
+            {/* LISTA DE MEMBROS */}
+            <div className="mt-10 space-y-4 px-2 sm:px-0">
+                {sponsors.map((sponsor, index) => (
+                    <SponsorCard key={index} sponsor={sponsor} />
+                ))}
+            </div>
         </div>
     );
 }

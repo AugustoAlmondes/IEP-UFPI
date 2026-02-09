@@ -7,4 +7,5 @@ export const navItems:NavItem[] = [
     { label: 'Equipe', href: '/equipe' },
     { label: 'Perguntas', href: '/quests' },
     { label: 'Login', href: '/login' },
+    { label: 'Settings', href: '/settings' },
 ]
