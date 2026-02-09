@@ -14,8 +14,10 @@ import { ToastContainer } from 'react-toastify'
 import Login from './pages/Login'
 import FormNewsletter from './pages/FormNewsletter'
 import Settings from './pages/Settings'
-import Quests from './pages/Quests'
+import { AdminRoute } from './routes/AdminRoute'
+import Questions from './pages/Questions'
 import Newsletter from './pages/Newsletter'
+import { AuthProvider } from './providers/AuthProvider'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -33,19 +35,35 @@ createRoot(document.getElementById('root')!).render(
       draggable
     />
 
-    <Router>
-      <Routes>
-        <Route element={<Layout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/institutional" element={<Institutional />} />
-          <Route path="/equipe" element={<Equipe />} />
-          <Route path="/form-newsletter" element={<FormNewsletter />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/quests" element={<Quests />} />
-          <Route path="/newsletter" element={<Newsletter />} />
-        </Route>
-        <Route path="/login" element={<Login />} />
-      </Routes>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route element={<Layout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/institutional" element={<Institutional />} />
+            <Route path="/equipe" element={<Equipe />} />
+            <Route path="/questions" element={<Questions />} />
+            <Route path="/newsletter" element={<Newsletter />} />
+            <Route
+              path="/form-newsletter"
+              element={
+                <AdminRoute>
+                  <FormNewsletter />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path="/settings"
+              element={
+                <AdminRoute>
+                  <Settings />
+                </AdminRoute>
+              }
+            />
+          </Route>
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   </StrictMode>,
 )

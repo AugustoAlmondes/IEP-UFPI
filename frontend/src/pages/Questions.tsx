@@ -5,9 +5,9 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import { FaCircle } from 'react-icons/fa6';
 import { IoMdArrowDropup } from 'react-icons/io';
-import { quests } from "../constants/quests";
+import { questions } from "../constants/questions";
 
-export default function Quests() {
+export default function Questions() {
     return (
         <>
             <section className="bg-white h-80vh pb-40 pt-50">
@@ -17,7 +17,7 @@ export default function Quests() {
 
                 <div className='mt-10 px-40 flex flex-col center justify-center'>
                     {
-                        quests.map((quest, index) => {
+                        questions.map((question, index) => {
                             return (
                                 <Accordion
                                     sx={{
@@ -55,7 +55,7 @@ export default function Quests() {
                                                     fontSize: "20px"
                                                 }}
                                             >
-                                                {quest.title}
+                                                {question.title}
                                             </Typography>
                                         </Box>
                                     </AccordionSummary>
@@ -67,7 +67,7 @@ export default function Quests() {
                                         }}
                                     >
                                         <Typography>
-                                            {quest.answer}
+                                            {question.answer}
                                         </Typography>
                                     </AccordionDetails>
                                 </Accordion>

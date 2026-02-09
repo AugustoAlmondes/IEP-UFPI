@@ -1,10 +1,10 @@
-export interface QuestsType {
+export interface QuestionsType {
     title: string;
     answer: string;
     link?: string;
 }
 
-export const quests: QuestsType[] = [
+export const questions: QuestionsType[] = [
     {
         title: 'O que é o IEP?',
         answer: 'O IEP, sigla para Instituto de Ensino e Pesquisa, seria uma instituição dedicada à produção de conhecimento científico, formação acadêmica e desenvolvimento de projetos de inovação. Ele poderia atuar em parceria com universidades e centros tecnológicos, oferecendo cursos, promovendo estudos e estimulando a pesquisa aplicada em diversas áreas.'
