@@ -1,6 +1,5 @@
-import { useRef } from "react";
-import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
+import NewsletterCard from "../components/NewsletterCard";
+import { newsletter } from "../constants/newsletter";
 
 export default function Equipe() {
     return (
@@ -14,11 +13,11 @@ export default function Equipe() {
                 </h2>
 
                 <div className="flex justify-center mb-8">
-                    <div className="flex w-full max-w-md">
+                    <div className="flex w-full max-w-xl">
                         <input
                             type="text"
                             placeholder="Pesquisar boletim"
-                            className="cursor-pointer w-full px-4 py-2 bg-gray2 text-black placeholder-gray-500 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 mr-3"
+                            className="cursor-pointer w-full px-4 py-2 bg-gray2 text-black rounded-lg placeholder-gray-500 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 mr-3"
                         />
                         <button
                             className="cursor-pointer border border-darkgray py-1.5 px-4 rounded-lg hover:bg-darkgray hover:text-white transition-colors duration-300 min-w"
@@ -28,11 +27,11 @@ export default function Equipe() {
                     </div>
                 </div>
 
-                {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-4xl mx-auto">
-                    {teamMembers.map((member, index) => (
-                        <TeamCard key={index} member={member} />
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-100 max-w-4xl mx-auto">
+                    {newsletter.map((item, index) => ( 
+                        <NewsletterCard key={index} newsletter={item} />
                     ))}
-                </div> */}
+                </div>
             </div>
         </>
     );

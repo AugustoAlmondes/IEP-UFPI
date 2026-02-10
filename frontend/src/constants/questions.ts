@@ -1,8 +1,4 @@
-export interface QuestionsType {
-    title: string;
-    answer: string;
-    link?: string;
-}
+import type { QuestionsType } from "../types/questions"
 
 export const questions: QuestionsType[] = [
     {
