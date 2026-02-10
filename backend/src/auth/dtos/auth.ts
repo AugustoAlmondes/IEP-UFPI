@@ -1,5 +1,5 @@
 export interface SignUpDTO {
-    nome: string;
+    name: string;
     email: string;
     password: string;
 }
