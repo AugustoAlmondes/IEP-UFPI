@@ -1,6 +1,8 @@
 import { AuthService } from './auth.service';
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Request, UseGuards } from '@nestjs/common';
 import { SignInDTO, SignUpDTO } from './dtos/auth';
+import { request } from 'node:http';
+import { AuthGuard } from './auth.guard';
 
 // AQUI QUE FICA TODOS OS ENDPOINTS RELACIONADOS A AUTENTICAÇÃO, COMO SIGNUP E SIGNIN
 
@@ -19,8 +21,9 @@ export class AuthController {
         return await this.authService.signin(body);
     }
 
+    @UseGuards(AuthGuard)
     @Get('me')
     async me(@Request() request) {
-        return await this.authService.get();
+        return request.user
     }
 }
