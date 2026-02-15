@@ -9,12 +9,18 @@ export class SignUpDTO {
 
     @IsNotEmpty()
     password: string;
+
+    @IsNotEmpty()
+    role: string;
 }
 
 export class SignInDTO {
     @IsEmail()
     email: string;
-
+    
     @IsNotEmpty()
     password: string;
+    
+    @IsNotEmpty()
+    role: string;
 }
