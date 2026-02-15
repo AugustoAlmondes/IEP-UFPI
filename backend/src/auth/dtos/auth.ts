@@ -11,7 +11,7 @@ export class SignUpDTO {
     password: string;
 }
 
-export interface SignInDTO {
+export class SignInDTO {
     @IsEmail()
     email: string;
 

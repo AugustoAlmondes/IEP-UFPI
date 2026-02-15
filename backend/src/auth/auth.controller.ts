@@ -26,4 +26,12 @@ export class AuthController {
     async me(@Request() request) {
         return request.user
     }
+
+    @UseGuards(AuthGuard)
+    @Get('private')
+    privateRoute() {
+        return {
+            message: "Você acessou uma rota protegida com JWT"
+        }
+    }
 }
