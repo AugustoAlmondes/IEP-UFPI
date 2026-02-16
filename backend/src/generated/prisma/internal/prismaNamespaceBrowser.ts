@@ -52,7 +52,10 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
-  Post: 'Post'
+  Editores: 'Editores',
+  Boletins: 'Boletins',
+  Membros: 'Membros',
+  Patrocinadores: 'Patrocinadores'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -81,15 +84,52 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
-export const PostScalarFieldEnum = {
+export const EditoresScalarFieldEnum = {
   id: 'id',
-  title: 'title',
-  content: 'content',
-  published: 'published',
-  authorId: 'authorId'
+  name: 'name',
+  email: 'email',
+  role: 'role',
+  matricula: 'matricula'
 } as const
 
-export type PostScalarFieldEnum = (typeof PostScalarFieldEnum)[keyof typeof PostScalarFieldEnum]
+export type EditoresScalarFieldEnum = (typeof EditoresScalarFieldEnum)[keyof typeof EditoresScalarFieldEnum]
+
+
+export const BoletinsScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  category: 'category',
+  date: 'date',
+  content: 'content',
+  reference: 'reference',
+  proofreader: 'proofreader',
+  image: 'image',
+  legend_image: 'legend_image',
+  created_by_id: 'created_by_id',
+  created_in: 'created_in'
+} as const
+
+export type BoletinsScalarFieldEnum = (typeof BoletinsScalarFieldEnum)[keyof typeof BoletinsScalarFieldEnum]
+
+
+export const MembrosScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  profile_image: 'profile_image',
+  role: 'role',
+  curriculum: 'curriculum'
+} as const
+
+export type MembrosScalarFieldEnum = (typeof MembrosScalarFieldEnum)[keyof typeof MembrosScalarFieldEnum]
+
+
+export const PatrocinadoresScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  profile_image: 'profile_image'
+} as const
+
+export type PatrocinadoresScalarFieldEnum = (typeof PatrocinadoresScalarFieldEnum)[keyof typeof PatrocinadoresScalarFieldEnum]
 
 
 export const SortOrder = {

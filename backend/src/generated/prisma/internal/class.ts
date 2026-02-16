@@ -20,7 +20,7 @@ const config: runtime.GetPrismaClientConfig = {
   "clientVersion": "7.3.0",
   "engineVersion": "9d6ad21cbbceab97458517b147a6a09ff43aa735",
   "activeProvider": "postgresql",
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider     = \"prisma-client\"\n  output       = \"../src/generated/prisma\"\n  moduleFormat = \"cjs\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel User {\n  id       Int    @id @default(autoincrement())\n  name     String\n  email    String @unique\n  password String\n}\n\nmodel Post {\n  id        Int      @id @default(autoincrement())\n  title     String\n  content   String?\n  published Boolean? @default(false)\n  authorId  Int?\n}\n",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider     = \"prisma-client\"\n  output       = \"../src/generated/prisma\"\n  moduleFormat = \"cjs\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel User {\n  id       Int    @id @default(autoincrement())\n  name     String\n  email    String @unique\n  password String\n}\n\nmodel Editores {\n  id        Int    @id @default(autoincrement())\n  name      String\n  email     String @unique\n  role      String @default(\"aluno\")\n  matricula String @unique\n\n  boletins Boletins[]\n}\n\nmodel Boletins {\n  id           Int      @id @default(autoincrement())\n  title        String\n  category     String\n  date         DateTime @default(now())\n  content      String\n  reference    String\n  proofreader  String\n  image        String?\n  legend_image String?\n\n  // Criado por um editor específo\n  created_by_id Int\n  created_by    Editores @relation(fields: [created_by_id], references: [id])\n  created_in    DateTime @default(now())\n}\n\nmodel Membros {\n  id            Int     @id @default(autoincrement())\n  name          String\n  profile_image String?\n  role          String  @default(\"aluno\")\n  curriculum    String?\n}\n\nmodel Patrocinadores {\n  id            Int     @id @default(autoincrement())\n  name          String\n  profile_image String?\n}\n",
   "runtimeDataModel": {
     "models": {},
     "enums": {},
@@ -28,7 +28,7 @@ const config: runtime.GetPrismaClientConfig = {
   }
 }
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"Post\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"content\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"published\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"authorId\",\"kind\":\"scalar\",\"type\":\"Int\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"Editores\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"matricula\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"boletins\",\"kind\":\"object\",\"type\":\"Boletins\",\"relationName\":\"BoletinsToEditores\"}],\"dbName\":null},\"Boletins\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"category\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"date\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"content\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"reference\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"proofreader\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"image\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"legend_image\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"created_by_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"created_by\",\"kind\":\"object\",\"type\":\"Editores\",\"relationName\":\"BoletinsToEditores\"},{\"name\":\"created_in\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Membros\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"profile_image\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"curriculum\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"Patrocinadores\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"profile_image\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 
 async function decodeBase64AsWasm(wasmBase64: string): Promise<WebAssembly.Module> {
   const { Buffer } = await import('node:buffer')
@@ -187,14 +187,44 @@ export interface PrismaClient<
   get user(): Prisma.UserDelegate<ExtArgs, { omit: OmitOpts }>;
 
   /**
-   * `prisma.post`: Exposes CRUD operations for the **Post** model.
+   * `prisma.editores`: Exposes CRUD operations for the **Editores** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Posts
-    * const posts = await prisma.post.findMany()
+    * // Fetch zero or more Editores
+    * const editores = await prisma.editores.findMany()
     * ```
     */
-  get post(): Prisma.PostDelegate<ExtArgs, { omit: OmitOpts }>;
+  get editores(): Prisma.EditoresDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.boletins`: Exposes CRUD operations for the **Boletins** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Boletins
+    * const boletins = await prisma.boletins.findMany()
+    * ```
+    */
+  get boletins(): Prisma.BoletinsDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.membros`: Exposes CRUD operations for the **Membros** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Membros
+    * const membros = await prisma.membros.findMany()
+    * ```
+    */
+  get membros(): Prisma.MembrosDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.patrocinadores`: Exposes CRUD operations for the **Patrocinadores** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Patrocinadores
+    * const patrocinadores = await prisma.patrocinadores.findMany()
+    * ```
+    */
+  get patrocinadores(): Prisma.PatrocinadoresDelegate<ExtArgs, { omit: OmitOpts }>;
 }
 
 export function getPrismaClientClass(): PrismaClientConstructor {
