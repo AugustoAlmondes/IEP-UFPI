@@ -52,9 +52,9 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
+  Membros: 'Membros',
   Editores: 'Editores',
   Boletins: 'Boletins',
-  Membros: 'Membros',
   Patrocinadores: 'Patrocinadores'
 } as const
 
@@ -76,7 +76,6 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 
 export const UserScalarFieldEnum = {
   id: 'id',
-  name: 'name',
   email: 'email',
   password: 'password'
 } as const
@@ -84,11 +83,21 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+export const MembrosScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  name: 'name',
+  profile_image: 'profile_image',
+  role: 'role',
+  curriculum: 'curriculum'
+} as const
+
+export type MembrosScalarFieldEnum = (typeof MembrosScalarFieldEnum)[keyof typeof MembrosScalarFieldEnum]
+
+
 export const EditoresScalarFieldEnum = {
   id: 'id',
-  name: 'name',
-  email: 'email',
-  role: 'role',
+  membro_id: 'membro_id',
   matricula: 'matricula'
 } as const
 
@@ -110,17 +119,6 @@ export const BoletinsScalarFieldEnum = {
 } as const
 
 export type BoletinsScalarFieldEnum = (typeof BoletinsScalarFieldEnum)[keyof typeof BoletinsScalarFieldEnum]
-
-
-export const MembrosScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  profile_image: 'profile_image',
-  role: 'role',
-  curriculum: 'curriculum'
-} as const
-
-export type MembrosScalarFieldEnum = (typeof MembrosScalarFieldEnum)[keyof typeof MembrosScalarFieldEnum]
 
 
 export const PatrocinadoresScalarFieldEnum = {

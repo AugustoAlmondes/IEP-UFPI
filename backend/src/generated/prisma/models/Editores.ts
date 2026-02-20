@@ -28,33 +28,29 @@ export type AggregateEditores = {
 
 export type EditoresAvgAggregateOutputType = {
   id: number | null
+  membro_id: number | null
 }
 
 export type EditoresSumAggregateOutputType = {
   id: number | null
+  membro_id: number | null
 }
 
 export type EditoresMinAggregateOutputType = {
   id: number | null
-  name: string | null
-  email: string | null
-  role: string | null
+  membro_id: number | null
   matricula: string | null
 }
 
 export type EditoresMaxAggregateOutputType = {
   id: number | null
-  name: string | null
-  email: string | null
-  role: string | null
+  membro_id: number | null
   matricula: string | null
 }
 
 export type EditoresCountAggregateOutputType = {
   id: number
-  name: number
-  email: number
-  role: number
+  membro_id: number
   matricula: number
   _all: number
 }
@@ -62,33 +58,29 @@ export type EditoresCountAggregateOutputType = {
 
 export type EditoresAvgAggregateInputType = {
   id?: true
+  membro_id?: true
 }
 
 export type EditoresSumAggregateInputType = {
   id?: true
+  membro_id?: true
 }
 
 export type EditoresMinAggregateInputType = {
   id?: true
-  name?: true
-  email?: true
-  role?: true
+  membro_id?: true
   matricula?: true
 }
 
 export type EditoresMaxAggregateInputType = {
   id?: true
-  name?: true
-  email?: true
-  role?: true
+  membro_id?: true
   matricula?: true
 }
 
 export type EditoresCountAggregateInputType = {
   id?: true
-  name?: true
-  email?: true
-  role?: true
+  membro_id?: true
   matricula?: true
   _all?: true
 }
@@ -181,9 +173,7 @@ export type EditoresGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 
 export type EditoresGroupByOutputType = {
   id: number
-  name: string
-  email: string
-  role: string
+  membro_id: number
   matricula: string
   _count: EditoresCountAggregateOutputType | null
   _avg: EditoresAvgAggregateOutputType | null
@@ -212,39 +202,34 @@ export type EditoresWhereInput = {
   OR?: Prisma.EditoresWhereInput[]
   NOT?: Prisma.EditoresWhereInput | Prisma.EditoresWhereInput[]
   id?: Prisma.IntFilter<"Editores"> | number
-  name?: Prisma.StringFilter<"Editores"> | string
-  email?: Prisma.StringFilter<"Editores"> | string
-  role?: Prisma.StringFilter<"Editores"> | string
+  membro_id?: Prisma.IntFilter<"Editores"> | number
   matricula?: Prisma.StringFilter<"Editores"> | string
+  membro?: Prisma.XOR<Prisma.MembrosScalarRelationFilter, Prisma.MembrosWhereInput>
   boletins?: Prisma.BoletinsListRelationFilter
 }
 
 export type EditoresOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  email?: Prisma.SortOrder
-  role?: Prisma.SortOrder
+  membro_id?: Prisma.SortOrder
   matricula?: Prisma.SortOrder
+  membro?: Prisma.MembrosOrderByWithRelationInput
   boletins?: Prisma.BoletinsOrderByRelationAggregateInput
 }
 
 export type EditoresWhereUniqueInput = Prisma.AtLeast<{
   id?: number
-  email?: string
+  membro_id?: number
   matricula?: string
   AND?: Prisma.EditoresWhereInput | Prisma.EditoresWhereInput[]
   OR?: Prisma.EditoresWhereInput[]
   NOT?: Prisma.EditoresWhereInput | Prisma.EditoresWhereInput[]
-  name?: Prisma.StringFilter<"Editores"> | string
-  role?: Prisma.StringFilter<"Editores"> | string
+  membro?: Prisma.XOR<Prisma.MembrosScalarRelationFilter, Prisma.MembrosWhereInput>
   boletins?: Prisma.BoletinsListRelationFilter
-}, "id" | "email" | "matricula">
+}, "id" | "membro_id" | "matricula">
 
 export type EditoresOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  email?: Prisma.SortOrder
-  role?: Prisma.SortOrder
+  membro_id?: Prisma.SortOrder
   matricula?: Prisma.SortOrder
   _count?: Prisma.EditoresCountOrderByAggregateInput
   _avg?: Prisma.EditoresAvgOrderByAggregateInput
@@ -258,104 +243,120 @@ export type EditoresScalarWhereWithAggregatesInput = {
   OR?: Prisma.EditoresScalarWhereWithAggregatesInput[]
   NOT?: Prisma.EditoresScalarWhereWithAggregatesInput | Prisma.EditoresScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Editores"> | number
-  name?: Prisma.StringWithAggregatesFilter<"Editores"> | string
-  email?: Prisma.StringWithAggregatesFilter<"Editores"> | string
-  role?: Prisma.StringWithAggregatesFilter<"Editores"> | string
+  membro_id?: Prisma.IntWithAggregatesFilter<"Editores"> | number
   matricula?: Prisma.StringWithAggregatesFilter<"Editores"> | string
 }
 
 export type EditoresCreateInput = {
-  name: string
-  email: string
-  role?: string
   matricula: string
+  membro: Prisma.MembrosCreateNestedOneWithoutEditorInput
   boletins?: Prisma.BoletinsCreateNestedManyWithoutCreated_byInput
 }
 
 export type EditoresUncheckedCreateInput = {
   id?: number
-  name: string
-  email: string
-  role?: string
+  membro_id: number
   matricula: string
   boletins?: Prisma.BoletinsUncheckedCreateNestedManyWithoutCreated_byInput
 }
 
 export type EditoresUpdateInput = {
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.StringFieldUpdateOperationsInput | string
   matricula?: Prisma.StringFieldUpdateOperationsInput | string
+  membro?: Prisma.MembrosUpdateOneRequiredWithoutEditorNestedInput
   boletins?: Prisma.BoletinsUpdateManyWithoutCreated_byNestedInput
 }
 
 export type EditoresUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.StringFieldUpdateOperationsInput | string
+  membro_id?: Prisma.IntFieldUpdateOperationsInput | number
   matricula?: Prisma.StringFieldUpdateOperationsInput | string
   boletins?: Prisma.BoletinsUncheckedUpdateManyWithoutCreated_byNestedInput
 }
 
 export type EditoresCreateManyInput = {
   id?: number
-  name: string
-  email: string
-  role?: string
+  membro_id: number
   matricula: string
 }
 
 export type EditoresUpdateManyMutationInput = {
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.StringFieldUpdateOperationsInput | string
   matricula?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type EditoresUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.StringFieldUpdateOperationsInput | string
+  membro_id?: Prisma.IntFieldUpdateOperationsInput | number
   matricula?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
+export type EditoresNullableScalarRelationFilter = {
+  is?: Prisma.EditoresWhereInput | null
+  isNot?: Prisma.EditoresWhereInput | null
 }
 
 export type EditoresCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  email?: Prisma.SortOrder
-  role?: Prisma.SortOrder
+  membro_id?: Prisma.SortOrder
   matricula?: Prisma.SortOrder
 }
 
 export type EditoresAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  membro_id?: Prisma.SortOrder
 }
 
 export type EditoresMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  email?: Prisma.SortOrder
-  role?: Prisma.SortOrder
+  membro_id?: Prisma.SortOrder
   matricula?: Prisma.SortOrder
 }
 
 export type EditoresMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  email?: Prisma.SortOrder
-  role?: Prisma.SortOrder
+  membro_id?: Prisma.SortOrder
   matricula?: Prisma.SortOrder
 }
 
 export type EditoresSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  membro_id?: Prisma.SortOrder
 }
 
 export type EditoresScalarRelationFilter = {
   is?: Prisma.EditoresWhereInput
   isNot?: Prisma.EditoresWhereInput
+}
+
+export type EditoresCreateNestedOneWithoutMembroInput = {
+  create?: Prisma.XOR<Prisma.EditoresCreateWithoutMembroInput, Prisma.EditoresUncheckedCreateWithoutMembroInput>
+  connectOrCreate?: Prisma.EditoresCreateOrConnectWithoutMembroInput
+  connect?: Prisma.EditoresWhereUniqueInput
+}
+
+export type EditoresUncheckedCreateNestedOneWithoutMembroInput = {
+  create?: Prisma.XOR<Prisma.EditoresCreateWithoutMembroInput, Prisma.EditoresUncheckedCreateWithoutMembroInput>
+  connectOrCreate?: Prisma.EditoresCreateOrConnectWithoutMembroInput
+  connect?: Prisma.EditoresWhereUniqueInput
+}
+
+export type EditoresUpdateOneWithoutMembroNestedInput = {
+  create?: Prisma.XOR<Prisma.EditoresCreateWithoutMembroInput, Prisma.EditoresUncheckedCreateWithoutMembroInput>
+  connectOrCreate?: Prisma.EditoresCreateOrConnectWithoutMembroInput
+  upsert?: Prisma.EditoresUpsertWithoutMembroInput
+  disconnect?: Prisma.EditoresWhereInput | boolean
+  delete?: Prisma.EditoresWhereInput | boolean
+  connect?: Prisma.EditoresWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EditoresUpdateToOneWithWhereWithoutMembroInput, Prisma.EditoresUpdateWithoutMembroInput>, Prisma.EditoresUncheckedUpdateWithoutMembroInput>
+}
+
+export type EditoresUncheckedUpdateOneWithoutMembroNestedInput = {
+  create?: Prisma.XOR<Prisma.EditoresCreateWithoutMembroInput, Prisma.EditoresUncheckedCreateWithoutMembroInput>
+  connectOrCreate?: Prisma.EditoresCreateOrConnectWithoutMembroInput
+  upsert?: Prisma.EditoresUpsertWithoutMembroInput
+  disconnect?: Prisma.EditoresWhereInput | boolean
+  delete?: Prisma.EditoresWhereInput | boolean
+  connect?: Prisma.EditoresWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EditoresUpdateToOneWithWhereWithoutMembroInput, Prisma.EditoresUpdateWithoutMembroInput>, Prisma.EditoresUncheckedUpdateWithoutMembroInput>
 }
 
 export type EditoresCreateNestedOneWithoutBoletinsInput = {
@@ -372,18 +373,52 @@ export type EditoresUpdateOneRequiredWithoutBoletinsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.EditoresUpdateToOneWithWhereWithoutBoletinsInput, Prisma.EditoresUpdateWithoutBoletinsInput>, Prisma.EditoresUncheckedUpdateWithoutBoletinsInput>
 }
 
-export type EditoresCreateWithoutBoletinsInput = {
-  name: string
-  email: string
-  role?: string
+export type EditoresCreateWithoutMembroInput = {
   matricula: string
+  boletins?: Prisma.BoletinsCreateNestedManyWithoutCreated_byInput
+}
+
+export type EditoresUncheckedCreateWithoutMembroInput = {
+  id?: number
+  matricula: string
+  boletins?: Prisma.BoletinsUncheckedCreateNestedManyWithoutCreated_byInput
+}
+
+export type EditoresCreateOrConnectWithoutMembroInput = {
+  where: Prisma.EditoresWhereUniqueInput
+  create: Prisma.XOR<Prisma.EditoresCreateWithoutMembroInput, Prisma.EditoresUncheckedCreateWithoutMembroInput>
+}
+
+export type EditoresUpsertWithoutMembroInput = {
+  update: Prisma.XOR<Prisma.EditoresUpdateWithoutMembroInput, Prisma.EditoresUncheckedUpdateWithoutMembroInput>
+  create: Prisma.XOR<Prisma.EditoresCreateWithoutMembroInput, Prisma.EditoresUncheckedCreateWithoutMembroInput>
+  where?: Prisma.EditoresWhereInput
+}
+
+export type EditoresUpdateToOneWithWhereWithoutMembroInput = {
+  where?: Prisma.EditoresWhereInput
+  data: Prisma.XOR<Prisma.EditoresUpdateWithoutMembroInput, Prisma.EditoresUncheckedUpdateWithoutMembroInput>
+}
+
+export type EditoresUpdateWithoutMembroInput = {
+  matricula?: Prisma.StringFieldUpdateOperationsInput | string
+  boletins?: Prisma.BoletinsUpdateManyWithoutCreated_byNestedInput
+}
+
+export type EditoresUncheckedUpdateWithoutMembroInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  matricula?: Prisma.StringFieldUpdateOperationsInput | string
+  boletins?: Prisma.BoletinsUncheckedUpdateManyWithoutCreated_byNestedInput
+}
+
+export type EditoresCreateWithoutBoletinsInput = {
+  matricula: string
+  membro: Prisma.MembrosCreateNestedOneWithoutEditorInput
 }
 
 export type EditoresUncheckedCreateWithoutBoletinsInput = {
   id?: number
-  name: string
-  email: string
-  role?: string
+  membro_id: number
   matricula: string
 }
 
@@ -404,17 +439,13 @@ export type EditoresUpdateToOneWithWhereWithoutBoletinsInput = {
 }
 
 export type EditoresUpdateWithoutBoletinsInput = {
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.StringFieldUpdateOperationsInput | string
   matricula?: Prisma.StringFieldUpdateOperationsInput | string
+  membro?: Prisma.MembrosUpdateOneRequiredWithoutEditorNestedInput
 }
 
 export type EditoresUncheckedUpdateWithoutBoletinsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.StringFieldUpdateOperationsInput | string
+  membro_id?: Prisma.IntFieldUpdateOperationsInput | number
   matricula?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -451,56 +482,55 @@ export type EditoresCountOutputTypeCountBoletinsArgs<ExtArgs extends runtime.Typ
 
 export type EditoresSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  name?: boolean
-  email?: boolean
-  role?: boolean
+  membro_id?: boolean
   matricula?: boolean
+  membro?: boolean | Prisma.MembrosDefaultArgs<ExtArgs>
   boletins?: boolean | Prisma.Editores$boletinsArgs<ExtArgs>
   _count?: boolean | Prisma.EditoresCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["editores"]>
 
 export type EditoresSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  name?: boolean
-  email?: boolean
-  role?: boolean
+  membro_id?: boolean
   matricula?: boolean
+  membro?: boolean | Prisma.MembrosDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["editores"]>
 
 export type EditoresSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  name?: boolean
-  email?: boolean
-  role?: boolean
+  membro_id?: boolean
   matricula?: boolean
+  membro?: boolean | Prisma.MembrosDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["editores"]>
 
 export type EditoresSelectScalar = {
   id?: boolean
-  name?: boolean
-  email?: boolean
-  role?: boolean
+  membro_id?: boolean
   matricula?: boolean
 }
 
-export type EditoresOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "role" | "matricula", ExtArgs["result"]["editores"]>
+export type EditoresOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "membro_id" | "matricula", ExtArgs["result"]["editores"]>
 export type EditoresInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  membro?: boolean | Prisma.MembrosDefaultArgs<ExtArgs>
   boletins?: boolean | Prisma.Editores$boletinsArgs<ExtArgs>
   _count?: boolean | Prisma.EditoresCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type EditoresIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type EditoresIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type EditoresIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  membro?: boolean | Prisma.MembrosDefaultArgs<ExtArgs>
+}
+export type EditoresIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  membro?: boolean | Prisma.MembrosDefaultArgs<ExtArgs>
+}
 
 export type $EditoresPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Editores"
   objects: {
+    membro: Prisma.$MembrosPayload<ExtArgs>
     boletins: Prisma.$BoletinsPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
-    name: string
-    email: string
-    role: string
+    membro_id: number
     matricula: string
   }, ExtArgs["result"]["editores"]>
   composites: {}
@@ -896,6 +926,7 @@ readonly fields: EditoresFieldRefs;
  */
 export interface Prisma__EditoresClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  membro<T extends Prisma.MembrosDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MembrosDefaultArgs<ExtArgs>>): Prisma.Prisma__MembrosClient<runtime.Types.Result.GetResult<Prisma.$MembrosPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   boletins<T extends Prisma.Editores$boletinsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Editores$boletinsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoletinsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -927,9 +958,7 @@ export interface Prisma__EditoresClient<T, Null = never, ExtArgs extends runtime
  */
 export interface EditoresFieldRefs {
   readonly id: Prisma.FieldRef<"Editores", 'Int'>
-  readonly name: Prisma.FieldRef<"Editores", 'String'>
-  readonly email: Prisma.FieldRef<"Editores", 'String'>
-  readonly role: Prisma.FieldRef<"Editores", 'String'>
+  readonly membro_id: Prisma.FieldRef<"Editores", 'Int'>
   readonly matricula: Prisma.FieldRef<"Editores", 'String'>
 }
     
@@ -1180,6 +1209,10 @@ export type EditoresCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extens
    */
   data: Prisma.EditoresCreateManyInput | Prisma.EditoresCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EditoresIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1250,6 +1283,10 @@ export type EditoresUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extens
    * Limit how many Editores to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EditoresIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**

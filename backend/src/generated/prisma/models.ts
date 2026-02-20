@@ -9,8 +9,8 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/User'
+export type * from './models/Membros'
 export type * from './models/Editores'
 export type * from './models/Boletins'
-export type * from './models/Membros'
 export type * from './models/Patrocinadores'
 export type * from './commonInputTypes'

@@ -542,10 +542,6 @@ export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
 export type BoletinsCreateWithoutCreated_byInput = {
   title: string
   category: string

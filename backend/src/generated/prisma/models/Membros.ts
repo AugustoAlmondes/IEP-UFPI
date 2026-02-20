@@ -28,14 +28,17 @@ export type AggregateMembros = {
 
 export type MembrosAvgAggregateOutputType = {
   id: number | null
+  user_id: number | null
 }
 
 export type MembrosSumAggregateOutputType = {
   id: number | null
+  user_id: number | null
 }
 
 export type MembrosMinAggregateOutputType = {
   id: number | null
+  user_id: number | null
   name: string | null
   profile_image: string | null
   role: string | null
@@ -44,6 +47,7 @@ export type MembrosMinAggregateOutputType = {
 
 export type MembrosMaxAggregateOutputType = {
   id: number | null
+  user_id: number | null
   name: string | null
   profile_image: string | null
   role: string | null
@@ -52,6 +56,7 @@ export type MembrosMaxAggregateOutputType = {
 
 export type MembrosCountAggregateOutputType = {
   id: number
+  user_id: number
   name: number
   profile_image: number
   role: number
@@ -62,14 +67,17 @@ export type MembrosCountAggregateOutputType = {
 
 export type MembrosAvgAggregateInputType = {
   id?: true
+  user_id?: true
 }
 
 export type MembrosSumAggregateInputType = {
   id?: true
+  user_id?: true
 }
 
 export type MembrosMinAggregateInputType = {
   id?: true
+  user_id?: true
   name?: true
   profile_image?: true
   role?: true
@@ -78,6 +86,7 @@ export type MembrosMinAggregateInputType = {
 
 export type MembrosMaxAggregateInputType = {
   id?: true
+  user_id?: true
   name?: true
   profile_image?: true
   role?: true
@@ -86,6 +95,7 @@ export type MembrosMaxAggregateInputType = {
 
 export type MembrosCountAggregateInputType = {
   id?: true
+  user_id?: true
   name?: true
   profile_image?: true
   role?: true
@@ -181,6 +191,7 @@ export type MembrosGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 
 export type MembrosGroupByOutputType = {
   id: number
+  user_id: number
   name: string
   profile_image: string | null
   role: string
@@ -212,22 +223,29 @@ export type MembrosWhereInput = {
   OR?: Prisma.MembrosWhereInput[]
   NOT?: Prisma.MembrosWhereInput | Prisma.MembrosWhereInput[]
   id?: Prisma.IntFilter<"Membros"> | number
+  user_id?: Prisma.IntFilter<"Membros"> | number
   name?: Prisma.StringFilter<"Membros"> | string
   profile_image?: Prisma.StringNullableFilter<"Membros"> | string | null
   role?: Prisma.StringFilter<"Membros"> | string
   curriculum?: Prisma.StringNullableFilter<"Membros"> | string | null
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  editor?: Prisma.XOR<Prisma.EditoresNullableScalarRelationFilter, Prisma.EditoresWhereInput> | null
 }
 
 export type MembrosOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  user_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   profile_image?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   curriculum?: Prisma.SortOrderInput | Prisma.SortOrder
+  user?: Prisma.UserOrderByWithRelationInput
+  editor?: Prisma.EditoresOrderByWithRelationInput
 }
 
 export type MembrosWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  user_id?: number
   AND?: Prisma.MembrosWhereInput | Prisma.MembrosWhereInput[]
   OR?: Prisma.MembrosWhereInput[]
   NOT?: Prisma.MembrosWhereInput | Prisma.MembrosWhereInput[]
@@ -235,10 +253,13 @@ export type MembrosWhereUniqueInput = Prisma.AtLeast<{
   profile_image?: Prisma.StringNullableFilter<"Membros"> | string | null
   role?: Prisma.StringFilter<"Membros"> | string
   curriculum?: Prisma.StringNullableFilter<"Membros"> | string | null
-}, "id">
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  editor?: Prisma.XOR<Prisma.EditoresNullableScalarRelationFilter, Prisma.EditoresWhereInput> | null
+}, "id" | "user_id">
 
 export type MembrosOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  user_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   profile_image?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
@@ -255,6 +276,7 @@ export type MembrosScalarWhereWithAggregatesInput = {
   OR?: Prisma.MembrosScalarWhereWithAggregatesInput[]
   NOT?: Prisma.MembrosScalarWhereWithAggregatesInput | Prisma.MembrosScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Membros"> | number
+  user_id?: Prisma.IntWithAggregatesFilter<"Membros"> | number
   name?: Prisma.StringWithAggregatesFilter<"Membros"> | string
   profile_image?: Prisma.StringNullableWithAggregatesFilter<"Membros"> | string | null
   role?: Prisma.StringWithAggregatesFilter<"Membros"> | string
@@ -266,14 +288,18 @@ export type MembrosCreateInput = {
   profile_image?: string | null
   role?: string
   curriculum?: string | null
+  user: Prisma.UserCreateNestedOneWithoutMembroInput
+  editor?: Prisma.EditoresCreateNestedOneWithoutMembroInput
 }
 
 export type MembrosUncheckedCreateInput = {
   id?: number
+  user_id: number
   name: string
   profile_image?: string | null
   role?: string
   curriculum?: string | null
+  editor?: Prisma.EditoresUncheckedCreateNestedOneWithoutMembroInput
 }
 
 export type MembrosUpdateInput = {
@@ -281,18 +307,23 @@ export type MembrosUpdateInput = {
   profile_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   curriculum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user?: Prisma.UserUpdateOneRequiredWithoutMembroNestedInput
+  editor?: Prisma.EditoresUpdateOneWithoutMembroNestedInput
 }
 
 export type MembrosUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  user_id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   profile_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   curriculum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  editor?: Prisma.EditoresUncheckedUpdateOneWithoutMembroNestedInput
 }
 
 export type MembrosCreateManyInput = {
   id?: number
+  user_id: number
   name: string
   profile_image?: string | null
   role?: string
@@ -308,14 +339,21 @@ export type MembrosUpdateManyMutationInput = {
 
 export type MembrosUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  user_id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   profile_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   curriculum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
+export type MembrosNullableScalarRelationFilter = {
+  is?: Prisma.MembrosWhereInput | null
+  isNot?: Prisma.MembrosWhereInput | null
+}
+
 export type MembrosCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  user_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   profile_image?: Prisma.SortOrder
   role?: Prisma.SortOrder
@@ -324,10 +362,12 @@ export type MembrosCountOrderByAggregateInput = {
 
 export type MembrosAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  user_id?: Prisma.SortOrder
 }
 
 export type MembrosMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  user_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   profile_image?: Prisma.SortOrder
   role?: Prisma.SortOrder
@@ -336,6 +376,7 @@ export type MembrosMaxOrderByAggregateInput = {
 
 export type MembrosMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  user_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   profile_image?: Prisma.SortOrder
   role?: Prisma.SortOrder
@@ -344,49 +385,227 @@ export type MembrosMinOrderByAggregateInput = {
 
 export type MembrosSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  user_id?: Prisma.SortOrder
+}
+
+export type MembrosScalarRelationFilter = {
+  is?: Prisma.MembrosWhereInput
+  isNot?: Prisma.MembrosWhereInput
+}
+
+export type MembrosCreateNestedOneWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.MembrosCreateWithoutUserInput, Prisma.MembrosUncheckedCreateWithoutUserInput>
+  connectOrCreate?: Prisma.MembrosCreateOrConnectWithoutUserInput
+  connect?: Prisma.MembrosWhereUniqueInput
+}
+
+export type MembrosUncheckedCreateNestedOneWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.MembrosCreateWithoutUserInput, Prisma.MembrosUncheckedCreateWithoutUserInput>
+  connectOrCreate?: Prisma.MembrosCreateOrConnectWithoutUserInput
+  connect?: Prisma.MembrosWhereUniqueInput
+}
+
+export type MembrosUpdateOneWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.MembrosCreateWithoutUserInput, Prisma.MembrosUncheckedCreateWithoutUserInput>
+  connectOrCreate?: Prisma.MembrosCreateOrConnectWithoutUserInput
+  upsert?: Prisma.MembrosUpsertWithoutUserInput
+  disconnect?: Prisma.MembrosWhereInput | boolean
+  delete?: Prisma.MembrosWhereInput | boolean
+  connect?: Prisma.MembrosWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MembrosUpdateToOneWithWhereWithoutUserInput, Prisma.MembrosUpdateWithoutUserInput>, Prisma.MembrosUncheckedUpdateWithoutUserInput>
+}
+
+export type MembrosUncheckedUpdateOneWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.MembrosCreateWithoutUserInput, Prisma.MembrosUncheckedCreateWithoutUserInput>
+  connectOrCreate?: Prisma.MembrosCreateOrConnectWithoutUserInput
+  upsert?: Prisma.MembrosUpsertWithoutUserInput
+  disconnect?: Prisma.MembrosWhereInput | boolean
+  delete?: Prisma.MembrosWhereInput | boolean
+  connect?: Prisma.MembrosWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MembrosUpdateToOneWithWhereWithoutUserInput, Prisma.MembrosUpdateWithoutUserInput>, Prisma.MembrosUncheckedUpdateWithoutUserInput>
+}
+
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
+}
+
+export type MembrosCreateNestedOneWithoutEditorInput = {
+  create?: Prisma.XOR<Prisma.MembrosCreateWithoutEditorInput, Prisma.MembrosUncheckedCreateWithoutEditorInput>
+  connectOrCreate?: Prisma.MembrosCreateOrConnectWithoutEditorInput
+  connect?: Prisma.MembrosWhereUniqueInput
+}
+
+export type MembrosUpdateOneRequiredWithoutEditorNestedInput = {
+  create?: Prisma.XOR<Prisma.MembrosCreateWithoutEditorInput, Prisma.MembrosUncheckedCreateWithoutEditorInput>
+  connectOrCreate?: Prisma.MembrosCreateOrConnectWithoutEditorInput
+  upsert?: Prisma.MembrosUpsertWithoutEditorInput
+  connect?: Prisma.MembrosWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MembrosUpdateToOneWithWhereWithoutEditorInput, Prisma.MembrosUpdateWithoutEditorInput>, Prisma.MembrosUncheckedUpdateWithoutEditorInput>
+}
+
+export type MembrosCreateWithoutUserInput = {
+  name: string
+  profile_image?: string | null
+  role?: string
+  curriculum?: string | null
+  editor?: Prisma.EditoresCreateNestedOneWithoutMembroInput
+}
+
+export type MembrosUncheckedCreateWithoutUserInput = {
+  id?: number
+  name: string
+  profile_image?: string | null
+  role?: string
+  curriculum?: string | null
+  editor?: Prisma.EditoresUncheckedCreateNestedOneWithoutMembroInput
+}
+
+export type MembrosCreateOrConnectWithoutUserInput = {
+  where: Prisma.MembrosWhereUniqueInput
+  create: Prisma.XOR<Prisma.MembrosCreateWithoutUserInput, Prisma.MembrosUncheckedCreateWithoutUserInput>
+}
+
+export type MembrosUpsertWithoutUserInput = {
+  update: Prisma.XOR<Prisma.MembrosUpdateWithoutUserInput, Prisma.MembrosUncheckedUpdateWithoutUserInput>
+  create: Prisma.XOR<Prisma.MembrosCreateWithoutUserInput, Prisma.MembrosUncheckedCreateWithoutUserInput>
+  where?: Prisma.MembrosWhereInput
+}
+
+export type MembrosUpdateToOneWithWhereWithoutUserInput = {
+  where?: Prisma.MembrosWhereInput
+  data: Prisma.XOR<Prisma.MembrosUpdateWithoutUserInput, Prisma.MembrosUncheckedUpdateWithoutUserInput>
+}
+
+export type MembrosUpdateWithoutUserInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  profile_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  curriculum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  editor?: Prisma.EditoresUpdateOneWithoutMembroNestedInput
+}
+
+export type MembrosUncheckedUpdateWithoutUserInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  profile_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  curriculum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  editor?: Prisma.EditoresUncheckedUpdateOneWithoutMembroNestedInput
+}
+
+export type MembrosCreateWithoutEditorInput = {
+  name: string
+  profile_image?: string | null
+  role?: string
+  curriculum?: string | null
+  user: Prisma.UserCreateNestedOneWithoutMembroInput
+}
+
+export type MembrosUncheckedCreateWithoutEditorInput = {
+  id?: number
+  user_id: number
+  name: string
+  profile_image?: string | null
+  role?: string
+  curriculum?: string | null
+}
+
+export type MembrosCreateOrConnectWithoutEditorInput = {
+  where: Prisma.MembrosWhereUniqueInput
+  create: Prisma.XOR<Prisma.MembrosCreateWithoutEditorInput, Prisma.MembrosUncheckedCreateWithoutEditorInput>
+}
+
+export type MembrosUpsertWithoutEditorInput = {
+  update: Prisma.XOR<Prisma.MembrosUpdateWithoutEditorInput, Prisma.MembrosUncheckedUpdateWithoutEditorInput>
+  create: Prisma.XOR<Prisma.MembrosCreateWithoutEditorInput, Prisma.MembrosUncheckedCreateWithoutEditorInput>
+  where?: Prisma.MembrosWhereInput
+}
+
+export type MembrosUpdateToOneWithWhereWithoutEditorInput = {
+  where?: Prisma.MembrosWhereInput
+  data: Prisma.XOR<Prisma.MembrosUpdateWithoutEditorInput, Prisma.MembrosUncheckedUpdateWithoutEditorInput>
+}
+
+export type MembrosUpdateWithoutEditorInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  profile_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  curriculum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user?: Prisma.UserUpdateOneRequiredWithoutMembroNestedInput
+}
+
+export type MembrosUncheckedUpdateWithoutEditorInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  user_id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  profile_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  curriculum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
 
 export type MembrosSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  user_id?: boolean
   name?: boolean
   profile_image?: boolean
   role?: boolean
   curriculum?: boolean
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  editor?: boolean | Prisma.Membros$editorArgs<ExtArgs>
 }, ExtArgs["result"]["membros"]>
 
 export type MembrosSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  user_id?: boolean
   name?: boolean
   profile_image?: boolean
   role?: boolean
   curriculum?: boolean
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["membros"]>
 
 export type MembrosSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  user_id?: boolean
   name?: boolean
   profile_image?: boolean
   role?: boolean
   curriculum?: boolean
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["membros"]>
 
 export type MembrosSelectScalar = {
   id?: boolean
+  user_id?: boolean
   name?: boolean
   profile_image?: boolean
   role?: boolean
   curriculum?: boolean
 }
 
-export type MembrosOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "profile_image" | "role" | "curriculum", ExtArgs["result"]["membros"]>
+export type MembrosOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "user_id" | "name" | "profile_image" | "role" | "curriculum", ExtArgs["result"]["membros"]>
+export type MembrosInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  editor?: boolean | Prisma.Membros$editorArgs<ExtArgs>
+}
+export type MembrosIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+}
+export type MembrosIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+}
 
 export type $MembrosPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Membros"
-  objects: {}
+  objects: {
+    user: Prisma.$UserPayload<ExtArgs>
+    editor: Prisma.$EditoresPayload<ExtArgs> | null
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
+    user_id: number
     name: string
     profile_image: string | null
     role: string
@@ -785,6 +1004,8 @@ readonly fields: MembrosFieldRefs;
  */
 export interface Prisma__MembrosClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  editor<T extends Prisma.Membros$editorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Membros$editorArgs<ExtArgs>>): Prisma.Prisma__EditoresClient<runtime.Types.Result.GetResult<Prisma.$EditoresPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -815,6 +1036,7 @@ export interface Prisma__MembrosClient<T, Null = never, ExtArgs extends runtime.
  */
 export interface MembrosFieldRefs {
   readonly id: Prisma.FieldRef<"Membros", 'Int'>
+  readonly user_id: Prisma.FieldRef<"Membros", 'Int'>
   readonly name: Prisma.FieldRef<"Membros", 'String'>
   readonly profile_image: Prisma.FieldRef<"Membros", 'String'>
   readonly role: Prisma.FieldRef<"Membros", 'String'>
@@ -836,6 +1058,10 @@ export type MembrosFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Inter
    */
   omit?: Prisma.MembrosOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MembrosInclude<ExtArgs> | null
+  /**
    * Filter, which Membros to fetch.
    */
   where: Prisma.MembrosWhereUniqueInput
@@ -854,6 +1080,10 @@ export type MembrosFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extension
    */
   omit?: Prisma.MembrosOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MembrosInclude<ExtArgs> | null
+  /**
    * Filter, which Membros to fetch.
    */
   where: Prisma.MembrosWhereUniqueInput
@@ -871,6 +1101,10 @@ export type MembrosFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Omit specific fields from the Membros
    */
   omit?: Prisma.MembrosOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MembrosInclude<ExtArgs> | null
   /**
    * Filter, which Membros to fetch.
    */
@@ -920,6 +1154,10 @@ export type MembrosFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions
    */
   omit?: Prisma.MembrosOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MembrosInclude<ExtArgs> | null
+  /**
    * Filter, which Membros to fetch.
    */
   where?: Prisma.MembrosWhereInput
@@ -968,6 +1206,10 @@ export type MembrosFindManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    */
   omit?: Prisma.MembrosOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MembrosInclude<ExtArgs> | null
+  /**
    * Filter, which Membros to fetch.
    */
   where?: Prisma.MembrosWhereInput
@@ -1011,6 +1253,10 @@ export type MembrosCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    */
   omit?: Prisma.MembrosOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MembrosInclude<ExtArgs> | null
+  /**
    * The data needed to create a Membros.
    */
   data: Prisma.XOR<Prisma.MembrosCreateInput, Prisma.MembrosUncheckedCreateInput>
@@ -1044,6 +1290,10 @@ export type MembrosCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensi
    */
   data: Prisma.MembrosCreateManyInput | Prisma.MembrosCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MembrosIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1058,6 +1308,10 @@ export type MembrosUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * Omit specific fields from the Membros
    */
   omit?: Prisma.MembrosOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MembrosInclude<ExtArgs> | null
   /**
    * The data needed to update a Membros.
    */
@@ -1110,6 +1364,10 @@ export type MembrosUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensi
    * Limit how many Membros to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MembrosIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1124,6 +1382,10 @@ export type MembrosUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * Omit specific fields from the Membros
    */
   omit?: Prisma.MembrosOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MembrosInclude<ExtArgs> | null
   /**
    * The filter to search for the Membros to update in case it exists.
    */
@@ -1151,6 +1413,10 @@ export type MembrosDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    */
   omit?: Prisma.MembrosOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MembrosInclude<ExtArgs> | null
+  /**
    * Filter which Membros to delete.
    */
   where: Prisma.MembrosWhereUniqueInput
@@ -1171,6 +1437,25 @@ export type MembrosDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 /**
+ * Membros.editor
+ */
+export type Membros$editorArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Editores
+   */
+  select?: Prisma.EditoresSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Editores
+   */
+  omit?: Prisma.EditoresOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EditoresInclude<ExtArgs> | null
+  where?: Prisma.EditoresWhereInput
+}
+
+/**
  * Membros without action
  */
 export type MembrosDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1182,4 +1467,8 @@ export type MembrosDefaultArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Omit specific fields from the Membros
    */
   omit?: Prisma.MembrosOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MembrosInclude<ExtArgs> | null
 }

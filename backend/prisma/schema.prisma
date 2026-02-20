@@ -15,20 +15,29 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  name     String
-  email    String @unique
-  password String
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  membro    Membros?
+}
+
+model Membros {
+  id            Int        @id @default(autoincrement())
+  user_id       Int        @unique
+  user          User       @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  name          String
+  profile_image String?
+  role          String     @default("aluno")
+  curriculum    String?
+  editor        Editores?
 }
 
 model Editores {
-  id        Int    @id @default(autoincrement())
-  name      String
-  email     String @unique
-  role      String @default("aluno")
-  matricula String @unique
-
-  boletins Boletins[]
+  id        Int      @id @default(autoincrement())
+  membro_id Int      @unique
+  membro    Membros  @relation(fields: [membro_id], references: [id], onDelete: Cascade)
+  matricula String?   @unique
+  boletins  Boletins[]
 }
 
 model Boletins {
@@ -41,19 +50,10 @@ model Boletins {
   proofreader  String
   image        String?
   legend_image String?
-
-  // Criado por um editor específo
+  
   created_by_id Int
   created_by    Editores @relation(fields: [created_by_id], references: [id])
   created_in    DateTime @default(now())
-}
-
-model Membros {
-  id            Int     @id @default(autoincrement())
-  name          String
-  profile_image String?
-  role          String  @default("aluno")
-  curriculum    String?
 }
 
 model Patrocinadores {
