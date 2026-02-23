@@ -23,24 +23,42 @@ export class AuthService {
         }
 
         const hashedPassword = await bcrypt.hash(data.password, 10);
+
+        const memberData: any = {
+            name: data.name,
+        };
+        if (data.role) {
+            memberData.role = data.role;
+        }
+
         const user = await this.prisma.user.create({
             data: {
-                ...data,
-                password: hashedPassword
+                email: data.email,
+                password: hashedPassword,
+                membro: {
+                    create: memberData
+                }
+            },
+            include: {
+                membro: true
             }
-        })
+        });
 
         return {
             id: user.id,
-            name: user.name,
+            name: user.membro?.name,
             email: user.email,
+            role: user.membro?.role,
         };
     }
 
     async signin(data: SignInDTO) {
         console.log(data);
         const user = await this.prisma.user.findUnique({
-            where: { email: data.email }
+            where: { email: data.email },
+            include: {
+                membro: true
+            }
         })
 
         if (!user) {
@@ -55,13 +73,18 @@ export class AuthService {
 
         const accessToken = await this.jwtService.signAsync({
             id: user.id,
-            name: user.name,
-            email: user.email
+            name: user.membro?.name,
+            email: user.email,
+            role: user.membro?.role,
         })
-        return {accessToken,};
+        return { accessToken, };
     }
 
     async get() {
-        return await this.prisma.user.findMany();
+        return await this.prisma.user.findMany({
+            include: {
+                membro: true
+            }
+        });
     }
 }

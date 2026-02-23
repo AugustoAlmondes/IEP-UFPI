@@ -174,7 +174,7 @@ export type EditoresGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 export type EditoresGroupByOutputType = {
   id: number
   membro_id: number
-  matricula: string
+  matricula: string | null
   _count: EditoresCountAggregateOutputType | null
   _avg: EditoresAvgAggregateOutputType | null
   _sum: EditoresSumAggregateOutputType | null
@@ -203,7 +203,7 @@ export type EditoresWhereInput = {
   NOT?: Prisma.EditoresWhereInput | Prisma.EditoresWhereInput[]
   id?: Prisma.IntFilter<"Editores"> | number
   membro_id?: Prisma.IntFilter<"Editores"> | number
-  matricula?: Prisma.StringFilter<"Editores"> | string
+  matricula?: Prisma.StringNullableFilter<"Editores"> | string | null
   membro?: Prisma.XOR<Prisma.MembrosScalarRelationFilter, Prisma.MembrosWhereInput>
   boletins?: Prisma.BoletinsListRelationFilter
 }
@@ -211,7 +211,7 @@ export type EditoresWhereInput = {
 export type EditoresOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   membro_id?: Prisma.SortOrder
-  matricula?: Prisma.SortOrder
+  matricula?: Prisma.SortOrderInput | Prisma.SortOrder
   membro?: Prisma.MembrosOrderByWithRelationInput
   boletins?: Prisma.BoletinsOrderByRelationAggregateInput
 }
@@ -230,7 +230,7 @@ export type EditoresWhereUniqueInput = Prisma.AtLeast<{
 export type EditoresOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   membro_id?: Prisma.SortOrder
-  matricula?: Prisma.SortOrder
+  matricula?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.EditoresCountOrderByAggregateInput
   _avg?: Prisma.EditoresAvgOrderByAggregateInput
   _max?: Prisma.EditoresMaxOrderByAggregateInput
@@ -244,11 +244,11 @@ export type EditoresScalarWhereWithAggregatesInput = {
   NOT?: Prisma.EditoresScalarWhereWithAggregatesInput | Prisma.EditoresScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Editores"> | number
   membro_id?: Prisma.IntWithAggregatesFilter<"Editores"> | number
-  matricula?: Prisma.StringWithAggregatesFilter<"Editores"> | string
+  matricula?: Prisma.StringNullableWithAggregatesFilter<"Editores"> | string | null
 }
 
 export type EditoresCreateInput = {
-  matricula: string
+  matricula?: string | null
   membro: Prisma.MembrosCreateNestedOneWithoutEditorInput
   boletins?: Prisma.BoletinsCreateNestedManyWithoutCreated_byInput
 }
@@ -256,12 +256,12 @@ export type EditoresCreateInput = {
 export type EditoresUncheckedCreateInput = {
   id?: number
   membro_id: number
-  matricula: string
+  matricula?: string | null
   boletins?: Prisma.BoletinsUncheckedCreateNestedManyWithoutCreated_byInput
 }
 
 export type EditoresUpdateInput = {
-  matricula?: Prisma.StringFieldUpdateOperationsInput | string
+  matricula?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   membro?: Prisma.MembrosUpdateOneRequiredWithoutEditorNestedInput
   boletins?: Prisma.BoletinsUpdateManyWithoutCreated_byNestedInput
 }
@@ -269,24 +269,24 @@ export type EditoresUpdateInput = {
 export type EditoresUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   membro_id?: Prisma.IntFieldUpdateOperationsInput | number
-  matricula?: Prisma.StringFieldUpdateOperationsInput | string
+  matricula?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   boletins?: Prisma.BoletinsUncheckedUpdateManyWithoutCreated_byNestedInput
 }
 
 export type EditoresCreateManyInput = {
   id?: number
   membro_id: number
-  matricula: string
+  matricula?: string | null
 }
 
 export type EditoresUpdateManyMutationInput = {
-  matricula?: Prisma.StringFieldUpdateOperationsInput | string
+  matricula?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type EditoresUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   membro_id?: Prisma.IntFieldUpdateOperationsInput | number
-  matricula?: Prisma.StringFieldUpdateOperationsInput | string
+  matricula?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type EditoresNullableScalarRelationFilter = {
@@ -374,13 +374,13 @@ export type EditoresUpdateOneRequiredWithoutBoletinsNestedInput = {
 }
 
 export type EditoresCreateWithoutMembroInput = {
-  matricula: string
+  matricula?: string | null
   boletins?: Prisma.BoletinsCreateNestedManyWithoutCreated_byInput
 }
 
 export type EditoresUncheckedCreateWithoutMembroInput = {
   id?: number
-  matricula: string
+  matricula?: string | null
   boletins?: Prisma.BoletinsUncheckedCreateNestedManyWithoutCreated_byInput
 }
 
@@ -401,25 +401,25 @@ export type EditoresUpdateToOneWithWhereWithoutMembroInput = {
 }
 
 export type EditoresUpdateWithoutMembroInput = {
-  matricula?: Prisma.StringFieldUpdateOperationsInput | string
+  matricula?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   boletins?: Prisma.BoletinsUpdateManyWithoutCreated_byNestedInput
 }
 
 export type EditoresUncheckedUpdateWithoutMembroInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  matricula?: Prisma.StringFieldUpdateOperationsInput | string
+  matricula?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   boletins?: Prisma.BoletinsUncheckedUpdateManyWithoutCreated_byNestedInput
 }
 
 export type EditoresCreateWithoutBoletinsInput = {
-  matricula: string
+  matricula?: string | null
   membro: Prisma.MembrosCreateNestedOneWithoutEditorInput
 }
 
 export type EditoresUncheckedCreateWithoutBoletinsInput = {
   id?: number
   membro_id: number
-  matricula: string
+  matricula?: string | null
 }
 
 export type EditoresCreateOrConnectWithoutBoletinsInput = {
@@ -439,14 +439,14 @@ export type EditoresUpdateToOneWithWhereWithoutBoletinsInput = {
 }
 
 export type EditoresUpdateWithoutBoletinsInput = {
-  matricula?: Prisma.StringFieldUpdateOperationsInput | string
+  matricula?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   membro?: Prisma.MembrosUpdateOneRequiredWithoutEditorNestedInput
 }
 
 export type EditoresUncheckedUpdateWithoutBoletinsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   membro_id?: Prisma.IntFieldUpdateOperationsInput | number
-  matricula?: Prisma.StringFieldUpdateOperationsInput | string
+  matricula?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -531,7 +531,7 @@ export type $EditoresPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     membro_id: number
-    matricula: string
+    matricula: string | null
   }, ExtArgs["result"]["editores"]>
   composites: {}
 }
