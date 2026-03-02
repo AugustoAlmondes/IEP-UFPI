@@ -18,6 +18,7 @@ import { AdminRoute } from './routes/AdminRoute'
 import Questions from './pages/Questions'
 import Newsletter from './pages/Newsletter'
 import { AuthProvider } from './providers/AuthProvider'
+import InfoNewslatter from './pages/InfoNewslatter'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -44,6 +45,8 @@ createRoot(document.getElementById('root')!).render(
             <Route path="/equipe" element={<Equipe />} />
             <Route path="/questions" element={<Questions />} />
             <Route path="/newsletter" element={<Newsletter />} />
+            <Route path="/newsletter" element={<Newsletter />} />
+            <Route path="/info-newsletter/:index/:slug" element={<InfoNewslatter />} />
             <Route
               path="/form-newsletter"
               element={

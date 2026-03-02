@@ -3,9 +3,10 @@ import type { Newsletter } from "../types/newsletter"
 export const newsletter: Newsletter[] = [
     {
         title: 'DESENVOLVIMENTO E ESTAGNAÇÃO NA AMÉRICA LATINA: UMA ABORDAGEM ESTRUTURALISTA, POR CELSO FURTADO',
+        author: 'Richelly de Moura Conceição',
         category: 'Resenha',
-        date: '2023-08-15',
-         text: [
+        date: '02 mar. 2026',
+        text: [
             'Em seu intitulado desenvolvimento e estagnação na América Latina, Celso Furtado busca compreender a partir de uma perspectiva estruturalista, como se deu historicamente o processo de estagnação do desenvolvimento das economias latino-americanas desde a forma como seus territórios foram colonizados até o modo em que buscaram a sua independência. Nesse sentido, o ponto-guia escolhido pelo autor do por que estudar esse tema dar-se-á por dois problemas: a tendência ao crescimento de preços nos produtos dessas economias e o decrescimento da renda per capita nas mesmas.',
             'Historicamente, o processo de colonização dos países latino-americanos foi sustentado por uma cadeia de núcleos urbanos melhor desenvolvidos e que buscavam em novas terras um lugar para auferirem ainda mais privilégios dentro de seu próprio espaço. Desse modo, os núcleos, por meio de concessões bem divididas dessas terras, àqueles que possuíam algum capital próprio para investirem na terra, principalmente em atividades agrícolas. Esses, agora proprietários da terra, após a abolição da escravatura, mantiveram em suas posses o modelo econômico chamado semifeudalismo, onde os servos produziam em suas terras e parte do que produziam era para sua própria subsistência por meio do aluguel de terras, e os seus donos exportavam os excedentes produzidos.',
             'Esse modelo semifeudal abriu brechas para o aparecimento de uma nova classe social oriunda daqueles que viram a oportunidade de lucrar por fora do setor agrário, contrabandeando pedras preciosas. Esses senhores tinham o interesse de exportá-las e dessa forma obterem seus ganhos, eles são o que a posteriori é compreendido como pré-capitalistas e tinham tendências à formação de centros urbanos, pois queriam que a terra se parecesse com o núcleo que a priori colonizou a terra.',
@@ -17,16 +18,17 @@ export const newsletter: Newsletter[] = [
             'Essas medidas permitiram que o nível de renda monetária do setor exportador tenho sido mantido estável e a demanda agregada ajustada a um nível maior de impostos concedidos, ou seja, não cobrados. Em contrapeso, a parte da pressão exercida sobre a balanço de pagamentos por tais medidas são aumentadas as tarifas sobre produtos manufaturados que já começaram a ser produzidos internamente, causando assim, uma alta de preços no setor interno.',
             'Desse modo, o autor concluiu que a alta dos preços e a baixa na renda per capita dessas economias sucede os fatores: da retração das importações pelo processo de substituição de importações; a deterioração dos termos de intercâmbio causada pela assimetria de valor monetário da moeda local com a moeda externa, sendo esta mais valiosa do que aquela; a expansão do crédito para o financiamento de estoques reguladores na temporada de alta produção a fim de manter  preço estável; e o aumento das tarifas de exportação; são o que determinou uma série de mudanças na estrutura de custos de produção, juntamente a esses fatores houve também a luta de vários grupos sociais em defesa de sua renda, resultando em modificações nos preços relativos e na distribuição de renda. O resultado no final foi de um aumento no nível geral de preços dos bens finais.'
         ],
-        referece: 'FURTADO, C. Development and stagnation in Latin America: A structuralist approach. Studies in Comparative International Development, v. 1, n. 11, p. 159–175, nov. 1965.',
+        reference: 'FURTADO, C. Development and stagnation in Latin America: A structuralist approach. Studies in Comparative International Development, v. 1, n. 11, p. 159–175, nov. 1965.',
         review: 'Hugo Feitosa Gonçalves',
         imageUrl: 'https://082noticias.com/wp-content/uploads/2021/05/Celso-Furtado.jpg',
-        caption: 'Imagen de Celso Furtado'
+        caption: 'Imagem de Celso Furtado'
     },
     {
-        title: 'DESENVOLVIMENTO E ESTAGNAÇÃO NA AMÉRICA LATINA: UMA ABORDAGEM ESTRUTURALISTA, POR CELSO FURTADO',
+        title: 'EXEMPLO DE BOLETIM',
+        author: 'Viviany da Silva Araújo',
         category: 'Resenha',
-        date: '2023-08-15',
-         text: [
+        date: '16 fev. 2025',
+        text: [
             'Em seu intitulado desenvolvimento e estagnação na América Latina, Celso Furtado busca compreender a partir de uma perspectiva estruturalista, como se deu historicamente o processo de estagnação do desenvolvimento das economias latino-americanas desde a forma como seus territórios foram colonizados até o modo em que buscaram a sua independência. Nesse sentido, o ponto-guia escolhido pelo autor do por que estudar esse tema dar-se-á por dois problemas: a tendência ao crescimento de preços nos produtos dessas economias e o decrescimento da renda per capita nas mesmas.',
             'Historicamente, o processo de colonização dos países latino-americanos foi sustentado por uma cadeia de núcleos urbanos melhor desenvolvidos e que buscavam em novas terras um lugar para auferirem ainda mais privilégios dentro de seu próprio espaço. Desse modo, os núcleos, por meio de concessões bem divididas dessas terras, àqueles que possuíam algum capital próprio para investirem na terra, principalmente em atividades agrícolas. Esses, agora proprietários da terra, após a abolição da escravatura, mantiveram em suas posses o modelo econômico chamado semifeudalismo, onde os servos produziam em suas terras e parte do que produziam era para sua própria subsistência por meio do aluguel de terras, e os seus donos exportavam os excedentes produzidos.',
             'Esse modelo semifeudal abriu brechas para o aparecimento de uma nova classe social oriunda daqueles que viram a oportunidade de lucrar por fora do setor agrário, contrabandeando pedras preciosas. Esses senhores tinham o interesse de exportá-las e dessa forma obterem seus ganhos, eles são o que a posteriori é compreendido como pré-capitalistas e tinham tendências à formação de centros urbanos, pois queriam que a terra se parecesse com o núcleo que a priori colonizou a terra.',
@@ -38,16 +40,17 @@ export const newsletter: Newsletter[] = [
             'Essas medidas permitiram que o nível de renda monetária do setor exportador tenho sido mantido estável e a demanda agregada ajustada a um nível maior de impostos concedidos, ou seja, não cobrados. Em contrapeso, a parte da pressão exercida sobre a balanço de pagamentos por tais medidas são aumentadas as tarifas sobre produtos manufaturados que já começaram a ser produzidos internamente, causando assim, uma alta de preços no setor interno.',
             'Desse modo, o autor concluiu que a alta dos preços e a baixa na renda per capita dessas economias sucede os fatores: da retração das importações pelo processo de substituição de importações; a deterioração dos termos de intercâmbio causada pela assimetria de valor monetário da moeda local com a moeda externa, sendo esta mais valiosa do que aquela; a expansão do crédito para o financiamento de estoques reguladores na temporada de alta produção a fim de manter  preço estável; e o aumento das tarifas de exportação; são o que determinou uma série de mudanças na estrutura de custos de produção, juntamente a esses fatores houve também a luta de vários grupos sociais em defesa de sua renda, resultando em modificações nos preços relativos e na distribuição de renda. O resultado no final foi de um aumento no nível geral de preços dos bens finais.'
         ],
-        referece: 'FURTADO, C. Development and stagnation in Latin America: A structuralist approach. Studies in Comparative International Development, v. 1, n. 11, p. 159–175, nov. 1965.',
+        reference: 'FURTADO, C. Development and stagnation in Latin America: A structuralist approach. Studies in Comparative International Development, v. 1, n. 11, p. 159–175, nov. 1965.',
         review: 'Hugo Feitosa Gonçalves',
         imageUrl: 'https://082noticias.com/wp-content/uploads/2021/05/Celso-Furtado.jpg',
-        caption: 'Imagen de Celso Furtado'
+        caption: 'Imagem de Celso Furtado'
     },
     {
-        title: 'DESENVOLVIMENTO E ESTAGNAÇÃO NA AMÉRICA LATINA: UMA ABORDAGEM ESTRUTURALISTA, POR CELSO FURTADO',
+        title: 'EXEMPLO DE BOLETIM',
+        author: 'Augusto Almondes Teixeira',
         category: 'Resenha',
-        date: '2023-08-15',
-         text: [
+        date: '15 ago. 2023',
+        text: [
             'Em seu intitulado desenvolvimento e estagnação na América Latina, Celso Furtado busca compreender a partir de uma perspectiva estruturalista, como se deu historicamente o processo de estagnação do desenvolvimento das economias latino-americanas desde a forma como seus territórios foram colonizados até o modo em que buscaram a sua independência. Nesse sentido, o ponto-guia escolhido pelo autor do por que estudar esse tema dar-se-á por dois problemas: a tendência ao crescimento de preços nos produtos dessas economias e o decrescimento da renda per capita nas mesmas.',
             'Historicamente, o processo de colonização dos países latino-americanos foi sustentado por uma cadeia de núcleos urbanos melhor desenvolvidos e que buscavam em novas terras um lugar para auferirem ainda mais privilégios dentro de seu próprio espaço. Desse modo, os núcleos, por meio de concessões bem divididas dessas terras, àqueles que possuíam algum capital próprio para investirem na terra, principalmente em atividades agrícolas. Esses, agora proprietários da terra, após a abolição da escravatura, mantiveram em suas posses o modelo econômico chamado semifeudalismo, onde os servos produziam em suas terras e parte do que produziam era para sua própria subsistência por meio do aluguel de terras, e os seus donos exportavam os excedentes produzidos.',
             'Esse modelo semifeudal abriu brechas para o aparecimento de uma nova classe social oriunda daqueles que viram a oportunidade de lucrar por fora do setor agrário, contrabandeando pedras preciosas. Esses senhores tinham o interesse de exportá-las e dessa forma obterem seus ganhos, eles são o que a posteriori é compreendido como pré-capitalistas e tinham tendências à formação de centros urbanos, pois queriam que a terra se parecesse com o núcleo que a priori colonizou a terra.',
@@ -59,9 +62,9 @@ export const newsletter: Newsletter[] = [
             'Essas medidas permitiram que o nível de renda monetária do setor exportador tenho sido mantido estável e a demanda agregada ajustada a um nível maior de impostos concedidos, ou seja, não cobrados. Em contrapeso, a parte da pressão exercida sobre a balanço de pagamentos por tais medidas são aumentadas as tarifas sobre produtos manufaturados que já começaram a ser produzidos internamente, causando assim, uma alta de preços no setor interno.',
             'Desse modo, o autor concluiu que a alta dos preços e a baixa na renda per capita dessas economias sucede os fatores: da retração das importações pelo processo de substituição de importações; a deterioração dos termos de intercâmbio causada pela assimetria de valor monetário da moeda local com a moeda externa, sendo esta mais valiosa do que aquela; a expansão do crédito para o financiamento de estoques reguladores na temporada de alta produção a fim de manter  preço estável; e o aumento das tarifas de exportação; são o que determinou uma série de mudanças na estrutura de custos de produção, juntamente a esses fatores houve também a luta de vários grupos sociais em defesa de sua renda, resultando em modificações nos preços relativos e na distribuição de renda. O resultado no final foi de um aumento no nível geral de preços dos bens finais.'
         ],
-        referece: 'FURTADO, C. Development and stagnation in Latin America: A structuralist approach. Studies in Comparative International Development, v. 1, n. 11, p. 159–175, nov. 1965.',
+        reference: 'FURTADO, C. Development and stagnation in Latin America: A structuralist approach. Studies in Comparative International Development, v. 1, n. 11, p. 159–175, nov. 1965.',
         review: 'Hugo Feitosa Gonçalves',
         imageUrl: 'https://082noticias.com/wp-content/uploads/2021/05/Celso-Furtado.jpg',
-        caption: 'Imagen de Celso Furtado'
+        caption: 'Imagem de Celso Furtado'
     },
 ]

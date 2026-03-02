@@ -1,7 +1,7 @@
 import NewsletterCard from "../components/NewsletterCard";
 import { newsletter } from "../constants/newsletter";
 
-export default function Equipe() {
+export default function Newsletter() {
     return (
         <>
             <div className="bg-white pb-40 pt-30 px-4">
@@ -29,7 +29,7 @@ export default function Equipe() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-100 max-w-4xl mx-auto">
                     {newsletter.map((item, index) => ( 
-                        <NewsletterCard key={index} newsletter={item} />
+                        <NewsletterCard key={index} newsletter={item} index={index} />
                     ))}
                 </div>
             </div>
