@@ -1,37 +1,27 @@
-import { AuthService } from './auth.service';
-import { Body, Controller, Get, Post, Request, UseGuards } from '@nestjs/common';
-import { SignInDTO, SignUpDTO } from './dtos/auth';
-import { request } from 'node:http';
-import { AuthGuard } from './auth.guard';
+import { Controller, Post, Body, HttpCode, HttpStatus, UseGuards, Get } from "@nestjs/common";
+import { AuthService } from "./auth.service";
+import { SignupDto } from "../dto/signup.dto";
+import { SigninDto } from "../dto/signin.dto";
+import { AuthGuard } from "./auth.guard";
 
-// AQUI QUE FICA TODOS OS ENDPOINTS RELACIONADOS A AUTENTICAÇÃO, COMO SIGNUP E SIGNIN
-
-@Controller('auth')
+@Controller("auth")
 export class AuthController {
+    constructor(private readonly authService: AuthService) { }
 
-    constructor(private authService: AuthService) {}
-
-    @Post('signup')
-    async signup(@Body() body: SignUpDTO) {
-        return await this.authService.signup(body);
-    }
-    
-    @Post('signin') 
-    async signin(@Body() body: SignInDTO) {
-        return await this.authService.signin(body);
+    @HttpCode(HttpStatus.OK)
+    @Post("signin")
+    async signin(@Body() dto: SigninDto) {
+        return this.authService.signIn(dto.email, dto.password);
     }
 
+    @Get("all")
     @UseGuards(AuthGuard)
-    @Get('me')
-    async me(@Request() request) {
-        return request.user
+    async getAll() {
+        return this.authService.getAll();
     }
 
-    @UseGuards(AuthGuard)
-    @Get('private')
-    privateRoute() {
-        return {
-            message: "Você acessou uma rota protegida com JWT"
-        }
+    @Post("signup")
+    async signup(@Body() dto: SignupDto) {
+        return this.authService.signUp(dto.email, dto.password);
     }
 }
