@@ -1,12 +1,16 @@
 import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { PrismaService } from "src/prisma/prisma.service";
 import * as bcrypt from 'bcrypt';
+import { JwtService } from "@nestjs/jwt";
 
 @Injectable()
 export class AuthService {
-    constructor(private readonly prisma: PrismaService) { }
+    constructor(
+        private readonly prisma: PrismaService,
+        private jwtService: JwtService
+    ) { }
 
-    async login(email: string, password: string) {
+    async signIn(email: string, password: string) {
         const user = await this.prisma.user.findUnique({
             where: { email },
         });
@@ -22,13 +26,16 @@ export class AuthService {
 
         }
 
-        return {
-            id: user.id,
-            email: user.email,
-        }
+        const payload = { sub: user.id, email: user.email };
+        const token = await this.jwtService.signAsync(payload)
+        return { token: token }
     }
 
-    async signup(email: string, password: string) {
+    async getAll() {
+        return this.prisma.user.findMany();
+    }
+
+    async signUp(email: string, password: string) {
         if (!email || !password) {
             throw new Error("Email e senha são obrigatórios");
         }
