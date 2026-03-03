@@ -5,10 +5,59 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "cjs"
 }
 
 datasource db {
   provider = "postgresql"
+}
+
+model User {
+  id       Int      @id @default(autoincrement())
+  email    String   @unique
+  password String
+  membro   Membros?
+}
+
+model Membros {
+  id            Int       @id @default(autoincrement())
+  user_id       Int       @unique
+  user          User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  name          String
+  profile_image String?
+  role          String    @default("aluno")
+  curriculum    String?
+  editor        Editores?
+}
+
+model Editores {
+  id        Int        @id @default(autoincrement())
+  membro_id Int        @unique
+  membro    Membros    @relation(fields: [membro_id], references: [id], onDelete: Cascade)
+  matricula String?    @unique
+  boletins  Boletins[]
+}
+
+model Boletins {
+  id           Int      @id @default(autoincrement())
+  title        String
+  category     String
+  date         DateTime @default(now())
+  content      String
+  reference    String
+  proofreader  String
+  image        String?
+  legend_image String?
+
+  created_by_id Int
+  created_by    Editores @relation(fields: [created_by_id], references: [id])
+  created_in    DateTime @default(now())
+}
+
+model Patrocinadores {
+  id            Int     @id @default(autoincrement())
+  name          String
+  profile_image String?
 }
