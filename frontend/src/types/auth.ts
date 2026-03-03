@@ -1,8 +1,7 @@
-import type { User } from "./user";
+import type { SignInProps } from './../providers/AuthProvider';
 
 export type AuthContextData = {
-    user: User | null;
     isAuthenticated: boolean;
-    login: (token: string) => void;
-    logout: () => void;
+    signIn: (props: SignInProps) => Promise<boolean>;
+    signOut: () => void;
 };

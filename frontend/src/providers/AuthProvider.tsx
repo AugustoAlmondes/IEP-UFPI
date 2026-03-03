@@ -1,32 +1,45 @@
 import { AuthContext } from '../context/AuthContext';
 import { useState } from "react";
-import type { User } from "../types/user";
 
+export interface SignInProps {
+    email: string;
+    password: string;
+}
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-    const [user, setUser] = useState<User | null>(null);
+    const [token, setToken] = useState<string | null>(localStorage.getItem('token'));
 
-    function login(token: string) {
-        console.log(token);
-        // TODO: decodificar JWT e extrair id e role
-        setUser({
-            id: 'fake-id',
-            role: 'ADMIN'
+    const isAuthenticated = !!token;
+
+    async function signIn(props: SignInProps):Promise<boolean> {
+        const response = await fetch("http://localhost:3000/auth/signin", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(props)
         })
+
+        const data = await response.json();
+
+        if(data.token){
+            localStorage.setItem('token', data.token);
+            setToken(data.token);
+            return true;
+        }
+        return false;
     }
 
-    function logout() {
-        setUser(null);
+    function signOut(){
+        localStorage.removeItem('token');
+        setToken(null);
     }
 
     return (
         <AuthContext.Provider
             value={{
-                user, isAuthenticated: !!user,
-                login,
-                logout
-            }
-            }
+                isAuthenticated, signIn, signOut
+            }}
         >
             {children}
         </AuthContext.Provider>

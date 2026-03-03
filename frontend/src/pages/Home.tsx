@@ -1,9 +1,16 @@
 import AboutCard from "../components/AboutCard";
 import BoletinCard from "../components/BoletinCard";
 import { aboutItems } from "../constants/aboutitens";
+import { apiFetch } from "../service/api";
 import BackgroundImage from "/image_2.jpeg";
 
 export default function Home() {
+
+    async function testFetch() {
+        const res = await apiFetch('/auth/all');
+        console.log(res);
+    }
+
     return (
         <section className="bg-white min-h-screen">
 
@@ -22,7 +29,7 @@ export default function Home() {
                 </div>
 
                 <div className="text-white flex flex-wrap items-center justify-center gap-4">
-                    <button className="btn-outline px-12">
+                    <button className="btn-outline px-12" onClick={testFetch}>
                         Ver boletins
                     </button>
 

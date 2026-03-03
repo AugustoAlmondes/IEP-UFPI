@@ -3,10 +3,33 @@ import { IoEye, IoEyeOff } from "react-icons/io5";
 import { RiKeyFill } from "react-icons/ri";
 import Logo from "../assets/width_766.webp"
 import { MdEmail } from "react-icons/md";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
 
+
+    const { signIn } = useAuth();
+    const navigate = useNavigate();
     const [viewPassword, setViewPassword] = useState(true);
+    const [dataform, setDataform] = useState({
+        email: "",
+        password: ""
+    });
+
+    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+        const response = await signIn(dataform);
+        if (response) {
+            navigate("/");
+            setDataform({
+                email: "",
+                password: ""
+            })
+        } else {
+            alert("Email ou senha incorretos");
+        }
+    }
 
     return (
         <div className="
@@ -39,7 +62,9 @@ export default function Login() {
             </div>
 
             {/* Coluna direita (Login) */}
-            <div className="
+            <form
+                onSubmit={handleSubmit}
+                className="
                 flex 
                 flex-col 
                 items-center 
@@ -68,7 +93,9 @@ export default function Login() {
                         className="text-pink absolute bottom-2 -left-7"
                     />
                     <input
-                        type="text"
+                        value={dataform.email}
+                        onChange={(e) => setDataform({ ...dataform, email: e.target.value })}
+                        type="email"
                         className="
                             bg-gray2/35 
                             text-white 
@@ -116,6 +143,8 @@ export default function Login() {
                     />
 
                     <input
+                        value={dataform.password}
+                        onChange={(e) => setDataform({ ...dataform, password: e.target.value })}
                         type={viewPassword ? "password" : "text"}
                         className="
                             bg-gray2/35
@@ -138,10 +167,10 @@ export default function Login() {
 
                 <div className="w-64 h-1 border bg-pink/40 my-10"></div>
 
-                <button className="btn-pink">
+                <button type="submit" className="btn-pink">
                     Entrar
                 </button>
-            </div>
+            </form>
         </div>
     );
 }
