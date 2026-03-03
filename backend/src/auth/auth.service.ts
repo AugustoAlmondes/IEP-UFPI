@@ -1,6 +1,6 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { PrismaService } from "src/prisma/prisma.service";
-import * as bcrypt from "bcrypt";
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
@@ -15,13 +15,17 @@ export class AuthService {
             throw new Error("Usuário não encontrado");
         }
 
-        const isPasswordValid = await bcrypt.compare(password, user.password);
+        const passwordMatch = await bcrypt.compare(password, String(user.password));
 
-        if (!isPasswordValid) {
-            throw new Error("Senha inválida");
+        if (!passwordMatch) {
+            throw new UnauthorizedException("Email ou senha inválidos");
+
         }
 
-        return user;
+        return {
+            id: user.id,
+            email: user.email,
+        }
     }
 
     async signup(email: string, password: string) {
@@ -37,12 +41,17 @@ export class AuthService {
             throw new Error("Usuário já existe");
         }
 
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const saltOrRounds = 10;
+        const hashedPassword = await bcrypt.hash(password, saltOrRounds);
 
         const user = await this.prisma.user.create({
             data: {
                 email,
                 password: hashedPassword,
+            },
+            select: {
+                id: true,
+                email: true,
             }
         })
 
