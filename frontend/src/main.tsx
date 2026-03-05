@@ -19,6 +19,7 @@ import Questions from './pages/Questions'
 import Newsletter from './pages/Newsletter'
 import { AuthProvider } from './providers/AuthProvider'
 import InfoNewslatter from './pages/InfoNewslatter'
+import ErrorPage from './pages/ErrorPage'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -45,7 +46,6 @@ createRoot(document.getElementById('root')!).render(
             <Route path="/equipe" element={<Equipe />} />
             <Route path="/questions" element={<Questions />} />
             <Route path="/newsletter" element={<Newsletter />} />
-            <Route path="/newsletter" element={<Newsletter />} />
             <Route path="/info-newsletter/:index/:slug" element={<InfoNewslatter />} />
             <Route
               path="/form-newsletter"
@@ -58,13 +58,14 @@ createRoot(document.getElementById('root')!).render(
             <Route
               path="/settings"
               element={
-                <AdminRoute>
+                <AdminRoute onlyAdmin={true}>
                   <Settings />
                 </AdminRoute>
               }
             />
           </Route>
           <Route path="/login" element={<Login />} />
+          <Route path="/error" element={<ErrorPage />} />
         </Routes>
       </Router>
     </AuthProvider>

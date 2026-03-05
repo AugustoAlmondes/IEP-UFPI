@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { IoEye, IoEyeOff } from "react-icons/io5";
-import { RiKeyFill } from "react-icons/ri";
+import { RiKeyFill, RiLoader2Fill } from "react-icons/ri";
 import Logo from "../assets/width_766.webp"
 import { MdEmail } from "react-icons/md";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function Login() {
 
@@ -12,6 +13,7 @@ export default function Login() {
     const { signIn } = useAuth();
     const navigate = useNavigate();
     const [viewPassword, setViewPassword] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [dataform, setDataform] = useState({
         email: "",
         password: ""
@@ -19,6 +21,11 @@ export default function Login() {
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
+        if (!dataform.email || !dataform.password) {
+            toast.error("Preencha todos os campos!");
+            return;
+        }
+        setLoading(true);
         const response = await signIn(dataform);
         if (response) {
             navigate("/");
@@ -26,9 +33,11 @@ export default function Login() {
                 email: "",
                 password: ""
             })
+            toast.success("Login realizado com sucesso!");
         } else {
-            alert("Email ou senha incorretos");
+            toast.error("Email ou senha incorretos!");
         }
+        setLoading(false);
     }
 
     return (
@@ -94,6 +103,7 @@ export default function Login() {
                     />
                     <input
                         value={dataform.email}
+                        disabled={loading}
                         onChange={(e) => setDataform({ ...dataform, email: e.target.value })}
                         type="email"
                         className="
@@ -144,6 +154,7 @@ export default function Login() {
 
                     <input
                         value={dataform.password}
+                        disabled={loading}
                         onChange={(e) => setDataform({ ...dataform, password: e.target.value })}
                         type={viewPassword ? "password" : "text"}
                         className="
@@ -167,8 +178,8 @@ export default function Login() {
 
                 <div className="w-64 h-1 border bg-pink/40 my-10"></div>
 
-                <button type="submit" className="btn-pink">
-                    Entrar
+                <button type="submit" className="btn-pink flex items-center justify-center h-8">
+                    {loading ? <RiLoader2Fill size={20} className="animate-spin" /> : "Entrar"}
                 </button>
             </form>
         </div>

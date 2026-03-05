@@ -3,10 +3,12 @@ import Logo from "../assets/width_766.webp";
 import { navItems } from "../constants/navitems";
 import { Link } from "react-router-dom";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
+import { useAuth } from "../context/AuthContext";
 
 export default function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+    const { isAuthenticated, signOut } = useAuth();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -26,7 +28,7 @@ export default function Header() {
             `}
         >
             {/* Logo */}
-            <img className={`${isScrolled? "h-8 my-2": "h-13"} transition-all duration-200`} src={Logo} alt="logo" />
+            <img className={`${isScrolled ? "h-8 my-2" : "h-13"} transition-all duration-200`} src={Logo} alt="logo" />
 
             {/* Menu Desktop */}
             <ul className="text-white list-none gap-15 items-center mr-8 hidden md:flex text-sm">
@@ -40,6 +42,14 @@ export default function Header() {
                         </Link>
                     </li>
                 ))}
+                {isAuthenticated && (
+                    <li
+                        className="hover:text-pink cursor-pointer transition-colors duration-200"
+                        onClick={() => signOut()}
+                    >
+                        Sair
+                    </li>
+                )}
             </ul>
 
             {/* Botão Mobile */}

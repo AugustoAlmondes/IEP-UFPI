@@ -1,14 +1,14 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
-export function AdminRoute({ children }: { children: React.ReactNode }) {
+export function AdminRoute({ children, onlyAdmin = false }: { children: React.ReactNode, onlyAdmin?: boolean }) {
     const { user, isAuthenticated } = useAuth();
 
     if (!isAuthenticated) {
-        return <Navigate to="/login" replace />;
+        return <Navigate to="/error" replace />;
     }
 
-    if (user?.role !== 'ADMIN') {
+    if (onlyAdmin && user !== 'ADMIN') {
         return <Navigate to="/" replace />;
     }
 
