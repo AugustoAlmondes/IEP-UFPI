@@ -36,7 +36,7 @@ export class AuthService {
 
         const payload = { sub: user.id, email: user.email, role: member.role.toUpperCase() };
         const token = await this.jwtService.signAsync(payload)
-        return { token: token, role: member.role.toUpperCase() }
+        return { token: token }
     }
 
     async signUp(
@@ -45,6 +45,7 @@ export class AuthService {
         name: string,
         role?: string,
         curriculum?: string,
+        profile_image?: string,
     ) {
         if (!email || !password) {
             throw new Error("Email e senha são obrigatórios");
@@ -72,8 +73,9 @@ export class AuthService {
                 membro: {
                     create: {
                         name,
-                        role: role ?? "aluno",
+                        role: role ?? "ALUNO",
                         curriculum: curriculum ?? null,
+                        profile_image: profile_image ?? null,
                     },
                 },
             },
@@ -86,6 +88,7 @@ export class AuthService {
                         name: true,
                         role: true,
                         curriculum: true,
+                        profile_image: true,
                     },
                 },
             },

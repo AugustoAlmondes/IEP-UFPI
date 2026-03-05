@@ -18,4 +18,8 @@ export class SignupDto {
     @IsOptional()
     @IsString()
     curriculum?: string;
+
+    @IsOptional()
+    @IsString()
+    profile_image?: string;
 }

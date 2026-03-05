@@ -2,6 +2,6 @@ export type SignupPayload = {
     email: string;
     password: string;
     name: string;
-    role?: string;
+    role?: 'ADMIN' | 'ALUNO';
     curriculum?: string;
 };
