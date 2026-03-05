@@ -29,15 +29,6 @@ model Membros {
   profile_image String?
   role          String    @default("aluno")
   curriculum    String?
-  editor        Editores?
-}
-
-model Editores {
-  id        Int        @id @default(autoincrement())
-  membro_id Int        @unique
-  membro    Membros    @relation(fields: [membro_id], references: [id], onDelete: Cascade)
-  matricula String?    @unique
-  boletins  Boletins[]
 }
 
 model Boletins {
@@ -52,7 +43,6 @@ model Boletins {
   legend_image String?
 
   created_by_id Int
-  created_by    Editores @relation(fields: [created_by_id], references: [id])
   created_in    DateTime @default(now())
 }
 
