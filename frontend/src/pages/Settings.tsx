@@ -1,13 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { TbPointFilled } from "react-icons/tb";
 import { IoIosAddCircle } from "react-icons/io";
 import ImageUpload from "../components/ImageUpload";
 import MemberCard from "../components/MemberCard";
-import { teamMembers } from "../constants/teamMembers";
 import { sponsors } from "../constants/sponsors";
 import SponsorCard from "../components/SponsorCard";
 import { apiFetch, apiUploadFile } from "../service/api";
 import type { SignupPayload } from "../types/signup";
+import type { MemberApiData } from "../types/member";
 import { toast } from "react-toastify";
 
 const EMPTY_FORM: SignupPayload = {
@@ -22,6 +22,24 @@ export default function Settings() {
     const [form, setForm] = useState<SignupPayload>(EMPTY_FORM);
     const [loading, setLoading] = useState(false);
     const [profileImage, setProfileImage] = useState<File | null>(null);
+    const [members, setMembers] = useState<MemberApiData[]>([]);
+    const [membersLoading, setMembersLoading] = useState(true);
+
+    const fetchMembers = useCallback(async () => {
+        setMembersLoading(true);
+        try {
+            const data = await apiFetch("/membros");
+            setMembers(data);
+        } catch {
+            toast.error("Erro ao carregar membros.");
+        } finally {
+            setMembersLoading(false);
+        }
+    }, []);
+
+    useEffect(() => {
+        fetchMembers();
+    }, [fetchMembers]);
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
         setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -58,11 +76,26 @@ export default function Settings() {
 
             setForm(EMPTY_FORM);
             setProfileImage(null);
+            // Recarrega a lista após cadastro
+            await fetchMembers();
         } catch (error) {
             console.log(error);
         } finally {
             setLoading(false);
         }
+    }
+
+    async function handleDeleteMember(id: number) {
+        await toast.promise(
+            apiFetch(`/membros/${id}`, { method: "DELETE" }),
+            {
+                pending: "Removendo membro...",
+                success: "Membro removido com sucesso!",
+                error: "Erro ao remover membro.",
+            }
+        );
+        // Atualiza a lista removendo localmente para resposta imediata
+        setMembers((prev) => prev.filter((m) => m.id !== id));
     }
 
     return (
@@ -135,10 +168,26 @@ export default function Settings() {
             </form>
 
             {/* LISTA DE MEMBROS */}
-            <div className="mt-10 space-y-4 px-2 sm:px-0">
-                {teamMembers.map((member, index) => (
-                    <MemberCard key={index} member={member} />
-                ))}
+            <div className="mt-2 px-2 sm:px-0">
+                {membersLoading ? (
+                    <div className="flex justify-center py-10">
+                        <div className="w-6 h-6 border-2 border-pink-400 border-t-transparent rounded-full animate-spin" />
+                    </div>
+                ) : members.length === 0 ? (
+                    <p className="text-center text-gray-400 py-6 text-sm">
+                        Nenhum membro cadastrado ainda.
+                    </p>
+                ) : (
+                    <div className="space-y-2">
+                        {members.map((member) => (
+                            <MemberCard
+                                key={member.id}
+                                member={member}
+                                onDelete={handleDeleteMember}
+                            />
+                        ))}
+                    </div>
+                )}
             </div>
 
             {/* FORM PATROCINADORES */}

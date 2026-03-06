@@ -1,67 +1,125 @@
-import type { TeamMember } from "../types/teamMember";
+import { useState } from "react";
 import { IoTrashOutline } from "react-icons/io5";
+import { IoMdLink } from "react-icons/io";
+import { MdOutlineMail } from "react-icons/md";
+import type { MemberApiData } from "../types/member";
 
-export default function TeamCard({ member }: { member: TeamMember }) {
+const DEFAULT_AVATAR = "/images/default_user.png";
+
+interface MemberCardProps {
+    member: MemberApiData;
+    onDelete: (id: number) => Promise<void>;
+}
+
+export default function MemberCard({ member, onDelete }: MemberCardProps) {
+    const [confirming, setConfirming] = useState(false);
+    const [deleting, setDeleting] = useState(false);
+
+    async function handleConfirmDelete() {
+        setDeleting(true);
+        try {
+            await onDelete(member.id);
+        } finally {
+            setDeleting(false);
+            setConfirming(false);
+        }
+    }
+
+    const avatarSrc = member.profile_image ?? DEFAULT_AVATAR;
+
     return (
         <div className="
-        bg-gray2 
-        mx-4 sm:mx-8 
-        mb-6 
-        flex flex-col sm:flex-row 
-        items-start sm:items-center 
-        border border-gray 
-        rounded-md 
-        px-4 py-4 
-        hover:border-pink-500
-        transition
-    ">
-            {/* Imagem */}
-            <div className="w-full sm:w-[130px] flex justify-center sm:justify-start mb-4 sm:mb-0">
-                <div className="w-[100px] h-[100px] sm:w-[130px] sm:h-[130px]">
-                    <img
-                        src={member.imageUrl}
-                        alt={member.name}
-                        className="w-full h-full object-cover rounded-md"
-                    />
-                </div>
+            group
+            bg-white
+            mx-4 sm:mx-8
+            mb-3
+            flex flex-col sm:flex-row
+            items-center
+            border border-gray-200
+            rounded-xl
+            overflow-hidden
+            shadow-sm
+            hover:shadow-md
+            hover:border-pink-300
+            transition-all duration-200
+        ">
+            {/* Avatar */}
+            <div className="w-full sm:w-auto shrink-0">
+                <img
+                    src={avatarSrc}
+                    alt={member.name}
+                    onError={(e) => { (e.target as HTMLImageElement).src = DEFAULT_AVATAR; }}
+                    className="w-full sm:w-[90px] sm:h-[90px] h-40 object-cover"
+                />
             </div>
 
-            {/* Informações */}
-            <div className="
-        sm:ml-5 
-        grid 
-        grid-cols-1 sm:grid-cols-3 
-        gap-y-4 sm:gap-x-4 
-        w-full
-        ">
-                <div>
-                    <p className="text-sm text-gray-400">Nome Completo</p>
-                    <p className="text-base font-bold">{member.name}</p>
+            {/* Info */}
+            <div className="flex-1 px-5 py-3 min-w-0">
+                <p className="text-base font-bold text-gray-800 leading-tight truncate">
+                    {member.name}
+                </p>
+                <div className="flex items-center gap-1.5 mt-1 text-gray-500 text-sm truncate">
+                    <MdOutlineMail className="shrink-0 text-pink-400" size={14} />
+                    <span className="truncate">{member.user.email}</span>
                 </div>
-
-                <div>
-                    <p className="text-sm text-gray-400">Cargo</p>
-                    <p className="text-base font-bold">{member.position}</p>
-                </div>
-
-                <div>
-                    <p className="text-sm text-gray-400">Link</p>
-                    <p className="text-base font-bold break-all">
-                        {member.url || "Não informado"}
-                    </p>
-                </div>
+                {member.curriculum && (
+                    <a
+                        href={member.curriculum}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1.5 mt-1 text-pink-500 hover:text-pink-700 text-sm truncate transition-colors"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <IoMdLink className="shrink-0" size={14} />
+                        <span className="truncate">{member.curriculum}</span>
+                    </a>
+                )}
             </div>
 
             {/* Ações */}
-            <div className="
-        w-full sm:w-auto 
-        flex justify-end 
-        mt-4 sm:mt-0 
-        sm:ml-auto">
-                <IoTrashOutline
-                    className="text-pink cursor-pointer hover:text-darkpink transition"
-                    size={28}
-                />
+            <div className="shrink-0 px-5 py-3 flex items-center">
+                {!confirming ? (
+                    <button
+                        onClick={() => setConfirming(true)}
+                        title="Remover membro"
+                        className="
+                            p-2 rounded-lg
+                            text-gray-400
+                            hover:text-red-500 hover:bg-red-50
+                            transition-all duration-150
+                        "
+                    >
+                        <IoTrashOutline size={20} />
+                    </button>
+                ) : (
+                    <div className="flex items-center gap-2 animate-fade-in">
+                        <span className="text-sm text-gray-600 whitespace-nowrap">Remover?</span>
+                        <button
+                            onClick={handleConfirmDelete}
+                            disabled={deleting}
+                            className="
+                                px-3 py-1 rounded-md text-xs font-semibold
+                                bg-red-500 text-white
+                                hover:bg-red-600 disabled:opacity-60
+                                transition-colors
+                            "
+                        >
+                            {deleting ? "..." : "Sim"}
+                        </button>
+                        <button
+                            onClick={() => setConfirming(false)}
+                            disabled={deleting}
+                            className="
+                                px-3 py-1 rounded-md text-xs font-semibold
+                                bg-gray-100 text-gray-600
+                                hover:bg-gray-200 disabled:opacity-60
+                                transition-colors
+                            "
+                        >
+                            Não
+                        </button>
+                    </div>
+                )}
             </div>
         </div>
     );

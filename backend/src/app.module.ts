@@ -6,6 +6,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { UploadModule } from './upload/upload.module';
+import { MembrosModule } from './membros/membros.module';
 import { PrismaService } from './prisma/prisma.service';
 
 @Module({
@@ -17,8 +18,10 @@ import { PrismaService } from './prisma/prisma.service';
     }),
     AuthModule,
     UploadModule,
+    MembrosModule,
   ],
   controllers: [AppController],
   providers: [AppService, PrismaService],
 })
 export class AppModule { }
+
