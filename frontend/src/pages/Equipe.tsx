@@ -1,8 +1,9 @@
-import { useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import TeamCard from "../components/TeamCard";
-import { teamMembers } from "../constants/teamMembers";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import { apiFetch } from "../service/api";
+import type { MemberApiData } from "../types/member";
 
 export default function Equipe() {
 
@@ -20,6 +21,37 @@ export default function Equipe() {
         handleSubmit,
         reset
     } = useForm<JoinTeamForm>();
+
+    const [members, setMembers] = useState<MemberApiData[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [currentPage, setCurrentPage] = useState(1);
+    const membersPerPage = 9;
+
+    useEffect(() => {
+        async function fetchMembers() {
+            try {
+                const data = await apiFetch('/membros');
+                const sortedMembers = data.sort((a: MemberApiData, b: MemberApiData) => {
+                    if (a.role === 'ADMIN' && b.role !== 'ADMIN') return -1;
+                    if (a.role !== 'ADMIN' && b.role === 'ADMIN') return 1;
+                    return 0;
+                });
+                setMembers(sortedMembers);
+            } catch (error) {
+                console.error("Erro ao carregar membros", error);
+                toast.error("Erro ao carregar membros.");
+            } finally {
+                setLoading(false);
+            }
+        }
+        fetchMembers();
+    }, []);
+
+    const totalPages = Math.ceil(members.length / membersPerPage);
+    const paginatedMembers = members.slice(
+        (currentPage - 1) * membersPerPage,
+        currentPage * membersPerPage
+    );
 
     function onSubmit(data: JoinTeamForm) {
         toast.success("Seu email foi enviado com sucesso!");
@@ -61,16 +93,45 @@ export default function Equipe() {
 
             </div>
 
-            <div ref={memberSectionRef} className="bg-white pb-40 pt-30 px-4">
+            <div ref={memberSectionRef} className="bg-white pb-40 pt-30 px-4 min-h-screen">
                 <h2 className="text-3xl sm:text-4xl text-darkpink font-bold text-center mb-10">
                     MEMBROS
                 </h2>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-4xl mx-auto">
-                    {teamMembers.map((member, index) => (
-                        <TeamCard key={index} member={member} />
-                    ))}
-                </div>
+                {loading ? (
+                    <div className="text-center text-darkpink font-bold">Carregando membros...</div>
+                ) : members.length === 0 ? (
+                    <div className="text-center text-gray-500">Nenhum membro encontrado.</div>
+                ) : (
+                    <>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-4xl mx-auto">
+                            {paginatedMembers.map((member) => (
+                                <TeamCard key={member.id} member={member} />
+                            ))}
+                        </div>
+                        {totalPages > 1 && (
+                            <div className="flex justify-center mt-14 gap-2">
+                                {Array.from({ length: totalPages }).map((_, idx) => (
+                                    <button
+                                        key={idx}
+                                        onClick={() => {
+                                            setCurrentPage(idx + 1);
+                                            memberSectionRef.current?.scrollIntoView({
+                                                block: "start", behavior: "smooth"
+                                            });
+                                        }}
+                                        className={`w-10 h-10 rounded-full font-bold flex items-center justify-center transition-colors ${currentPage === idx + 1
+                                                ? "bg-darkpink text-white"
+                                                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                                            }`}
+                                    >
+                                        {idx + 1}
+                                    </button>
+                                ))}
+                            </div>
+                        )}
+                    </>
+                )}
             </div>
 
             <div ref={formSectionRef} className="min-h-100 bg-darkgray text-white">

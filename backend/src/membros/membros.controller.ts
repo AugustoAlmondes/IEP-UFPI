@@ -9,7 +9,6 @@ import {
 import { MembrosService } from './membros.service';
 import { AuthGuard } from '../auth/auth.guard';
 
-@UseGuards(AuthGuard)
 @Controller('membros')
 export class MembrosController {
     constructor(private readonly membrosService: MembrosService) { }
@@ -19,6 +18,7 @@ export class MembrosController {
         return this.membrosService.findAll();
     }
 
+    @UseGuards(AuthGuard)
     @Delete(':id')
     remove(@Param('id', ParseIntPipe) id: number) {
         return this.membrosService.remove(id);
