@@ -1,0 +1,50 @@
+# Projeto IEP/UFPI
+
+# ========================
+# BACKEND
+# ========================
+
+# Node
+node_modules/
+dist/
+
+# Ambiente
+backend/.env
+backend/.env.local
+
+# Uploads salvos em disco
+backend/uploads/
+
+# Prisma
+backend/src/generated/
+
+# ========================
+# FRONTEND
+# ========================
+
+node_modules/
+dist/
+
+# Ambiente
+frontend/.env
+frontend/.env.local
+
+# ========================
+# GERAL
+# ========================
+
+# Logs
+*.log
+npm-debug.log*
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# IDEs
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln

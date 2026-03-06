@@ -54,7 +54,7 @@ export default function Settings() {
                 role: form.role?.trim() || "ALUNO",
                 curriculum: form.curriculum?.trim() || undefined,
                 // password: Math.random().toString(36).slice(-8) //Senha aleatória
-                password: "12345678", //Senha temporária
+                password: import.meta.env.VITE_DEFAULT_PASSWORD ?? "changeme", //Senha temporária via env
             };
 
             // 1. Criar o membro (signup)

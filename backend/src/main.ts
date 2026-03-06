@@ -9,7 +9,9 @@ async function bootstrap() {
     forbidNonWhitelisted: true,
     transform: true,
   }));
-  app.enableCors();
+  app.enableCors({
+    origin: process.env.FRONTEND_URL ?? 'http://localhost:5173',
+  });
   await app.listen(process.env.PORT ?? 3000);
 }
-bootstrap();
+void bootstrap();
