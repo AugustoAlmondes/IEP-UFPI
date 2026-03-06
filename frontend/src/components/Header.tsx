@@ -4,11 +4,11 @@ import { navItems } from "../constants/navitems";
 import { Link } from "react-router-dom";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { useAuth } from "../context/AuthContext";
-
+import UserMenu from "./UserMenu";
 export default function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
-    const { isAuthenticated, signOut } = useAuth();
+    const { isAuthenticated } = useAuth();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -42,14 +42,7 @@ export default function Header() {
                         </Link>
                     </li>
                 ))}
-                {isAuthenticated && (
-                    <li
-                        className="hover:text-pink cursor-pointer transition-colors duration-200"
-                        onClick={() => signOut()}
-                    >
-                        Sair
-                    </li>
-                )}
+                {isAuthenticated && <UserMenu />}
             </ul>
 
             {/* Botão Mobile */}

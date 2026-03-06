@@ -12,6 +12,7 @@ export class MembrosService {
             select: {
                 id: true,
                 name: true,
+                role: true,
                 profile_image: true,
                 curriculum: true,
                 user: {

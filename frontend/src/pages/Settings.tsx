@@ -9,12 +9,13 @@ import { apiFetch, apiUploadFile } from "../service/api";
 import type { SignupPayload } from "../types/signup";
 import type { MemberApiData } from "../types/member";
 import { toast } from "react-toastify";
+import { decodeJwtPayload, type JwtPayload } from "../service/jwt";
 
 const EMPTY_FORM: SignupPayload = {
     name: "",
     email: "",
     password: "",
-    role: undefined,
+    role: "ALUNO",
     curriculum: "",
 };
 
@@ -22,8 +23,12 @@ export default function Settings() {
     const [form, setForm] = useState<SignupPayload>(EMPTY_FORM);
     const [loading, setLoading] = useState(false);
     const [profileImage, setProfileImage] = useState<File | null>(null);
+    const [uploadKey, setUploadKey] = useState(Date.now());
     const [members, setMembers] = useState<MemberApiData[]>([]);
     const [membersLoading, setMembersLoading] = useState(true);
+
+    const token = localStorage.getItem('token');
+    const loggedInUserId = token ? decodeJwtPayload<JwtPayload>(token)?.sub : undefined;
 
     const fetchMembers = useCallback(async () => {
         setMembersLoading(true);
@@ -51,14 +56,14 @@ export default function Settings() {
         try {
             const payload: SignupPayload = {
                 ...form,
-                role: form.role?.trim() || "ALUNO",
+                role: (form.role?.trim() || "ALUNO") as 'ADMIN' | 'ALUNO',
                 curriculum: form.curriculum?.trim() || undefined,
                 // password: Math.random().toString(36).slice(-8) //Senha aleatória
                 password: import.meta.env.VITE_DEFAULT_PASSWORD ?? "changeme", //Senha temporária via env
             };
 
             // 1. Criar o membro (signup)
-            await toast.promise(apiFetch("/auth/signup", {
+            const createdMemberData = await toast.promise(apiFetch("/auth/signup", {
                 method: "POST",
                 body: JSON.stringify(payload),
             }), {
@@ -67,15 +72,16 @@ export default function Settings() {
                 error: "Erro ao cadastrar membro. Verifique os dados e tente novamente.",
             });
 
-            // 2. Se houver imagem, enviar separadamente para /upload/profile-image
-            if (profileImage) {
-                await toast.promise(apiUploadFile("/upload/profile-image", profileImage), {
+            // 2. Se houver imagem, enviar separadamente para /upload/profile-image/:id
+            if (profileImage && createdMemberData?.membro?.id) {
+                await toast.promise(apiUploadFile(`/upload/profile-image/${createdMemberData.membro.id}`, profileImage), {
                     error: "Membro cadastrado, mas houve um erro ao enviar a foto.",
                 });
             }
 
             setForm(EMPTY_FORM);
             setProfileImage(null);
+            setUploadKey(Date.now());
             // Recarrega a lista após cadastro
             await fetchMembers();
         } catch (error) {
@@ -156,7 +162,7 @@ export default function Settings() {
 
                     <div className="mt-4">
                         <label className="text-sm">Foto de perfil</label>
-                        <ImageUpload onFileChange={setProfileImage} />
+                        <ImageUpload key={uploadKey} onFileChange={setProfileImage} />
                     </div>
 
                     <div className="flex justify-center sm:justify-end mt-6">
@@ -183,6 +189,7 @@ export default function Settings() {
                             <MemberCard
                                 key={member.id}
                                 member={member}
+                                loggedInUserId={loggedInUserId}
                                 onDelete={handleDeleteMember}
                             />
                         ))}
