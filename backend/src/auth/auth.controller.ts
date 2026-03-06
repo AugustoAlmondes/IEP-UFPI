@@ -21,7 +21,7 @@ export class AuthController {
             dto.name,
             dto.role,
             dto.curriculum,
-            dto.profile,
+            dto.profile_image,
         );
     }
 }

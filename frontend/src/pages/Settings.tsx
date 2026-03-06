@@ -6,7 +6,7 @@ import MemberCard from "../components/MemberCard";
 import { teamMembers } from "../constants/teamMembers";
 import { sponsors } from "../constants/sponsors";
 import SponsorCard from "../components/SponsorCard";
-import { apiFetch } from "../service/api";
+import { apiFetch, apiUploadFile } from "../service/api";
 import type { SignupPayload } from "../types/signup";
 import { toast } from "react-toastify";
 
@@ -14,13 +14,14 @@ const EMPTY_FORM: SignupPayload = {
     name: "",
     email: "",
     password: "",
-    role: "",
+    role: undefined,
     curriculum: "",
 };
 
 export default function Settings() {
     const [form, setForm] = useState<SignupPayload>(EMPTY_FORM);
     const [loading, setLoading] = useState(false);
+    const [profileImage, setProfileImage] = useState<File | null>(null);
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
         setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -35,18 +36,28 @@ export default function Settings() {
                 role: form.role?.trim() || "ALUNO",
                 curriculum: form.curriculum?.trim() || undefined,
                 // password: Math.random().toString(36).slice(-8) //Senha aleatória
-                password: "12345678" //Senha temporária
+                password: "12345678", //Senha temporária
             };
 
+            // 1. Criar o membro (signup)
             await toast.promise(apiFetch("/auth/signup", {
                 method: "POST",
                 body: JSON.stringify(payload),
             }), {
                 pending: "Cadastrando membro...",
-                success: "Membro cadastrado com sucesso!",
+                success: profileImage ? "Membro cadastrado! Enviando foto..." : "Membro cadastrado com sucesso!",
                 error: "Erro ao cadastrar membro. Verifique os dados e tente novamente.",
             });
+
+            // 2. Se houver imagem, enviar separadamente para /upload/profile-image
+            if (profileImage) {
+                await toast.promise(apiUploadFile("/upload/profile-image", profileImage), {
+                    error: "Membro cadastrado, mas houve um erro ao enviar a foto.",
+                });
+            }
+
             setForm(EMPTY_FORM);
+            setProfileImage(null);
         } catch (error) {
             console.log(error);
         } finally {
@@ -82,18 +93,6 @@ export default function Settings() {
                                 className="w-full text-base placeholder-opacity-18 border border-gray bg-gray2 rounded-md px-4 h-9 focus:outline-none focus:border-pink-500"
                             />
                         </div>
-
-                        {/* <div className="w-full text-sm">
-                            <label>Cargo</label>
-                            <input
-                                type="text"
-                                name="role"
-                                value={form.role}
-                                onChange={handleChange}
-                                placeholder="Digite o cargo do membro"
-                                className="w-full text-base placeholder-opacity-18 border border-gray bg-gray2 rounded-md px-4 h-9 focus:outline-none focus:border-pink-500"
-                            />
-                        </div> */}
                         <div className="w-full text-sm">
                             <label>Email</label>
                             <input
@@ -106,23 +105,6 @@ export default function Settings() {
                                 className="w-full text-base placeholder-opacity-18 border border-gray bg-gray2 rounded-md px-4 h-9 focus:outline-none focus:border-pink-500"
                             />
                         </div>
-                        {/* </div>
-
-                    <div className="flex flex-col lg:flex-row gap-4 w-full mt-4"> */}
-
-                        {/* <div className="w-full text-sm">
-                            <label>Senha</label>
-                            <input
-                                type="password"
-                                name="password"
-                                value={form.password}
-                                onChange={handleChange}
-                                placeholder="Senha de acesso do membro"
-                                required
-                                minLength={6}
-                                className="w-full text-base placeholder-opacity-18 border border-gray bg-gray2 rounded-md px-4 h-9 focus:outline-none focus:border-pink-500"
-                            />
-                        </div> */}
                     </div>
 
                     <div className="flex flex-col lg:flex-row gap-4 w-full mt-4">
@@ -141,7 +123,7 @@ export default function Settings() {
 
                     <div className="mt-4">
                         <label className="text-sm">Foto de perfil</label>
-                        <ImageUpload />
+                        <ImageUpload onFileChange={setProfileImage} />
                     </div>
 
                     <div className="flex justify-center sm:justify-end mt-6">
@@ -204,4 +186,3 @@ export default function Settings() {
         </div>
     );
 }
-
