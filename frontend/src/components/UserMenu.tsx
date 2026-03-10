@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AiOutlineSetting, AiOutlineLogout } from "react-icons/ai";
+import { AiOutlineSetting, AiOutlineLogout, AiOutlinePlus } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -23,6 +23,12 @@ export default function UserMenu() {
             label: "Configurações",
             icon: <AiOutlineSetting />,
             action: () => navigate("/settings"),
+            roles: ["ADMIN"],
+        },
+        {
+            label: "Novo boletim",
+            icon: <AiOutlinePlus />,
+            action: () => navigate("/form-newsletter"),
             roles: ["ADMIN"],
         },
         {
