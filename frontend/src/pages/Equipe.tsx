@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { apiFetch } from "../service/api";
 import type { MemberApiData } from "../types/member";
+import Loading from "../components/Loading";
 
 export default function Equipe() {
 
@@ -99,7 +100,7 @@ export default function Equipe() {
                 </h2>
 
                 {loading ? (
-                    <div className="text-center text-darkpink font-bold">Carregando membros...</div>
+                    <Loading/>
                 ) : members.length === 0 ? (
                     <div className="text-center text-gray-500">Nenhum membro encontrado.</div>
                 ) : (

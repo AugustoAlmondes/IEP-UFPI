@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import type { Newsletter } from "../types/newsletter";
+import type { Boletins } from "../types/boletins";
 
-export default function NewsletterCard({ newsletter, index }: { newsletter: Newsletter, index: number }) {
+export default function NewsletterCard({ newsletter, index }: { newsletter: Boletins, index: number }) {
     // Função para criar um slug a partir do título
     const createSlug = (title: string) => {
         return title
@@ -14,20 +14,26 @@ export default function NewsletterCard({ newsletter, index }: { newsletter: News
 
     return (
         <>
-            <div className="w-full h-full flex justify-center items-start">
+            <div className="max-w-[350px] h-full mb-10 flex justify-between items-start">
                 <div className={`flex items-start flex-col`}>
-                    <div className="w-[300px] h-[200px] relative">
-                        <img src={newsletter.imageUrl} alt={newsletter.caption} className="w-full h-full object-cover" />
+                    <div className="w-[350px] h-[200px] relative">
+                        {
+                            newsletter.image ? (
+                                <img src={newsletter.image} className="w-full h-full object-cover" />
+                            ) : (
+                                <img src="public/images/boletim_default.jpg" className="w-full h-full object-cover" />
+                            )
+                        }
                         <div className="absolute h-7 w-full bg-darkpink bottom-0" />
                     </div>
-                    <h3 className="w-full mt-2 text-md font-bold">{newsletter.title}</h3>
-                    <p className="mb-2 text-sm h-12 overflow-hidden">
-                        {newsletter.text[0].substring(0, 70)}...
+                    <h3 className="w-full h-[50px] mt-2 text-md font-bold line-clamp-2">{newsletter.title}</h3>
+                    <p className="mb-2 text-sm h-[60px] text-start line-clamp-2">
+                        {newsletter.content}
                     </p>
                     <Link
                         to={`/info-newsletter/${index + 1}/${slug}`}
                         state={{newsletter, index}}
-                        className="btn-pink text-white text-center"
+                        className="btn-pink text-white text-center mt-4"
                     >
                         Saiba mais
                     </Link>
