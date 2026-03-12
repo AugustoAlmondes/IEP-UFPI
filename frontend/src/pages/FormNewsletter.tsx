@@ -4,6 +4,8 @@ import { IoIosAddCircle } from "react-icons/io";
 import ImageUpload from "../components/ImageUpload";
 import { apiFetch, apiUploadFile } from "../service/api";
 import { toast } from "react-toastify";
+import Tiptap from "../components/Titap";
+
 
 export default function FormNewsletter() {
     const [title, setTitle] = useState('');
@@ -155,21 +157,15 @@ export default function FormNewsletter() {
                 </section>
 
                 <section className="mb-10">
-                    <div className="flex items-center">
+                    <div className="flex items-center mb-4">
                         <TbPointFilled className="text-darkpink text-xl mr-2" />
                         <h3 className="text-xl font-bold">
                             Conteúdo
                         </h3>
                     </div>
-
-                    <div className="text-base my-4">
-                        <label>Texto</label>
-                        <textarea
-                            placeholder="Digite o conteúdo do boletim"
-                            required
-                            value={content}
-                            onChange={(e) => setContent(e.target.value)}
-                            className="text-base placeholder-opacity-18 w-full h-60 py-2 border-1 border-[var(--color-gray)] bg-[var(--color-gray2)] rounded-md px-4 focus:outline-none focus:border-pink-500" />
+                    <div className="mb-4">
+                        <label className="block mb-2 text-base">Texto</label>
+                        <Tiptap value={content} onChange={setContent} />
                     </div>
 
                     <div className="flex text-base my-4 w-full gap-6">
@@ -181,7 +177,7 @@ export default function FormNewsletter() {
                                 required
                                 value={reference}
                                 onChange={(e) => setReference(e.target.value)}
-                                className="text-base placeholder-opacity-18 w-full border-1 border-[var(--color-gray)] bg-[var(--color-gray2)] rounded-md px-4 h-7 focus:outline-none focus:border-pink-500" />
+                                className="text-base placeholder-opacity-18 w-full border border-[var(--color-gray)] bg-[var(--color-gray2)] rounded-md px-4 h-7 focus:outline-none focus:border-pink-500" />
                         </div>
                         <div className="w-full">
                             <label>Revisão e Edição</label>

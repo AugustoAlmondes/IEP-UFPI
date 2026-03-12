@@ -29,21 +29,24 @@ export default function InfoNewslatter() {
                         <h3 className="text-lg font-bold">{newsletter.title}</h3>
                         <p>{newsletter.category}</p>
                         <p className="mb-2">Por {newsletter.author}</p>
-
-                        <p>{newsletter.content}</p>
-                        {/* {newsletter.text.map((paragraph: string, idx: number) => (
-                            <p
-                                key={idx}
-                                className="my-1 text-justify indent-8"
-                            >
-                                {paragraph}
-                            </p>
-                        ))} */}
                     </div>
 
-                    <div className="flex flex-col justify-center items-center">
-                        <img src={newsletter.image} alt={newsletter.caption} className="w-[500px] h-[300px] object-cover" />
-                        <p className="text-justify mt-2">{newsletter.caption}</p>
+                    <div className="mb-8 w-full max-w-none prose prose-slate [&_p]:mb-4 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mb-4 [&_h3]:text-xl [&_h3]:font-bold [&_h3]:mb-3 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-4 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-4 [&_img]:max-w-full [&_img]:rounded-md [&_img]:shadow-md">
+                        {/* Imagem principal do boletim */}
+                        {newsletter.image && (
+                            <div className="flex flex-col justify-center items-center my-8">
+                                <img src={newsletter.image} alt={newsletter.caption || 'Imagem do boletim'} className="max-w-[500px] w-full max-h-[400px] object-cover rounded-md shadow-sm" />
+                                {newsletter.caption && (
+                                    <p className="text-sm text-gray-500 italic mt-2 text-center">{newsletter.caption}</p>
+                                )}
+                            </div>
+                        )}
+                        
+                        {/* Conteúdo Rico do Tiptap */}
+                        <div 
+                            className="text-justify"
+                            dangerouslySetInnerHTML={{ __html: newsletter.content }} 
+                        />
                     </div>
 
                     <div className="items-center mb-4">
