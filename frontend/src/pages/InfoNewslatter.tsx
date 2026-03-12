@@ -30,18 +30,19 @@ export default function InfoNewslatter() {
                         <p>{newsletter.category}</p>
                         <p className="mb-2">Por {newsletter.author}</p>
 
-                        {newsletter.text.map((paragraph: string, idx: number) => (
+                        <p>{newsletter.content}</p>
+                        {/* {newsletter.text.map((paragraph: string, idx: number) => (
                             <p
                                 key={idx}
                                 className="my-1 text-justify indent-8"
                             >
                                 {paragraph}
                             </p>
-                        ))}
+                        ))} */}
                     </div>
 
                     <div className="flex flex-col justify-center items-center">
-                        <img src={newsletter.imageUrl} alt={newsletter.caption} className="w-[500px] h-[300px] object-cover" />
+                        <img src={newsletter.image} alt={newsletter.caption} className="w-[500px] h-[300px] object-cover" />
                         <p className="text-justify mt-2">{newsletter.caption}</p>
                     </div>
 
