@@ -62,7 +62,7 @@ export default function FormNewsletter() {
 
         } catch (error: unknown) {
             console.error('Erro ao postar boletim:', error);
-            toast.error('Erro ao postar boletim. Verifique os dados e tente novamente.');
+            toast.error(error instanceof Error ? error.message : 'Erro ao postar boletim. Verifique os dados e tente novamente.');
         } finally {
             setIsSubmitting(false);
         }

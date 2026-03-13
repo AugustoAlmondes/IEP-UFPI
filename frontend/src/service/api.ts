@@ -18,6 +18,12 @@ export async function apiFetch(
         headers
     })
 
+    if (response.status === 401) {
+        localStorage.removeItem('token');
+        window.location.href = '/';
+        throw new Error("Sessão expirada. Faça login novamente.");
+    }
+
     if (!response.ok) {
         throw new Error("Erro na requisição");
     }
@@ -46,6 +52,12 @@ export async function apiUploadFile(
         },
         body: formData,
     });
+
+    if (response.status === 401) {
+        localStorage.removeItem('token');
+        window.location.href = '/';
+        throw new Error("Sessão expirada. Faça login novamente.");
+    }
 
     if (!response.ok) {
         throw new Error("Erro ao enviar imagem");

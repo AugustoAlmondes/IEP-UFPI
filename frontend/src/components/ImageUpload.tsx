@@ -1,5 +1,8 @@
 import React, { useRef, useState } from "react";
 import { FaUpload } from "react-icons/fa";
+import { FaClosedCaptioning, FaFolderClosed } from "react-icons/fa6";
+import { IoClose } from "react-icons/io5";
+import { toast } from "react-toastify";
 
 interface ImageUploadProps {
   onFileChange?: (file: File | null) => void;
@@ -13,14 +16,26 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onFileChange }) => {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0] ?? null;
     if (file) {
-      setFileName(file.name);
-      setImageUrl(URL.createObjectURL(file));
-      onFileChange?.(file);
+      if (
+        file.name.includes(".jpg") ||
+        file.name.includes(".jpeg") ||
+        file.name.includes(".png") ||
+        file.name.includes(".gif")) {
+        setFileName(file.name);
+        setImageUrl(URL.createObjectURL(file));
+        onFileChange?.(file);
+      } else {
+        toast.error("Tipo de imagem não suportado");
+        setFileName(null);
+        setImageUrl(null);
+        onFileChange?.(null);
+      }
     } else {
       setFileName(null);
       setImageUrl(null);
       onFileChange?.(null);
     }
+    event.target.value = "";
   };
 
   const handleClick = () => {
@@ -48,11 +63,21 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onFileChange }) => {
           {fileName || "Carregar imagem"}
         </span>
         {imageUrl && (
-          <img
-            src={imageUrl}
-            alt="Preview"
-            className="mt-2 max-h-40 rounded-lg object-contain"
-          />
+          <div className="w-max h-max relative">
+            <IoClose
+              onClick={() => {
+                setFileName(null);
+                setImageUrl(null);
+                onFileChange?.(null);
+              }}
+              size={25}
+              className="absolute top-[-3px] -right-1.5 bg-darkpink text-white cursor-pointer hover:bg-pink transition rounded-xl" />
+            <img
+              src={imageUrl}
+              alt="Preview"
+              className="mt-2 max-h-40 rounded-lg object-contain"
+            />
+          </div>
         )}
         {
           !fileName &&
@@ -60,11 +85,13 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onFileChange }) => {
             Clique para selecionar uma imagem (JPG, PNG ou GIF)
           </p>
         }
-        <button
-          type="button"
-          className="btn-lightpink">
-          Carregar
-        </button>
+        {!imageUrl &&
+          <button
+            type="button"
+            className="btn-lightpink">
+            Carregar
+          </button>
+        }
       </div>
     </div>
   );
