@@ -16,8 +16,8 @@ export default function BoletinCard({ newsletter }: { newsletter: Boletins }) {
                 </div>
 
                 <div className="mr-15">
-                    <h3 className="text-lg font-medium">Título de item</h3>
-                    <p className="text-sm text-justify font-light">Algum texto informativo falando sobre o item acima. Esse é um exemplo de como deve ficar</p>
+                    <h3 className="text-lg font-medium">{newsletter.title}</h3>
+                    <p className="text-sm text-justify font-light">{newsletter.content}</p>
                     <button className="btn-pink mt-4">Ver Boletim</button>
                 </div>
             </div>

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { TbPointFilled } from "react-icons/tb";
-import { IoIosAddCircle } from "react-icons/io";
 import ImageUpload from "../components/ImageUpload";
 import { apiFetch, apiUploadFile } from "../service/api";
 import { toast } from "react-toastify";

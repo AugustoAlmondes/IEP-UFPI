@@ -52,7 +52,7 @@ export default function Newsletter() {
                         <input
                             type="text"
                             placeholder="Pesquisar boletim"
-                            className="cursor-pointer w-full px-4 py-2 bg-gray2 text-black rounded-lg placeholder-gray-500 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 mr-3"
+                            className="w-full px-4 py-2 bg-gray2 text-black rounded-lg placeholder-gray-500 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 mr-3"
                         />
                         <button
                             className="cursor-pointer border bg-darkpink text-white py-1.5 px-4 rounded-lg hover:bg-darkpink/70 hover:text-white transition-colors duration-300 min-w"

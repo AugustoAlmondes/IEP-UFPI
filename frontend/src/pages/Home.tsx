@@ -6,6 +6,7 @@ import { apiFetch } from "../service/api";
 import { useEffect, useState } from "react";
 import type { Boletins } from "../types/boletins";
 import Loading from "../components/Loading";
+import NewsletterCard from "../components/NewsletterCard";
 
 export default function Home() {
 
@@ -53,9 +54,9 @@ export default function Home() {
                 </div>
 
                 <div className="text-white flex flex-wrap items-center justify-center gap-4">
-                    <button className="btn-outline px-12" >
+                    <Link to="/newsletter" className="btn-outline px-12" >
                         Ver boletins
-                    </button>
+                    </Link>
 
                     <div className="hidden sm:block w-px h-8 bg-white rounded-full" />
 
@@ -79,8 +80,8 @@ export default function Home() {
 
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-16 mt-16">
                         {
-                            lastNewsletters.map((newsletter: Boletins) => (
-                                <BoletinCard key={newsletter.id} newsletter={newsletter} />
+                            lastNewsletters.map((newsletter, index) => (
+                                <NewsletterCard key={index} index={index} newsletter={newsletter} />
                             ))
                         }
                     </div>

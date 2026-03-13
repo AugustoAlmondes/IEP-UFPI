@@ -1,9 +1,12 @@
 import { useLocation } from "react-router-dom";
 import { TbPointFilled } from "react-icons/tb";
+import { FaPen, FaTrash } from "react-icons/fa6";
+import { useAuth } from "../context/AuthContext";
 
 export default function InfoNewslatter() {
     const location = useLocation();
     const { newsletter, index } = location.state || {};
+    const { isAuthenticated } = useAuth();
 
     if (!newsletter) {
         return <div>Boletim não encontrado.</div>;
@@ -17,9 +20,20 @@ export default function InfoNewslatter() {
                 </h1>
 
                 <section className="mx-4 sm:mx-8">
-                    <div className="flex items-center mb-4">
-                        <TbPointFilled className="text-darkpink text-xl mr-2" />
-                        <h2 className="text-xl font-bold">Boletim Gaep, N. {index + 1}, {newsletter.date}</h2>
+                    <div className="flex items-center justify-between mb-4">
+                        <div className="flex items-center">
+                            <TbPointFilled className="text-darkpink text-xl mr-2" />
+                            <h2 className="text-xl font-bold">Boletim Gaep, N. {index + 1}, {newsletter.date}</h2>
+                        </div>
+
+                        {
+                            isAuthenticated && (
+                                <div className="flex gap-2 items-center">
+                                    <FaPen size={30} className="text-white cursor-pointer bg-darkpink p-2 rounded-full hover:bg-pink transition" />
+                                    <FaTrash size={30} className="text-white cursor-pointer bg-darkpink p-2 rounded-full hover:bg-pink transition" />
+                                </div>
+                            )
+                        }
                     </div>
 
                 </section>
@@ -41,11 +55,11 @@ export default function InfoNewslatter() {
                                 )}
                             </div>
                         )}
-                        
+
                         {/* Conteúdo Rico do Tiptap */}
-                        <div 
+                        <div
                             className="text-justify"
-                            dangerouslySetInnerHTML={{ __html: newsletter.content }} 
+                            dangerouslySetInnerHTML={{ __html: newsletter.content }}
                         />
                     </div>
 
@@ -59,8 +73,8 @@ export default function InfoNewslatter() {
 
                 </section>
 
-            
-                
+
+
             </div>
         </>
     );
