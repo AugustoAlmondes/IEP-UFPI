@@ -1,12 +1,17 @@
-// import './BoletinCard.module.css';
-// import styles from './BoletinCard.module.css';
+import type { Boletins } from "../types/boletins";
 
-export default function BoletinCard({BackgroundImage}: {BackgroundImage: string}) {
+export default function BoletinCard({ newsletter }: { newsletter: Boletins }) {
     return (
         <>
             <div className="w-[300px]">
                 <div className="w-full relative mb-2">
-                    <img className="object-cover w-full h-full" src={BackgroundImage} />
+                    {
+                        newsletter.image ? (
+                            <img src={newsletter.image} className="w-full h-full object-cover" />
+                        ) : (
+                            <img src="public/images/boletim_default.jpg" className="w-full h-full object-cover" />
+                        )
+                    }   
                     <div className="absolute bg-darkpink w-full h-4 bottom-0" />
                 </div>
 

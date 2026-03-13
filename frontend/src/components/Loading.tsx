@@ -1,10 +1,7 @@
-// import './Loading.module.css';
-// import styles from './Loading.module.css';
-
-export default function Loading() {
+export default function Loading({ background = "bg-white" }: { background?: string }) {
     return (
         <>
-            <div className="flex justify-center items-center h-screen bg-white">
+            <div className={`flex justify-center items-center h-screen ${background}`}>
                 <div className="animate-spin rounded-full h-22 w-22 border-b-4 border-darkpink"></div>
             </div>
         </>

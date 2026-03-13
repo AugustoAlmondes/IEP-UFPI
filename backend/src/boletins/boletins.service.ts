@@ -16,10 +16,11 @@ export class BoletinsService {
         });
     }
 
-    async findAll() {
+    async findAll(limit?: string) {
         return this.prisma.boletins.findMany({
-            orderBy: { date: 'desc' },
-        });
+            orderBy: { id: 'desc' },
+            take: limit ? parseInt(limit) : undefined,
+        })
     }
 
     async findOne(id: number) {

@@ -20,10 +20,7 @@ export default function Newsletter() {
                         'Content-Type': 'application/json',
                     },
                 });
-
-                // Ordenar por ID de forma decrescente
-                const sortedBoletins = [...response].sort((a: Boletins, b: Boletins) => b.id - a.id);
-                setBoletins(sortedBoletins);
+                setBoletins(response);
             } catch (error) {
                 setLoading(false)
                 toast.error("Erro ao buscar boletins");

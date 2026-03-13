@@ -1,15 +1,39 @@
+import { Link } from "react-router-dom";
 import AboutCard from "../components/AboutCard";
 import BoletinCard from "../components/BoletinCard";
 import { aboutItems } from "../constants/aboutitens";
 import { apiFetch } from "../service/api";
-import BackgroundImage from "/image_2.jpeg";
+import { useEffect, useState } from "react";
+import type { Boletins } from "../types/boletins";
+import Loading from "../components/Loading";
 
 export default function Home() {
 
-    async function testFetch() {
-        const res = await apiFetch('/auth/all');
-        console.log(res);
-    }
+    const [lastNewsletters, setLastNewsletters] = useState<Boletins[]>([])
+    const [loading, setLoading] = useState<boolean>(true)
+
+    useEffect(() => {
+        async function getOnlyLastNewsletters() {
+            try {
+                setLoading(true)
+                const response = await apiFetch('/boletins?limit=3', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+                if (response) {
+                    setLastNewsletters(response)
+                    console.log(lastNewsletters);
+                }
+            } catch (error) {
+                console.log(error)
+            } finally {
+                setLoading(false)
+            }
+        }
+        getOnlyLastNewsletters()
+    }, [])
 
     return (
         <section className="bg-white min-h-screen">
@@ -29,13 +53,13 @@ export default function Home() {
                 </div>
 
                 <div className="text-white flex flex-wrap items-center justify-center gap-4">
-                    <button className="btn-outline px-12" onClick={testFetch}>
+                    <button className="btn-outline px-12" >
                         Ver boletins
                     </button>
 
                     <div className="hidden sm:block w-px h-8 bg-white rounded-full" />
 
-                    <button className="btn-pink px-12">
+                    <button onClick={() => { window.scrollTo({ top: document.getElementById('about')?.offsetTop, behavior: 'smooth' }) }} className="btn-pink px-12">
                         Saiba mais
                     </button>
                 </div>
@@ -51,19 +75,24 @@ export default function Home() {
                     Veja os Boletins mais recentes que foram publicados, tenta por mais algum texto aqui para ficar bom
                 </p>
 
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-16 mt-16">
-                    <BoletinCard BackgroundImage={BackgroundImage} />
-                    <BoletinCard BackgroundImage={BackgroundImage} />
-                    <BoletinCard BackgroundImage={BackgroundImage} />
-                </div>
+                {loading ? <Loading background="transparent" /> :
 
-                <p className="cursor-pointer mt-16 text-white underline hover:text-pink transition-colors duration-200">
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-16 mt-16">
+                        {
+                            lastNewsletters.map((newsletter: Boletins) => (
+                                <BoletinCard key={newsletter.id} newsletter={newsletter} />
+                            ))
+                        }
+                    </div>
+                }
+
+                <Link to="/newsletter" className="cursor-pointer mt-16 text-white underline hover:text-pink transition-colors duration-200">
                     Ver mais boletins
-                </p>
+                </Link>
             </div>
 
             {/* SOBRE NÓS */}
-            <div className="bg-white relative py-24">
+            <div id="about" className="bg-white relative py-24">
                 <h1 className="text-2xl sm:text-3xl lg:text-4xl text-center font-light text-white absolute left-0 right-0 mx-auto -top-9">
                     SOBRE NÓS
                 </h1>
@@ -89,12 +118,9 @@ export default function Home() {
                 </div>
 
                 <div className="text-white flex flex-col items-center justify-center gap-4">
-                    <button className="btn-outline w-[220px]">
+                    <Link to="/questions" className="btn-outline w-[220px]">
                         Perguntas Frequentes
-                    </button>
-                    <button className="btn-pink w-[220px]">
-                        Enviar Email
-                    </button>
+                    </Link>
                 </div>
             </div>
         </section>

@@ -8,7 +8,8 @@ import {
     Delete,
     UseGuards,
     Request,
-    ParseIntPipe
+    ParseIntPipe,
+    Query
 } from '@nestjs/common';
 import { BoletinsService } from './boletins.service';
 import { CreateBoletimDto } from './dto/create-boletim.dto';
@@ -27,8 +28,8 @@ export class BoletinsController {
     }
 
     @Get()
-    findAll() {
-        return this.boletinsService.findAll();
+    findAll(@Query('limit') limit?: string) {
+        return this.boletinsService.findAll(limit);
     }
 
     @Get(':id')
