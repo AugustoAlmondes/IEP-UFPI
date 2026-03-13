@@ -5,6 +5,7 @@ export const navItems:NavItem[] = [
     { label: 'Institucional', href: '/institutional' },
     { label: 'Boletins', href: '/newsletter' },
     { label: 'Equipe', href: '/equipe' },
+    { label: 'Podcast', href: '/podcast' },
     { label: 'Perguntas', href: '/questions' },
     // { label: 'Login', href: '/login' }
 ]
