@@ -10,6 +10,10 @@ export default function Newsletter() {
     const [boletins, setBoletins] = useState<Boletins[]>([]);
     const [loading, setLoading] = useState(true);
 
+    const handleDelete = (id: number) => {
+        setBoletins(prev => prev.filter(b => b.id !== id));
+    };
+
     useEffect(() => {
         const fetchBoletins = async () => {
             try {
@@ -63,11 +67,15 @@ export default function Newsletter() {
                 </div>
 
                 <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 items-center justify-center gap-4 mt-20">
-                    {boletins && boletins.map((boletim: Boletins) => (
+                    {boletins && boletins.length > 0 ? boletins.map((boletim: Boletins) => (
                         <div key={boletim.id} className="w-full flex items-center justify-center">
-                            <NewsletterCard newsletter={boletim} index={boletim.id} />
+                            <NewsletterCard newsletter={boletim} index={boletim.id} onDelete={handleDelete} />
                         </div>
-                    ))}
+                    )) : (
+                        <div className="w-full flex items-center justify-center">
+                            <p className="text-center text-gray-500">Nenhum boletim encontrado</p>
+                        </div>
+                    )}
                 </div>
             </div>
         </>

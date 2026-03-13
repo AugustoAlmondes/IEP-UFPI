@@ -1,9 +1,15 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import type { Boletins } from "../types/boletins";
 import { useAuth } from "../context/AuthContext";
 import { FaPen, FaTrash } from "react-icons/fa6";
+import { apiFetch } from "../service/api";
+import { toast } from "react-toastify";
 
-export default function NewsletterCard({ newsletter, index }: { newsletter: Boletins, index: number }) {
+export default function NewsletterCard({ newsletter, index, onDelete }: { newsletter: Boletins, index: number, onDelete?: (id: number) => void }) {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isDeleting, setIsDeleting] = useState(false);
+
     // Função para criar um slug a partir do título
     const createSlug = (title: string) => {
         return title
@@ -15,6 +21,23 @@ export default function NewsletterCard({ newsletter, index }: { newsletter: Bole
     const { isAuthenticated } = useAuth();
 
     const slug = createSlug(newsletter.title);
+
+    const handleDelete = async () => {
+        setIsDeleting(true);
+        try {
+            await apiFetch(`/boletins/${newsletter.id}`, {
+                method: 'DELETE',
+            });
+            toast.success("Boletim removido com sucesso!");
+            if (onDelete) onDelete(newsletter.id);
+        } catch (error) {
+            console.error('Erro ao deletar boletim:', error);
+            toast.error("Erro ao remover o boletim.");
+        } finally {
+            setIsDeleting(false);
+            setIsModalOpen(false);
+        }
+    };
 
     return (
         <>
@@ -48,14 +71,43 @@ export default function NewsletterCard({ newsletter, index }: { newsletter: Bole
                         {
                             isAuthenticated && (
                                 <div className="flex gap-2 items-center mt-4">
-                                    <FaPen size={30} className="text-white cursor-pointer bg-darkpink p-2 rounded-full hover:bg-pink transition" />
-                                    <FaTrash size={30} className="text-white cursor-pointer bg-darkpink p-2 rounded-full hover:bg-pink transition" />
+                                    <Link to={`/form-newsletter/${newsletter.id}`} className="block">
+                                        <FaPen size={30} className="text-white cursor-pointer bg-darkpink p-2 rounded-full hover:bg-pink transition" />
+                                    </Link>
+                                    <button onClick={() => setIsModalOpen(true)} className="block">
+                                        <FaTrash size={30} className="text-white cursor-pointer bg-darkpink p-2 rounded-full hover:bg-pink transition" />
+                                    </button>
                                 </div>
                             )
                         }
                     </div>
                 </div>
             </div>
+
+            {isModalOpen && (
+                <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+                    <div className="bg-white rounded-lg p-6 max-w-sm w-full shadow-lg">
+                        <h3 className="text-xl font-bold mb-4 text-gray-800">Confirmar exclusão</h3>
+                        <p className="text-gray-600 mb-6">Tem certeza que deseja remover o boletim "{newsletter.title}"? Esta ação não pode ser desfeita.</p>
+                        <div className="flex justify-end gap-3">
+                            <button 
+                                onClick={() => setIsModalOpen(false)}
+                                className="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition cursor-pointer"
+                                disabled={isDeleting}
+                            >
+                                Cancelar
+                            </button>
+                            <button 
+                                onClick={handleDelete}
+                                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition cursor-pointer"
+                                disabled={isDeleting}
+                            >
+                                {isDeleting ? "Removendo..." : "Remover"}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </>
     );
 }

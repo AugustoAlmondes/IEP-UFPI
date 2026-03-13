@@ -1,7 +1,8 @@
 import { useLocation } from "react-router-dom";
 import { TbPointFilled } from "react-icons/tb";
-import { FaPen, FaTrash } from "react-icons/fa6";
+import { FaArrowLeft, FaPen, FaTrash } from "react-icons/fa6";
 import { useAuth } from "../context/AuthContext";
+import { FaArrowCircleLeft } from "react-icons/fa";
 
 export default function InfoNewslatter() {
     const location = useLocation();
@@ -15,12 +16,16 @@ export default function InfoNewslatter() {
     return (
         <>
             <div className="bg-white pb-40 pt-30 px-4">
+                <FaArrowLeft 
+                size={25} 
+                onClick={() => window.history.back()}
+                className="text-darkpink cursor-pointer rounded-full p-1 hover:text-white hover:bg-darkpink transition" />
                 <h1 className="text-3xl sm:text-4xl text-darkpink font-bold text-center mb-5">
                     BOLETIM GAEP
                 </h1>
 
                 <section className="mx-4 sm:mx-8">
-                    <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center justify-between mb-4">                        
                         <div className="flex items-center">
                             <TbPointFilled className="text-darkpink text-xl mr-2" />
                             <h2 className="text-xl font-bold">Boletim Gaep, N. {index + 1}, {newsletter.date}</h2>

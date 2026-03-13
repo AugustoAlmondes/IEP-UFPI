@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { TbPointFilled } from "react-icons/tb";
 import ImageUpload from "../components/ImageUpload";
 import { apiFetch, apiUploadFile } from "../service/api";
 import { toast } from "react-toastify";
 import Tiptap from "../components/Titap";
 import { useAuth } from "../context/AuthContext";
+import Loading from "../components/Loading";
 
 
 export default function FormNewsletter() {
+    const { id } = useParams<{ id: string }>();
     const { name } = useAuth();
     const [title, setTitle] = useState('');
     const [category, setCategory] = useState('');
@@ -17,10 +20,36 @@ export default function FormNewsletter() {
     const [reference, setReference] = useState('');
     const [proofreader, setProofreader] = useState('');
     const [legendImage, setLegendImage] = useState('');
+    const [initialImageUrl, setInitialImageUrl] = useState<string | null>(null);
     const [imageFile, setImageFile] = useState<File | null>(null);
     const [uploadKey, setUploadKey] = useState(Date.now());
 
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isLoading, setIsLoading] = useState(!!id);
+
+    useEffect(() => {
+        if (id) {
+            const fetchBoletim = async () => {
+                try {
+                    const response = await apiFetch(`/boletins/${id}`, { method: 'GET' });
+                    setTitle(response.title || '');
+                    setCategory(response.category || '');
+                    setDate(response.date ? response.date.split('T')[0] : '');
+                    setAuthorName(response.author_name || name);
+                    setContent(response.content || '');
+                    setReference(response.reference || '');
+                    setProofreader(response.proofreader || '');
+                    setLegendImage(response.legend_image || '');
+                    setInitialImageUrl(response.image || null);
+                } catch (err) {
+                    toast.error("Erro ao carregar os dados do boletim.");
+                } finally {
+                    setIsLoading(false);
+                }
+            };
+            fetchBoletim();
+        }
+    }, [id, name]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -37,27 +66,38 @@ export default function FormNewsletter() {
                 legend_image: legendImage,
             };
 
-            const createdBoletim = await apiFetch('/boletins', {
-                method: 'POST',
-                body: JSON.stringify(boletimData)
-            });
+            let createdBoletim;
+            
+            if (id) {
+                createdBoletim = await apiFetch(`/boletins/${id}`, {
+                    method: 'PATCH',
+                    body: JSON.stringify(boletimData)
+                });
+                toast.success('Boletim atualizado com sucesso!');
+            } else {
+                createdBoletim = await apiFetch('/boletins', {
+                    method: 'POST',
+                    body: JSON.stringify(boletimData)
+                });
+                toast.success('Boletim postado com sucesso!');
+            }
 
             if (imageFile && createdBoletim.id) {
                 await apiUploadFile(`/upload/boletins-image/${createdBoletim.id}`, imageFile);
             }
 
-            toast.success('Boletim postado com sucesso!');
-
-            setTitle('');
-            setCategory('');
-            setDate('');
-            setAuthorName('');
-            setContent('');
-            setReference('');
-            setProofreader('');
-            setLegendImage('');
-            setImageFile(null);
-            setUploadKey(Date.now());
+            if (!id) {
+                setTitle('');
+                setCategory('');
+                setDate('');
+                setAuthorName(name); // Reset to logged in user normally
+                setContent('');
+                setReference('');
+                setProofreader('');
+                setLegendImage('');
+                setImageFile(null);
+                setUploadKey(Date.now());
+            }
 
         } catch (error: unknown) {
             console.error('Erro ao postar boletim:', error);
@@ -67,10 +107,14 @@ export default function FormNewsletter() {
         }
     };
 
+    if (isLoading) {
+        return <div className="min-h-screen bg-gray2 flex items-center justify-center text-center"><Loading background="transparent"/></div>;
+    }
+
     return (
         <div className="bg-white pb-20 pt-30 px-4">
             <h2 className="text-4xl sm:text-5xl text-darkpink font-bold text-center mb-10">
-                Formulário de Boletim
+                {id ? "Editar Boletim" : "Formulário de Boletim"}
             </h2>
 
             <form className="mx-8" onSubmit={handleSubmit}>
@@ -179,7 +223,7 @@ export default function FormNewsletter() {
                         </div>
                     </div>
 
-                    <ImageUpload key={uploadKey} onFileChange={(file) => setImageFile(file)} />
+                    <ImageUpload key={uploadKey} initialImage={initialImageUrl} onFileChange={(file) => setImageFile(file)} />
 
                     <div className="text-base my-4">
                         <label>Legenda</label>
@@ -198,7 +242,7 @@ export default function FormNewsletter() {
                         disabled={isSubmitting}
                         className="bg-darkpink text-white px-12 py-2 rounded-lg font-medium cursor-pointer hover:opacity-90 disabled:opacity-50 transition-colors duration-300"
                     >
-                        {isSubmitting ? 'Postando...' : 'Postar boletim'}
+                        {isSubmitting ? (id ? 'Atualizando...' : 'Postando...') : (id ? 'Atualizar boletim' : 'Postar boletim')}
                     </button>
                 </div>
             </form>

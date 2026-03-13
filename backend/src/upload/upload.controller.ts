@@ -99,6 +99,14 @@ export class UploadController {
             throw new NotFoundException('Boletim não encontrado.');
         }
 
+        if (boletim.image) {
+            const oldFilename = boletim.image.split('/').pop();
+            const oldPath = join(process.cwd(), 'uploads', 'boletins', oldFilename);
+            if (fs.existsSync(oldPath)) {
+                fs.unlinkSync(oldPath);
+            }
+        }
+
         this.uploadService.validateFile(file);
 
         const baseUrl = process.env.BACKEND_URL ?? 'http://localhost:3000';

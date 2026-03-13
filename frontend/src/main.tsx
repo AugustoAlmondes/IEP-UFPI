@@ -56,6 +56,14 @@ createRoot(document.getElementById('root')!).render(
               }
             />
             <Route
+              path="/form-newsletter/:id"
+              element={
+                <AdminRoute>
+                  <FormNewsletter />
+                </AdminRoute>
+              }
+            />
+            <Route
               path="/settings"
               element={
                 <AdminRoute onlyAdmin={true}>

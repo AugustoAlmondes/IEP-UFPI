@@ -1,17 +1,23 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { FaUpload } from "react-icons/fa";
-import { FaClosedCaptioning, FaFolderClosed } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
 import { toast } from "react-toastify";
 
 interface ImageUploadProps {
   onFileChange?: (file: File | null) => void;
+  initialImage?: string | null;
 }
 
-const ImageUpload: React.FC<ImageUploadProps> = ({ onFileChange }) => {
+const ImageUpload: React.FC<ImageUploadProps> = ({ onFileChange, initialImage }) => {
   const [fileName, setFileName] = useState<string | null>(null);
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [imageUrl, setImageUrl] = useState<string | null>(initialImage || null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (initialImage) {
+      setImageUrl(initialImage);
+    }
+  }, [initialImage]);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0] ?? null;
@@ -56,11 +62,11 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onFileChange }) => {
         accept="image/*"
       />
       <div className="flex flex-col items-center gap-2.5">
-        {!fileName &&
+        {!fileName && !imageUrl &&
           <FaUpload className="text-2xl text-gray-500" />
         }
         <span className="text-base font-semibold text-gray-700">
-          {fileName || "Carregar imagem"}
+          {fileName || (!imageUrl ? "Carregar imagem" : "Imagem selecionada")}
         </span>
         {imageUrl && (
           <div className="w-max h-max relative">
@@ -80,7 +86,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onFileChange }) => {
           </div>
         )}
         {
-          !fileName &&
+          !fileName && !imageUrl &&
           <p className="text-sm text-gray-500 m-0">
             Clique para selecionar uma imagem (JPG, PNG ou GIF)
           </p>
