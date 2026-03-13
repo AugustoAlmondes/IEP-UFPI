@@ -20,6 +20,7 @@ import Newsletter from './pages/Newsletter'
 import { AuthProvider } from './providers/AuthProvider'
 import InfoNewslatter from './pages/InfoNewslatter'
 import ErrorPage from './pages/ErrorPage'
+import Podcast from './pages/Podcast'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -47,6 +48,7 @@ createRoot(document.getElementById('root')!).render(
             <Route path="/questions" element={<Questions />} />
             <Route path="/newsletter" element={<Newsletter />} />
             <Route path="/info-newsletter/:index/:slug" element={<InfoNewslatter />} />
+            <Route path="/podcast" element={<Podcast />} />
             <Route
               path="/form-newsletter"
               element={
