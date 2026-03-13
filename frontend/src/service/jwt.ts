@@ -16,6 +16,7 @@ export function decodeJwtPayload<T = Record<string, unknown>>(token: string): T 
 export type JwtPayload = {
     sub: number;
     email: string;
+    name: string;
     role: "ADMIN" | "ALUNO";
     iat: number;
     exp: number;

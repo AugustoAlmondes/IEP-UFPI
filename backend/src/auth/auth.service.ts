@@ -18,6 +18,9 @@ export class AuthService {
         if (!user) {
             throw new Error("Usuário não encontrado");
         }
+        const dataUser = await this.prisma.membros.findUnique({
+            where: { user_id: user.id }
+        })
 
         const member = await this.prisma.membros.findUnique({
             where: { user_id: user.id },
@@ -34,7 +37,12 @@ export class AuthService {
 
         }
 
-        const payload = { sub: user.id, email: user.email, role: member.role.toUpperCase() };
+        const payload = {
+            sub: user.id,
+            email: user.email,
+            name: dataUser?.name,
+            role: member.role.toUpperCase()
+        };
         const token = await this.jwtService.signAsync(payload)
         return { token: token }
     }
