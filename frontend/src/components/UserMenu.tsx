@@ -15,7 +15,7 @@ type MenuItem = {
 
 export default function UserMenu() {
     const [isOpen, setIsOpen] = useState(false);
-    const { signOut, user } = useAuth();
+    const { signOut, user, name } = useAuth();
     const navigate = useNavigate();
 
     const menuItems: MenuItem[] = [
@@ -54,8 +54,11 @@ export default function UserMenu() {
 
             {isOpen && (
                 <div className="absolute right-0 mt-3 w-56 bg-darkgray shadow-xl rounded-lg p-4 text-white z-50">
-                    <p className="font-semibold text-lg mb-4 text-pink">
+                    <h2 className="font-semibold text-lg text-pink">
                         Seja bem-vindo!
+                    </h2>
+                    <p className="mb-4 text-pink">
+                        {name}
                     </p>
 
                     <div className="flex flex-col gap-3">

@@ -5,14 +5,15 @@ import ImageUpload from "../components/ImageUpload";
 import { apiFetch, apiUploadFile } from "../service/api";
 import { toast } from "react-toastify";
 import Tiptap from "../components/Titap";
+import { useAuth } from "../context/AuthContext";
 
 
 export default function FormNewsletter() {
+    const { name } = useAuth();
     const [title, setTitle] = useState('');
     const [category, setCategory] = useState('');
     const [date, setDate] = useState('');
-    const [authorName, setAuthorName] = useState('');
-    const [authorRole, setAuthorRole] = useState('');
+    const [authorName, setAuthorName] = useState(name);
     const [content, setContent] = useState('');
     const [reference, setReference] = useState('');
     const [proofreader, setProofreader] = useState('');
@@ -52,7 +53,6 @@ export default function FormNewsletter() {
             setCategory('');
             setDate('');
             setAuthorName('');
-            setAuthorRole('');
             setContent('');
             setReference('');
             setProofreader('');
@@ -98,7 +98,7 @@ export default function FormNewsletter() {
                         <div className="w-full">
                             <label>Categoria</label>
                             <select
-                                className="text-base placeholder-opacity-18 w-full border-1 border-[var(--color-gray)] bg-[var(--color-gray2)] rounded-md px-4 h-7 focus:outline-none focus:border-pink-500"
+                                className="cursor-pointer text-base placeholder-opacity-18 w-full border-1 border-[var(--color-gray)] bg-[var(--color-gray2)] rounded-md px-4 h-7 focus:outline-none focus:border-pink-500"
                                 required
                                 value={category}
                                 onChange={(e) => setCategory(e.target.value)}
@@ -128,29 +128,18 @@ export default function FormNewsletter() {
                                 Autores
                             </h3>
                         </div>
-                        <div>
-                            <IoIosAddCircle className="text-pink cursor-pointer" size={28} />
-                        </div>
                     </div>
 
                     <div className="flex text-base my-4 w-full gap-6">
                         <div className="w-full">
-                            <label>Nome Completo</label>
+                            <label>Nome Completo dos Autores</label>
                             <input
                                 type="text"
                                 placeholder="Digite o nome do autor"
-                                value={authorName}
+                                value={authorName ?? ''}
                                 onChange={(e) => setAuthorName(e.target.value)}
-                                className="text-base placeholder-opacity-18 w-full border-1 border-[var(--color-gray)] bg-[var(--color-gray2)] rounded-md px-4 h-7 focus:outline-none focus:border-pink-500" />
-                        </div>
-                        <div className="w-full">
-                            <label>Cargo</label>
-                            <input
-                                type="text"
-                                placeholder="Digite o cargo do autor"
-                                value={authorRole}
-                                onChange={(e) => setAuthorRole(e.target.value)}
-                                className="text-base placeholder-opacity-18 w-full border-1 border-[var(--color-gray)] bg-[var(--color-gray2)] rounded-md px-4 h-7 focus:outline-none focus:border-pink-500" />
+                                className={`text-base placeholder-opacity-18 w-full border-1 border-gray bg-gray2 rounded-md px-4 h-7 focus:outline-none focus:border-pink-500`}
+                            />
                         </div>
                     </div>
 
