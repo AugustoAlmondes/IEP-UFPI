@@ -20,12 +20,30 @@ export class BoletinsService {
         return this.prisma.boletins.findMany({
             orderBy: { id: 'desc' },
             take: limit ? parseInt(limit) : undefined,
+            include: {
+                autor: {
+                    include: {
+                        membro: {
+                            select: { name: true }
+                        }
+                    }
+                }
+            }
         })
     }
 
     async findOne(id: number) {
         const boletim = await this.prisma.boletins.findUnique({
             where: { id },
+            include: {
+                autor: {
+                    include: {
+                        membro: {
+                            select: { name: true }
+                        }
+                    }
+                }
+            }
         });
 
         if (!boletim) {

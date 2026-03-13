@@ -10,4 +10,9 @@ export interface Boletins {
     legend_image: string | null;
     created_by_id: number;
     created_in: string;
+    autor?: {
+        membro?: {
+            name: string;
+        };
+    };
 }

@@ -101,9 +101,11 @@ export class UploadController {
 
         if (boletim.image) {
             const oldFilename = boletim.image.split('/').pop();
-            const oldPath = join(process.cwd(), 'uploads', 'boletins', oldFilename);
-            if (fs.existsSync(oldPath)) {
-                fs.unlinkSync(oldPath);
+            if(oldFilename){
+                const oldPath = join(process.cwd(), 'uploads', 'boletins', oldFilename);
+                if (fs.existsSync(oldPath)) {
+                    fs.unlinkSync(oldPath);
+                }
             }
         }
 

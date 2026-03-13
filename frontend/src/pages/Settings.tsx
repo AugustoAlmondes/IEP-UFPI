@@ -1,10 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { TbPointFilled } from "react-icons/tb";
-import { IoIosAddCircle } from "react-icons/io";
 import ImageUpload from "../components/ImageUpload";
 import MemberCard from "../components/MemberCard";
-import { sponsors } from "../constants/sponsors";
-import SponsorCard from "../components/SponsorCard";
 import { apiFetch, apiUploadFile } from "../service/api";
 import type { SignupPayload } from "../types/signup";
 import type { MemberApiData } from "../types/member";

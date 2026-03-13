@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import AboutCard from "../components/AboutCard";
-import BoletinCard from "../components/BoletinCard";
 import { aboutItems } from "../constants/aboutitens";
 import { apiFetch } from "../service/api";
 import { useEffect, useState } from "react";

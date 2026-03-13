@@ -2,7 +2,6 @@ import { useLocation } from "react-router-dom";
 import { TbPointFilled } from "react-icons/tb";
 import { FaArrowLeft, FaPen, FaTrash } from "react-icons/fa6";
 import { useAuth } from "../context/AuthContext";
-import { FaArrowCircleLeft } from "react-icons/fa";
 
 export default function InfoNewslatter() {
     const location = useLocation();
@@ -28,7 +27,7 @@ export default function InfoNewslatter() {
                     <div className="flex items-center justify-between mb-4">                        
                         <div className="flex items-center">
                             <TbPointFilled className="text-darkpink text-xl mr-2" />
-                            <h2 className="text-xl font-bold">Boletim Gaep, N. {index + 1}, {newsletter.date}</h2>
+                            <h2 className="text-xl font-bold">Boletim Gaep, N. {index + 1}, {newsletter.created_in.replace('-', '/').replace('-', '/').replace("T", " ").split(".")[0]}</h2>
                         </div>
 
                         {
@@ -47,7 +46,7 @@ export default function InfoNewslatter() {
                     <div className="items-center mb-4">
                         <h3 className="text-lg font-bold">{newsletter.title}</h3>
                         <p>{newsletter.category}</p>
-                        <p className="mb-2">Por {newsletter.author}</p>
+                        <p className="mb-2">Por <span className="font-bold text-darkpink">{newsletter.autor?.membro?.name || 'Autor Desconhecido'}</span></p>
                     </div>
 
                     <div className="mb-8 w-full max-w-none prose prose-slate [&_p]:mb-4 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mb-4 [&_h3]:text-xl [&_h3]:font-bold [&_h3]:mb-3 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-4 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-4 [&_img]:max-w-full [&_img]:rounded-md [&_img]:shadow-md">
@@ -55,8 +54,8 @@ export default function InfoNewslatter() {
                         {newsletter.image && (
                             <div className="flex flex-col justify-center items-center my-8">
                                 <img src={newsletter.image} alt={newsletter.caption || 'Imagem do boletim'} className="max-w-[500px] w-full max-h-[400px] object-cover rounded-md shadow-sm" />
-                                {newsletter.caption && (
-                                    <p className="text-sm text-gray-500 italic mt-2 text-center">{newsletter.caption}</p>
+                                {newsletter.legend_image && (
+                                    <p className="text-sm text-gray-500 italic mt-2 text-center">{newsletter.legend_image}</p>
                                 )}
                             </div>
                         )}
@@ -72,7 +71,7 @@ export default function InfoNewslatter() {
                         <p className="font-bold">Referência</p>
                         <p>{newsletter.reference}</p>
                         <p className="font-bold">Revisão e edição</p>
-                        <p>{newsletter.review}</p>
+                        <p>{newsletter.proofreader}</p>
                     </div>
 
 

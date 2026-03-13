@@ -19,6 +19,7 @@ model User {
   email    String   @unique
   password String
   membro   Membros?
+  boletins Boletins[]
 }
 
 model Membros {
@@ -43,6 +44,7 @@ model Boletins {
   legend_image String?
 
   created_by_id Int
+  autor         User     @relation(fields: [created_by_id], references: [id])
   created_in    DateTime @default(now())
 }
 
