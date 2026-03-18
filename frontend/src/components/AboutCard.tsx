@@ -19,8 +19,8 @@ const AboutCard: React.FC<AboutItem> = ({ title, description, imageUrl, url, sid
                 </a>
             </div>
 
-            <div className="relative">
-                <img className="w-80" src={imageUrl} alt={title} />
+            <div className="relative h-50 w-70">
+                <img className="h-full w-full object-cover" src={imageUrl} alt={title} />
                 <div className="absolute bg-darkpink w-full h-full rotate-5 z-[-1] bottom-0" />
             </div>
         </div>

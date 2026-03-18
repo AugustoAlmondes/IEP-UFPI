@@ -55,8 +55,7 @@ export default function Equipe() {
     );
 
     function onSubmit(data: JoinTeamForm) {
-        toast.success("Seu email foi enviado com sucesso!");
-        console.log(data)
+        toast.warning("Essa ação ainda não funciona :(");
         reset();
     }
 

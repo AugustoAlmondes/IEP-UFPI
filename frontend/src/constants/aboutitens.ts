@@ -22,7 +22,7 @@ export const aboutItems:AboutItem[] = [
     , {
         title: "PODCAST",
         description: "O Podcast 'Conexão Econômica', idealizado pelo GAEP e apresentado por 'Flávio Ataliba', desmistifica a economia com linguagem acessível, abordando temas como PIB, inflação, juros, mercado de trabalho e políticas públicas, para que o público entenda como a economia impacta o dia a dia de todos, mesmo sem conhecimento prévio na área.",
-        imageUrl: "/image_2.jpeg",
+        imageUrl: "/image_5.jpeg",
         url: "/podcast",
         side: "right"
     }

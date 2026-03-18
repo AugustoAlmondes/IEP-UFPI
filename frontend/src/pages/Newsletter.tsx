@@ -60,6 +60,7 @@ export default function Newsletter() {
                         />
                         <button
                             className="cursor-pointer border bg-darkpink text-white py-1.5 px-4 rounded-lg hover:bg-darkpink/70 hover:text-white transition-colors duration-300 min-w"
+                            onClick={() => { toast.warning("Essa ação ainda não funciona :(") }}
                         >
                             Buscar
                         </button>

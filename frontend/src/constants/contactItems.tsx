@@ -14,6 +14,6 @@ export const contactItems:ContactItem[] = [
   },
   {
     icon: <FaHouse size={24} />,
-    label: "Rua João Cabral, 1234 - Ininga, Teresina - PI, 64049-550",
+    label: "Rua Cícero Duarte, n. 905, Bairro do Junco, em Picos (PI), 64049-550",
   },
 ];

@@ -1,4 +1,5 @@
 import Logo from '../assets/width_766.webp';
+import UFPI from '../../public/images/ufpi.jpg'
 import {
     AiFillFacebook,
     AiFillInstagram,
@@ -9,7 +10,7 @@ import { contactItems } from '../constants/contactItems';
 
 export default function Footer() {
     return (
-        <footer className="bg-darkgray text-white grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 py-10 px-6 lg:px-15">
+        <footer className="bg-darkgray text-white grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 py-10 px-6 lg:px-15">
 
             {/* Coluna 1 */}
             <div>
@@ -46,7 +47,7 @@ export default function Footer() {
                 </ul>
             </div>
 
-            <div>
+            {/* <div>
                 <h3 className="text-pink font-semibold">Endereços</h3>
                 <ul className="flex flex-col gap-1 mt-5">
                     {contactItems.map((item, index) => (
@@ -56,14 +57,14 @@ export default function Footer() {
                         </li>
                     ))}
                 </ul>
-            </div>
+            </div> */}
 
             <div>
                 <h3 className="text-pink font-semibold">Patrocínios</h3>
                 <div className="flex flex-wrap gap-3 mt-5">
-                    <img className="w-20" src={Logo} />
-                    <img className="w-20" src={Logo} />
-                    <img className="w-20" src={Logo} />
+                    <a href="https://ufpi.br/">
+                        <img className="w-50" src={UFPI} />
+                    </a>
                 </div>
             </div>
         </footer>
