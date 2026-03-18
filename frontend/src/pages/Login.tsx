@@ -43,7 +43,7 @@ export default function Login() {
     return (
         <div className="
             h-screen 
-            bg-[url(Background_Login.png)] 
+            bg-[url(./src/assets/Background_Login.png)] 
             bg-cover 
             bg-black/90 
             grid 

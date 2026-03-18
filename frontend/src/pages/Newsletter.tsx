@@ -4,36 +4,11 @@ import type { Boletins } from "../types/boletins";
 import { apiFetch } from "../service/api";
 import { toast } from "react-toastify";
 import Loading from "../components/Loading";
+import useBoletins from "../context/BoletinsContext";
 
 export default function Newsletter() {
 
-    const [boletins, setBoletins] = useState<Boletins[]>([]);
-    const [loading, setLoading] = useState(true);
-
-    const handleDelete = (id: number) => {
-        setBoletins(prev => prev.filter(b => b.id !== id));
-    };
-
-    useEffect(() => {
-        const fetchBoletins = async () => {
-            try {
-                setLoading(true)
-                const response = await apiFetch('/boletins', {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                });
-                setBoletins(response);
-            } catch (error) {
-                setLoading(false)
-                // toast.error("Erro ao buscar boletins");
-                console.error('Erro ao buscar boletins:', error);
-            }
-            setLoading(false)
-        };
-        fetchBoletins();
-    }, []);
+    const { loading, boletins, handleDelete } = useBoletins();
 
     if (loading) {
         return (
@@ -72,7 +47,7 @@ export default function Newsletter() {
                         <div key={boletim.id} className="w-full flex items-center justify-center">
                             <NewsletterCard newsletter={boletim} index={boletim.id} onDelete={handleDelete} />
                         </div>
-                    )) : (  
+                    )) : (
                         <div className="w-full flex items-center justify-center">
                             <p className="text-center text-gray-500 text-xl">Erro ao carregar os boletins...</p>
                         </div>

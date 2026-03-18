@@ -16,3 +16,9 @@ export interface Boletins {
         };
     };
 }
+
+export interface BoletinsContextData {
+    boletins: Boletins[];
+    loading: boolean;
+    handleDelete?: (id: number) => void;
+}

@@ -10,7 +10,6 @@ export default function NewsletterCard({ newsletter, index, onDelete }: { newsle
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
 
-    // Função para criar um slug a partir do título
     const createSlug = (title: string) => {
         return title
             .toLowerCase()

@@ -1,40 +1,14 @@
 import { Link } from "react-router-dom";
 import AboutCard from "../components/AboutCard";
 import { aboutItems } from "../constants/aboutitens";
-import { apiFetch } from "../service/api";
-import { useEffect, useState } from "react";
-import type { Boletins } from "../types/boletins";
 import Loading from "../components/Loading";
 import NewsletterCard from "../components/NewsletterCard";
-import ObjectiveImage from "../assets/image_2.jpeg";
+import useBoletins from "../context/BoletinsContext";
 
 export default function Home() {
 
-    const [lastNewsletters, setLastNewsletters] = useState<Boletins[]>([])
-    const [loading, setLoading] = useState<boolean>(true)
-
-    useEffect(() => {
-        async function getOnlyLastNewsletters() {
-            try {
-                setLoading(true)
-                const response = await apiFetch('/boletins?limit=3', {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                });
-                if (response) {
-                    setLastNewsletters(response)
-                    console.log(lastNewsletters);
-                }
-            } catch (error) {
-                console.log(error)
-            } finally {
-                setLoading(false)
-            }
-        }
-        getOnlyLastNewsletters()
-    }, [])
+    const { boletins, loading } = useBoletins();
+    const lastNewsletters = boletins?.slice(0, 3)
 
     return (
         <section className="bg-white min-h-screen">
@@ -80,7 +54,7 @@ export default function Home() {
 
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-16 mt-16">
                         {
-                            lastNewsletters.map((newsletter, index) => (
+                            lastNewsletters?.map((newsletter, index) => (
                                 <NewsletterCard key={index} index={index} newsletter={newsletter} />
                             ))
                         }
