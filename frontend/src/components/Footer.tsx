@@ -6,7 +6,6 @@ import {
     AiFillLinkedin
 } from "react-icons/ai";
 import { navItems } from '../constants/navitems';
-import { contactItems } from '../constants/contactItems';
 
 export default function Footer() {
     return (

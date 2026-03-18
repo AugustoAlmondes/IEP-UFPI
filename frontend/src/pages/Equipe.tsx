@@ -54,7 +54,7 @@ export default function Equipe() {
         currentPage * membersPerPage
     );
 
-    function onSubmit(data: JoinTeamForm) {
+    function onSubmit() {
         toast.warning("Essa ação ainda não funciona :(");
         reset();
     }
