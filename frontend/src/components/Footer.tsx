@@ -1,11 +1,12 @@
 import Logo from '../assets/width_766.webp';
-import UFPI from '../../public/images/ufpi.jpg'
+import UFPI from '../assets/images/ufpi.jpg'
 import {
     AiFillFacebook,
     AiFillInstagram,
     AiFillLinkedin
 } from "react-icons/ai";
 import { navItems } from '../constants/navitems';
+
 
 export default function Footer() {
     return (

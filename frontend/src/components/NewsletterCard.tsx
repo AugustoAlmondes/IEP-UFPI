@@ -48,7 +48,7 @@ export default function NewsletterCard({ newsletter, index, onDelete }: { newsle
                             newsletter.image ? (
                                 <img src={newsletter.image} className="w-full h-full object-cover" />
                             ) : (
-                                <img src="public/images/boletim_default.jpg" className="w-full h-full object-cover" />
+                                <img src="../assets/images/boletim_default.jpg" className="w-full h-full object-cover" />
                             )
                         }
                         <div className="absolute h-7 w-full bg-darkpink bottom-0" />

@@ -27,7 +27,7 @@ export default function Newsletter() {
                 setBoletins(response);
             } catch (error) {
                 setLoading(false)
-                toast.error("Erro ao buscar boletins");
+                // toast.error("Erro ao buscar boletins");
                 console.error('Erro ao buscar boletins:', error);
             }
             setLoading(false)
@@ -72,9 +72,9 @@ export default function Newsletter() {
                         <div key={boletim.id} className="w-full flex items-center justify-center">
                             <NewsletterCard newsletter={boletim} index={boletim.id} onDelete={handleDelete} />
                         </div>
-                    )) : (
+                    )) : (  
                         <div className="w-full flex items-center justify-center">
-                            <p className="text-center text-gray-500">Nenhum boletim encontrado</p>
+                            <p className="text-center text-gray-500 text-xl">Erro ao carregar os boletins...</p>
                         </div>
                     )}
                 </div>

@@ -39,8 +39,8 @@ export default function Equipe() {
                 });
                 setMembers(sortedMembers);
             } catch (error) {
-                console.error("Erro ao carregar membros", error);
-                toast.error("Erro ao carregar membros.");
+                // toast.error("Erro ao carregar membros.");
+                console.error(error)
             } finally {
                 setLoading(false);
             }
@@ -62,7 +62,7 @@ export default function Equipe() {
     return (
         <>
             <div className=" bg-white">
-                <div className="w-full h-[800px] flex flex-col items-center gap-10 justify-center relative bg-[url(image_1.jpeg)] bg-cover bg-center bg-filter bg-blend-multiply bg-black/70">
+                <div className="w-full h-[800px] flex flex-col items-center gap-10 justify-center relative bg-[url(./src/assets/image_1.jpeg)] bg-cover bg-center bg-filter bg-blend-multiply bg-black/70">
                     <div className="text-white text-center">
                         <h1 className="text-5xl font-bold mb-8">
                             NOSSA EQUIPE
@@ -101,7 +101,7 @@ export default function Equipe() {
                 {loading ? (
                     <Loading/>
                 ) : members.length === 0 ? (
-                    <div className="text-center text-gray-500">Nenhum membro encontrado.</div>
+                    <div className="text-center text-gray-500 text-xl">Erro ao carregar os membros...</div>
                 ) : (
                     <>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-4xl mx-auto">

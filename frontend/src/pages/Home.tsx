@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import type { Boletins } from "../types/boletins";
 import Loading from "../components/Loading";
 import NewsletterCard from "../components/NewsletterCard";
+import ObjectiveImage from "../assets/image_2.jpeg";
 
 export default function Home() {
 
@@ -39,7 +40,7 @@ export default function Home() {
         <section className="bg-white min-h-screen">
 
             {/* IEP / UFPI */}
-            <div className="min-h-screen w-full flex flex-col items-center justify-center gap-8 relative bg-[url(image_2.jpeg)] bg-cover bg-center bg-blend-multiply bg-black/70 px-6">
+            <div className="min-h-screen w-full flex flex-col items-center justify-center gap-8 relative bg-[url(./src/assets/image_2.jpeg)] bg-cover bg-center bg-blend-multiply bg-black/70 px-6">
                 <div className="text-white text-center">
                     <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-2">
                         IEP/UFPI
@@ -107,7 +108,7 @@ export default function Home() {
             </div>
 
             {/* DÚVIDAS */}
-            <div className="py-28 mt-16 w-full flex flex-col items-center gap-8 justify-center relative bg-[url(image_2.jpeg)] bg-cover bg-center bg-blend-multiply bg-black/70 px-6">
+            <div className="py-28 mt-16 w-full flex flex-col items-center gap-8 justify-center relative bg-[url(./src/assets/image_2.jpeg)] bg-cover bg-center bg-blend-multiply bg-black/70 px-6">
                 <div className="text-white text-center max-w-2xl">
                     <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-2">
                         FICOU COM DÚVIDA?

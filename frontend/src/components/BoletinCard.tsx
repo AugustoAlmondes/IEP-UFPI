@@ -9,7 +9,7 @@ export default function BoletinCard({ newsletter }: { newsletter: Boletins }) {
                         newsletter.image ? (
                             <img src={newsletter.image} className="w-full h-full object-cover" />
                         ) : (
-                            <img src="public/images/boletim_default.jpg" className="w-full h-full object-cover" />
+                            <img src="../assets/images/boletim_default.jpg" className="w-full h-full object-cover" />
                         )
                     }   
                     <div className="absolute bg-darkpink w-full h-4 bottom-0" />
