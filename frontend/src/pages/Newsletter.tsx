@@ -1,7 +1,5 @@
-import { useEffect, useState } from "react";
 import NewsletterCard from "../components/NewsletterCard";
 import type { Boletins } from "../types/boletins";
-import { apiFetch } from "../service/api";
 import { toast } from "react-toastify";
 import Loading from "../components/Loading";
 import useBoletins from "../context/BoletinsContext";

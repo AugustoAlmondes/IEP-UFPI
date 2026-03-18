@@ -6,6 +6,7 @@ import { MdEmail } from "react-icons/md";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import BackgroundLogin from "../assets/Background_Login.png";
 
 export default function Login() {
 
@@ -41,15 +42,17 @@ export default function Login() {
     }
 
     return (
-        <div className="
-            h-screen 
-            bg-[url(./src/assets/Background_Login.png)] 
-            bg-cover 
-            bg-black/90 
-            grid 
-            grid-cols-1 
-            lg:grid-cols-2
-        ">
+        <div 
+            style={{ backgroundImage: `url(${BackgroundLogin})` }}
+            className="
+                h-screen 
+                bg-cover 
+                bg-black/90 
+                grid 
+                grid-cols-1 
+                lg:grid-cols-2
+            "
+        >
             {/* Coluna esquerda */}
             <div className="
                 hidden 

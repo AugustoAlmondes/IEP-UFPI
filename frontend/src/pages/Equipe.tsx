@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { apiFetch } from "../service/api";
 import type { MemberApiData } from "../types/member";
 import Loading from "../components/Loading";
+import TeamBg from "../assets/image_1.jpeg";
 
 export default function Equipe() {
 
@@ -62,7 +63,10 @@ export default function Equipe() {
     return (
         <>
             <div className=" bg-white">
-                <div className="w-full h-[800px] flex flex-col items-center gap-10 justify-center relative bg-[url(./src/assets/image_1.jpeg)] bg-cover bg-center bg-filter bg-blend-multiply bg-black/70">
+                <div 
+                    style={{ backgroundImage: `url(${TeamBg})` }}
+                    className="w-full h-[800px] flex flex-col items-center gap-10 justify-center relative bg-cover bg-center bg-filter bg-blend-multiply bg-black/70"
+                >
                     <div className="text-white text-center">
                         <h1 className="text-5xl font-bold mb-8">
                             NOSSA EQUIPE
