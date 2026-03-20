@@ -16,7 +16,7 @@ import { AdminGuard } from '../auth/admin.guard';
 import { PrismaService } from '../prisma/prisma.service';
 import { diskStorage } from 'multer';
 import { extname, join } from 'path';
-import { v4 as uuidv4 } from 'uuid';
+import { randomUUID } from 'crypto';
 import * as fs from 'fs';
 
 @Controller('upload')
@@ -69,7 +69,7 @@ export class UploadController {
                 cb(null, dir);
             },
             filename: (_req, file, callback) => {
-                const uniqueName = `${uuidv4()}${extname(file.originalname)}`;
+                const uniqueName = `${randomUUID()}${extname(file.originalname)}`;
                 callback(null, uniqueName);
             },
         }),

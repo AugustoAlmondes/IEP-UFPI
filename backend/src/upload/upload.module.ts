@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { MulterModule } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname, join } from 'path';
-import { v4 as uuidv4 } from 'uuid';
+import { randomUUID } from 'crypto';
 import { PrismaService } from '../prisma/prisma.service';
 import { UploadController } from './upload.controller';
 import { UploadService } from './upload.service';
@@ -13,7 +13,7 @@ import { UploadService } from './upload.service';
             storage: diskStorage({
                 destination: join(process.cwd(), 'uploads'),
                 filename: (_req, file, callback) => {
-                    const uniqueName = `${uuidv4()}${extname(file.originalname)}`;
+                    const uniqueName = `${randomUUID()}${extname(file.originalname)}`;
                     callback(null, uniqueName);
                 },
             }),
