@@ -36,10 +36,9 @@ export class MembrosService {
             throw new NotFoundException(`Membro com id ${id} não encontrado.`);
         }
 
-        // Remove o arquivo de foto, se existir na pasta uploads/
-        if (membro.profile_image) {
+        // Remove o arquivo de foto, se existir localmente
+        if (membro.profile_image && membro.profile_image.includes('/uploads/')) {
             try {
-                // profile_image é a URL completa, extrai apenas o filename
                 const filename = membro.profile_image.split('/uploads/').pop();
                 if (filename) {
                     const filePath = join(process.cwd(), 'uploads', filename);

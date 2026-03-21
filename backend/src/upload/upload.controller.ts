@@ -47,7 +47,8 @@ export class UploadController {
 
         this.uploadService.validateFile(file);
 
-        const url = this.uploadService.getPublicUrl(file.filename);
+        // Upload para o Supabase
+        const url = await this.uploadService.uploadToSupabase(file, 'public');
 
         await this.prisma.membros.update({
             where: { id },
@@ -59,30 +60,7 @@ export class UploadController {
 
     @UseGuards(AuthGuard, AdminGuard)
     @Post('boletins-image/:id')
-    @UseInterceptors(FileInterceptor('file', {
-        storage: diskStorage({
-            destination: (req, file, cb) => {
-                const dir = join(process.cwd(), 'uploads', 'boletins');
-                if (!fs.existsSync(dir)) {
-                    fs.mkdirSync(dir, { recursive: true });
-                }
-                cb(null, dir);
-            },
-            filename: (_req, file, callback) => {
-                const uniqueName = `${uuidv4()}${extname(file.originalname)}`;
-                callback(null, uniqueName);
-            },
-        }),
-        limits: { fileSize: 5 * 1024 * 1024 },
-        fileFilter: (_req, file, callback) => {
-            const allowed = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
-            if (allowed.includes(file.mimetype)) {
-                callback(null, true);
-            } else {
-                callback(new BadRequestException('Tipo de arquivo não suportado.'), false);
-            }
-        },
-    }))
+    @UseInterceptors(FileInterceptor('file'))
     async uploadBoletimImage(
         @Param('id', ParseIntPipe) id: number,
         @UploadedFile() file: Express.Multer.File
@@ -99,7 +77,8 @@ export class UploadController {
             throw new NotFoundException('Boletim não encontrado.');
         }
 
-        if (boletim.image) {
+        // Cleanup local antigo se existir
+        if (boletim.image && boletim.image.includes('/uploads/')) {
             const oldFilename = boletim.image.split('/').pop();
             if(oldFilename){
                 const oldPath = join(process.cwd(), 'uploads', 'boletins', oldFilename);
@@ -111,8 +90,8 @@ export class UploadController {
 
         this.uploadService.validateFile(file);
 
-        const baseUrl = process.env.BACKEND_URL ?? 'http://localhost:3000';
-        const url = `${baseUrl}/uploads/boletins/${file.filename}`;
+        // Upload para o Supabase
+        const url = await this.uploadService.uploadToSupabase(file, 'public');
 
         await this.prisma.boletins.update({
             where: { id },

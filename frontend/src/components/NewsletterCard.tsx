@@ -5,6 +5,7 @@ import { useAuth } from "../context/AuthContext";
 import { FaPen, FaTrash } from "react-icons/fa6";
 import { apiFetch } from "../service/api";
 import { toast } from "react-toastify";
+import boletimDefault from "../assets/images/boletim_default.jpg";
 
 export default function NewsletterCard({ newsletter, index, onDelete }: { newsletter: Boletins, index: number, onDelete?: (id: number) => void }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -47,7 +48,7 @@ export default function NewsletterCard({ newsletter, index, onDelete }: { newsle
                             newsletter.image ? (
                                 <img src={newsletter.image} className="w-full h-full object-cover" />
                             ) : (
-                                <img src="../assets/images/boletim_default.jpg" className="w-full h-full object-cover" />
+                                <img src={boletimDefault} className="w-full h-full object-cover" />
                             )
                         }
                         <div className="absolute h-7 w-full bg-darkpink bottom-0" />

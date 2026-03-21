@@ -56,6 +56,13 @@ export default function FormNewsletter() {
         setIsSubmitting(true);
 
         try {
+            let imageUrl = initialImageUrl;
+
+            if (imageFile) {
+                toast.info('Fazendo upload da imagem...');
+                imageUrl = await apiUploadFile(imageFile);
+            }
+
             const boletimData = {
                 title,
                 category,
@@ -64,33 +71,28 @@ export default function FormNewsletter() {
                 reference,
                 proofreader,
                 legend_image: legendImage,
+                image: imageUrl, // Include the image URL here
             };
 
-            let createdBoletim;
-            
             if (id) {
-                createdBoletim = await apiFetch(`/boletins/${id}`, {
+                await apiFetch(`/boletins/${id}`, {
                     method: 'PATCH',
                     body: JSON.stringify(boletimData)
                 });
                 toast.success('Boletim atualizado com sucesso!');
             } else {
-                createdBoletim = await apiFetch('/boletins', {
+                await apiFetch('/boletins', {
                     method: 'POST',
                     body: JSON.stringify(boletimData)
                 });
                 toast.success('Boletim postado com sucesso!');
             }
 
-            if (imageFile && createdBoletim.id) {
-                await apiUploadFile(`/upload/boletins-image/${createdBoletim.id}`, imageFile);
-            }
-
             if (!id) {
                 setTitle('');
                 setCategory('');
                 setDate('');
-                setAuthorName(name); // Reset to logged in user normally
+                setAuthorName(name);
                 setContent('');
                 setReference('');
                 setProofreader('');

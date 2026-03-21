@@ -10,23 +10,9 @@ import { UploadService } from './upload.service';
 @Module({
     imports: [
         MulterModule.register({
-            storage: diskStorage({
-                destination: join(process.cwd(), 'uploads'),
-                filename: (_req, file, callback) => {
-                    const uniqueName = `${uuidv4()}${extname(file.originalname)}`;
-                    callback(null, uniqueName);
-                },
-            }),
+            storage: undefined, // Default is memoryStorage if not specified
             limits: {
                 fileSize: 5 * 1024 * 1024, // 5MB
-            },
-            fileFilter: (_req, file, callback) => {
-                const allowed = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
-                if (allowed.includes(file.mimetype)) {
-                    callback(null, true);
-                } else {
-                    callback(new Error('Tipo de arquivo não suportado.'), false);
-                }
             },
         }),
     ],

@@ -1,5 +1,7 @@
 const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3000";
+import { createClient } from "@supabase/supabase-js"
 
+const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY)
 
 export async function apiFetch(
     endpoint: string,
@@ -35,7 +37,7 @@ export async function apiFetch(
  * Envia um arquivo como multipart/form-data.
  * NÃO define Content-Type manualmente — o browser adiciona o boundary correto.
  */
-export async function apiUploadFile(
+export async function apiUploadFileDepreacated(
     endpoint: string,
     file: File,
     fieldName = 'file'
@@ -64,4 +66,21 @@ export async function apiUploadFile(
     }
 
     return response.json();
+}
+
+export async function apiUploadFile(file: File) {
+    const filename = `${Date.now()}-${file.name}`;
+    const { error: uploadError } = await supabase.storage
+        .from('users_profile')
+        .upload('public/' + filename, file);
+
+    if (uploadError) {
+        throw uploadError;
+    }
+
+    const { data: publicUrlData } = supabase.storage
+        .from('users_profile')
+        .getPublicUrl('public/' + filename);
+
+    return publicUrlData.publicUrl;
 }

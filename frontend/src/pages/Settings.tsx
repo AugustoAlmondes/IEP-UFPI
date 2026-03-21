@@ -51,30 +51,28 @@ export default function Settings() {
         e.preventDefault();
         setLoading(true);
         try {
+            let profileImageUrl = undefined;
+            if (profileImage) {
+                profileImageUrl = await apiUploadFile(profileImage);
+            }
+
             const payload: SignupPayload = {
                 ...form,
                 role: (form.role?.trim() || "ALUNO") as 'ADMIN' | 'ALUNO',
                 curriculum: form.curriculum?.trim() || undefined,
-                // password: Math.random().toString(36).slice(-8) //Senha aleatória
-                password: import.meta.env.VITE_DEFAULT_PASSWORD ?? "changeme", //Senha temporária via env
+                profile_image: profileImageUrl, // Inclui a URL do Supabase aqui
+                password: import.meta.env.VITE_DEFAULT_PASSWORD ?? "changeme",
             };
 
-            // 1. Criar o membro (signup)
-            const createdMemberData = await toast.promise(apiFetch("/auth/signup", {
+            // 1. Criar o membro (signup) - Agora já inclui a imagem
+            await toast.promise(apiFetch("/auth/signup", {
                 method: "POST",
                 body: JSON.stringify(payload),
             }), {
                 pending: "Cadastrando membro...",
-                success: profileImage ? "Membro cadastrado! Enviando foto..." : "Membro cadastrado com sucesso!",
+                success: "Membro cadastrado com sucesso!",
                 error: "Erro ao cadastrar membro. Verifique os dados e tente novamente.",
             });
-
-            // 2. Se houver imagem, enviar separadamente para /upload/profile-image/:id
-            if (profileImage && createdMemberData?.membro?.id) {
-                await toast.promise(apiUploadFile(`/upload/profile-image/${createdMemberData.membro.id}`, profileImage), {
-                    error: "Membro cadastrado, mas houve um erro ao enviar a foto.",
-                });
-            }
 
             setForm(EMPTY_FORM);
             setProfileImage(null);

@@ -4,4 +4,5 @@ export type SignupPayload = {
     name: string;
     role: 'ADMIN' | 'ALUNO' ;
     curriculum?: string;
+    profile_image?: string;
 };
