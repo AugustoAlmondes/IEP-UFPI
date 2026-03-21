@@ -1,6 +1,0 @@
-# pasta para guardar uploads de imagens (não commitar arquivos reais)
-*.jpg
-*.jpeg
-*.png
-*.gif
-*.webp
