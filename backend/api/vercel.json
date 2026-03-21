@@ -2,15 +2,14 @@
     "version": 2,
     "builds": [
         {
-            "src": "src/main.ts",
+            "src": "backend/api/src/main.ts",
             "use": "@vercel/node"
         }
     ],
-    "buildCommand": "pnpm prisma generate",
     "routes": [
         {
             "src": "/api/(.*)",
-            "dest": "src/main.ts",
+            "dest": "backend/api/src/main.ts",
             "methods": [
                 "GET",
                 "POST",
