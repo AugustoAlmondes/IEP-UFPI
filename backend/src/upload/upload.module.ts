@@ -2,8 +2,8 @@ import { Module } from '@nestjs/common';
 import { MulterModule } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname, join } from 'path';
-import { v4 as uuidv4 } from 'uuid';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { randomUUID } from 'crypto';
+import { PrismaService } from '../prisma/prisma.service';
 import { UploadController } from './upload.controller';
 import { UploadService } from './upload.service';
 
