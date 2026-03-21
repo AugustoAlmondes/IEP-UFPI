@@ -1,4 +1,4 @@
-const API_URL = import.meta.env.VITE_API_URL;
+// const API_URL = import.meta.env.VITE_API_URL;
 import { createClient } from "@supabase/supabase-js"
 
 const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY)
@@ -15,7 +15,8 @@ export async function apiFetch(
         ...options.headers
     };
 
-    const response = await fetch(`${API_URL}${endpoint}`, {
+    console.log(`${import.meta.env.VITE_API_URL}${endpoint}`);
+    const response = await fetch(`${import.meta.env.VITE_API_URL}${endpoint}`, {
         ...options,
         headers
     })
@@ -37,36 +38,36 @@ export async function apiFetch(
  * Envia um arquivo como multipart/form-data.
  * NÃO define Content-Type manualmente — o browser adiciona o boundary correto.
  */
-export async function apiUploadFileDepreacated(
-    endpoint: string,
-    file: File,
-    fieldName = 'file'
-): Promise<{ url: string }> {
-    const token = localStorage.getItem('token');
+// export async function apiUploadFileDepreacated(
+//     endpoint: string,
+//     file: File,
+//     fieldName = 'file'
+// ): Promise<{ url: string }> {
+//     const token = localStorage.getItem('token');
 
-    const formData = new FormData();
-    formData.append(fieldName, file);
+//     const formData = new FormData();
+//     formData.append(fieldName, file);
 
-    const response = await fetch(`${API_URL}${endpoint}`, {
-        method: 'POST',
-        headers: {
-            ...(token && { Authorization: `Bearer ${token}` }),
-        },
-        body: formData,
-    });
+//     const response = await fetch(`${API_URL}${endpoint}`, {
+//         method: 'POST',
+//         headers: {
+//             ...(token && { Authorization: `Bearer ${token}` }),
+//         },
+//         body: formData,
+//     });
 
-    if (response.status === 401) {
-        localStorage.removeItem('token');
-        window.location.href = '/';
-        throw new Error("Sessão expirada. Faça login novamente.");
-    }
+//     if (response.status === 401) {
+//         localStorage.removeItem('token');
+//         window.location.href = '/';
+//         throw new Error("Sessão expirada. Faça login novamente.");
+//     }
 
-    if (!response.ok) {
-        throw new Error("Erro ao enviar imagem");
-    }
+//     if (!response.ok) {
+//         throw new Error("Erro ao enviar imagem");
+//     }
 
-    return response.json();
-}
+//     return response.json();
+// }
 
 export async function apiUploadFile(file: File) {
     const filename = `${Date.now()}-${file.name}`;

@@ -28,7 +28,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const isAuthenticated = !!token;
 
     async function signIn(props: SignInProps): Promise<boolean> {
-        const response = await fetch("http://localhost:3000/auth/signin", {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/signin`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
