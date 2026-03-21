@@ -14,10 +14,6 @@ import { UploadService } from './upload.service';
 import { AuthGuard } from '../auth/auth.guard';
 import { AdminGuard } from '../auth/admin.guard';
 import { PrismaService } from '../prisma/prisma.service';
-import { diskStorage } from 'multer';
-import { extname, join } from 'path';
-import { randomUUID } from 'crypto';
-import * as fs from 'fs';
 
 @Controller('upload')
 export class UploadController {
@@ -75,17 +71,6 @@ export class UploadController {
 
         if (!boletim) {
             throw new NotFoundException('Boletim não encontrado.');
-        }
-
-        // Cleanup local antigo se existir
-        if (boletim.image && boletim.image.includes('/uploads/')) {
-            const oldFilename = boletim.image.split('/').pop();
-            if(oldFilename){
-                const oldPath = join(process.cwd(), 'uploads', 'boletins', oldFilename);
-                if (fs.existsSync(oldPath)) {
-                    fs.unlinkSync(oldPath);
-                }
-            }
         }
 
         this.uploadService.validateFile(file);

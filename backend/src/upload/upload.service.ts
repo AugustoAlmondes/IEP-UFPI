@@ -1,32 +1,51 @@
-import { Injectable, BadRequestException } from '@nestjs/common';
+import { Injectable, BadRequestException, InternalServerErrorException } from '@nestjs/common';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
+import { randomUUID } from 'crypto';
+import { extname } from 'path';
 
 @Injectable()
 export class UploadService {
     private supabase: SupabaseClient;
 
     constructor() {
-        this.supabase = createClient(
-            process.env.SUPABASE_URL!,
-            process.env.SUPABASE_KEY!
-        );
+        const supabaseUrl = process.env.SUPABASE_URL;
+        const supabaseKey = process.env.SUPABASE_KEY;
+
+        if (!supabaseUrl || !supabaseKey) {
+            throw new InternalServerErrorException(
+                'Configuração do Supabase ausente (SUPABASE_URL ou SUPABASE_KEY).',
+            );
+        }
+
+        this.supabase = createClient(supabaseUrl, supabaseKey);
     }
 
     getPublicUrl(filename: string): string {
-        // Se já for uma URL completa (ex: do Supabase ou Cloudinary), retorna ela mesma
+        // Se já for uma URL completa, retorna ela mesma
         if (filename.startsWith('http')) {
             return filename;
         }
-        const baseUrl = process.env.BACKEND_URL ?? 'http://localhost:3000';
-        return `${baseUrl}/uploads/${filename}`;
+        
+        // Esta parte era usada para uploads locais, agora que migramos 100% para Supabase,
+        // esperamos sempre receber caminhos que correspondam ao Supabase ou URLs completas.
+        const { data } = this.supabase.storage
+            .from('users_profile')
+            .getPublicUrl(filename);
+
+        return data.publicUrl;
     }
 
     async uploadToSupabase(file: Express.Multer.File, folder = 'public'): Promise<string> {
-        const filename = `${Date.now()}-${file.originalname}`;
+        this.validateFile(file);
+
+        const fileExt = extname(file.originalname);
+        const filename = `${folder}/${randomUUID()}${fileExt}`;
+
         const { error } = await this.supabase.storage
             .from('users_profile')
-            .upload(`${folder}/${filename}`, file.buffer, {
+            .upload(filename, file.buffer, {
                 contentType: file.mimetype,
+                upsert: true,
             });
 
         if (error) {
@@ -35,7 +54,7 @@ export class UploadService {
 
         const { data } = this.supabase.storage
             .from('users_profile')
-            .getPublicUrl(`${folder}/${filename}`);
+            .getPublicUrl(filename);
 
         return data.publicUrl;
     }
