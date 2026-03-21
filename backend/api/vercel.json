@@ -9,7 +9,7 @@
     "buildCommand": "pnpm prisma generate",
     "routes": [
         {
-            "src": "/(.*)",
+            "src": "/api/(.*)",
             "dest": "src/main.ts",
             "methods": [
                 "GET",
