@@ -15,7 +15,7 @@ export default function Questions() {
                     PERGUNTAS FREQUENTES
                 </h2>
 
-                <div className='mt-10 px-40 flex flex-col center justify-center'>
+                <div className='mt-10 px-10 md:px-40 flex flex-col center justify-center'>
                     {
                         questions.map((question, index) => {
                             return (
