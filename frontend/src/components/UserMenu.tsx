@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { GiHamburgerMenu } from "react-icons/gi";
 
-type Role = "ADMIN" | "ALUNO";
+export type Role = "ADMIN" | "ALUNO";
 
-type MenuItem = {
+export type MenuItem = {
     label: string;
     icon: React.ReactNode;
     action: () => void;

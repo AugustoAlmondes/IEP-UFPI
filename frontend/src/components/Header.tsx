@@ -1,14 +1,36 @@
 import { useEffect, useState } from "react";
 import Logo from "../assets/width_766.webp";
 import { navItems } from "../constants/navitems";
-import { Link } from "react-router-dom";
-import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
+import { Link, useNavigate } from "react-router-dom";
+import { AiOutlineMenu, AiOutlineClose, AiOutlineSetting, AiOutlinePlus, AiOutlineLogout } from "react-icons/ai";
 import { useAuth } from "../context/AuthContext";
-import UserMenu from "./UserMenu";
+import UserMenu, { type MenuItem } from "./UserMenu";
 export default function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const { isAuthenticated } = useAuth();
+    const { signOut, user, name } = useAuth();
+    const navigate = useNavigate();
+
+    const menuItems: MenuItem[] = [
+        {
+            label: "Configurações",
+            icon: <AiOutlineSetting />,
+            action: () => navigate("/settings"),
+            roles: ["ADMIN"],
+        },
+        {
+            label: "Novo boletim",
+            icon: <AiOutlinePlus />,
+            action: () => navigate("/form-newsletter"),
+            roles: ["ADMIN"],
+        },
+        {
+            label: "Sair",
+            icon: <AiOutlineLogout />,
+            action: () => signOut(),
+        },
+    ];
 
     useEffect(() => {
         const handleScroll = () => {
@@ -83,6 +105,17 @@ export default function Header() {
                             </Link>
                         </li>
                     ))}
+                    {isAuthenticated && menuItems.map((item, index) => (
+                        <li key={index}>
+                            <p
+                                onClick={() => { setIsOpen(false); item.action(); }}
+                                className="hover:text-pink transition-colors duration-200"
+                            >
+                                {item.label}
+                            </p>
+                        </li>
+                    ))}
+
                 </ul>
             </div>
 
