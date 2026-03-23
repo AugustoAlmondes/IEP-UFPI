@@ -4,7 +4,7 @@ import { navItems } from "../constants/navitems";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineMenu, AiOutlineClose, AiOutlineSetting, AiOutlinePlus, AiOutlineLogout } from "react-icons/ai";
 import { useAuth } from "../context/AuthContext";
-import UserMenu, { type MenuItem } from "./UserMenu";
+import UserMenu, { type MenuItem, type Role } from "./UserMenu";
 export default function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
@@ -23,7 +23,6 @@ export default function Header() {
             label: "Novo boletim",
             icon: <AiOutlinePlus />,
             action: () => navigate("/form-newsletter"),
-            roles: ["ADMIN"],
         },
         {
             label: "Sair",
@@ -31,6 +30,11 @@ export default function Header() {
             action: () => signOut(),
         },
     ];
+
+    const visibleItems = menuItems.filter((item) => {
+        if (!item.roles) return true;
+        return item.roles.includes(user as Role);
+    });
 
     useEffect(() => {
         const handleScroll = () => {
@@ -84,7 +88,13 @@ export default function Header() {
                 `}
             >
                 <div className="flex justify-between items-center p-5 border-b border-white/10">
-                    <h2 className="text-white text-xl font-semibold">Menu</h2>
+                    {isAuthenticated ? <h2 className="font-semibold text-lg text-pink">
+                        Seja bem-vindo! <br />
+                        <span className="mb-4 text-pink">
+                            {name}
+                        </span>
+                    </h2> :
+                        <h2 className="text-white text-xl font-semibold">Menu</h2>}
                     <button
                         onClick={() => setIsOpen(false)}
                         className="text-white text-3xl"
@@ -105,7 +115,7 @@ export default function Header() {
                             </Link>
                         </li>
                     ))}
-                    {isAuthenticated && menuItems.map((item, index) => (
+                    {isAuthenticated && visibleItems.map((item, index) => (
                         <li key={index}>
                             <p
                                 onClick={() => { setIsOpen(false); item.action(); }}

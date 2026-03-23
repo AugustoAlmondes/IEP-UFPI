@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { RiKeyFill, RiLoader2Fill } from "react-icons/ri";
 import Logo from "../assets/width_766.webp"
@@ -11,7 +11,7 @@ import BackgroundLogin from "../assets/Background_Login.png";
 export default function Login() {
 
 
-    const { signIn } = useAuth();
+    const { signIn, isAuthenticated } = useAuth();
     const navigate = useNavigate();
     const [viewPassword, setViewPassword] = useState(true);
     const [loading, setLoading] = useState(false);
@@ -20,29 +20,40 @@ export default function Login() {
         password: ""
     });
 
+    useEffect(() => {
+        if (isAuthenticated) {
+            navigate("/");
+        }
+    }, [isAuthenticated]);
+
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         if (!dataform.email || !dataform.password) {
             toast.error("Preencha todos os campos!");
             return;
         }
-        setLoading(true);
-        const response = await signIn(dataform);
-        if (response) {
-            navigate("/");
-            setDataform({
-                email: "",
-                password: ""
-            })
-            toast.success("Login realizado com sucesso!");
-        } else {
-            toast.error("Email ou senha incorretos!");
+        try {
+            setLoading(true);
+            const response = await signIn(dataform);
+            if (response) {
+                navigate("/");
+                setDataform({
+                    email: "",
+                    password: ""
+                })
+                toast.success("Login realizado com sucesso!");
+            } else {
+                toast.error("Email ou senha incorretos!");
+            }
+        } catch (error) {
+            toast.error("Erro ao fazer login!");
+        } finally {
+            setLoading(false);
         }
-        setLoading(false);
     }
 
     return (
-        <div 
+        <div
             style={{ backgroundImage: `url(${BackgroundLogin})` }}
             className="
                 h-screen 

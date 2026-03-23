@@ -29,7 +29,6 @@ export default function UserMenu() {
             label: "Novo boletim",
             icon: <AiOutlinePlus />,
             action: () => navigate("/form-newsletter"),
-            roles: ["ADMIN"],
         },
         {
             label: "Sair",
