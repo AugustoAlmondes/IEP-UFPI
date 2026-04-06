@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider     = "prisma-client"
   output       = "../src/generated/prisma"
@@ -15,37 +9,37 @@ datasource db {
 }
 
 model User {
-  id       Int      @id @default(autoincrement())
-  email    String   @unique
+  id       Int        @id @default(autoincrement())
+  email    String     @unique
   password String
-  membro   Membros?
   boletins Boletins[]
+  membro   Membros?
 }
 
 model Membros {
-  id            Int       @id @default(autoincrement())
-  user_id       Int       @unique
-  user          User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  id            Int     @id @default(autoincrement())
+  user_id       Int     @unique
   name          String
   profile_image String?
-  role          String    @default("aluno")
+  role          String  @default("aluno")
   curriculum    String?
+  user          User    @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }
 
 model Boletins {
-  id           Int      @id @default(autoincrement())
-  title        String
-  category     String
-  date         DateTime @default(now())
-  content      String
-  reference    String
-  proofreader  String
-  image        String?
-  legend_image String?
-
+  id            Int      @id @default(autoincrement())
+  title         String
+  category      String
+  date          DateTime @default(now())
+  content       String
+  reference     String
+  proofreader   String
+  image         String?
+  legend_image  String?
   created_by_id Int
-  autor         User     @relation(fields: [created_by_id], references: [id])
   created_in    DateTime @default(now())
+  writers       String
+  autor         User     @relation(fields: [created_by_id], references: [id])
 }
 
 model Patrocinadores {

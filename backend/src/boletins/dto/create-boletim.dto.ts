@@ -36,4 +36,8 @@ export class CreateBoletimDto {
     @IsNumber()
     @IsOptional()
     created_by_id?: number;
+
+    @IsString()
+    @IsNotEmpty()
+    writers: string;
 }
