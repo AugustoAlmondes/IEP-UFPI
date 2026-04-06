@@ -32,4 +32,8 @@ export class UpdateBoletimDto {
     @IsString()
     @IsOptional()
     legend_image?: string;
+
+    @IsString()
+    @IsOptional()
+    writers?: string;
 }

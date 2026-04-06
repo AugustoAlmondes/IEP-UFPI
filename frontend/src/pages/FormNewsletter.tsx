@@ -15,7 +15,7 @@ export default function FormNewsletter() {
     const [title, setTitle] = useState('');
     const [category, setCategory] = useState('');
     const [date, setDate] = useState('');
-    const [authorName, setAuthorName] = useState(name);
+    const [authorName, setAuthorName] = useState('');
     const [content, setContent] = useState('');
     const [reference, setReference] = useState('');
     const [proofreader, setProofreader] = useState('');
@@ -35,7 +35,7 @@ export default function FormNewsletter() {
                     setTitle(response.title || '');
                     setCategory(response.category || '');
                     setDate(response.date ? response.date.split('T')[0] : '');
-                    setAuthorName(response.author_name || name);
+                    setAuthorName(response.writers || '');
                     setContent(response.content || '');
                     setReference(response.reference || '');
                     setProofreader(response.proofreader || '');
@@ -71,7 +71,8 @@ export default function FormNewsletter() {
                 reference,
                 proofreader,
                 legend_image: legendImage,
-                image: imageUrl, // Include the image URL here
+                writers: authorName,
+                image: imageUrl,
             };
 
             if (id) {
@@ -92,7 +93,7 @@ export default function FormNewsletter() {
                 setTitle('');
                 setCategory('');
                 setDate('');
-                setAuthorName(name);
+                setAuthorName('');
                 setContent('');
                 setReference('');
                 setProofreader('');
@@ -136,21 +137,21 @@ export default function FormNewsletter() {
                             required
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
-                            className="text-base placeholder-opacity-18 w-full border-1 border-[var(--color-gray)] bg-[var(--color-gray2)] rounded-md px-4 h-7 focus:outline-none focus:border-pink-500" />
+                            className="text-base placeholder-opacity-18 w-full border border-gray bg-gray2 rounded-md px-4 h-7 focus:outline-none focus:border-pink-500" />
                     </div>
 
                     <div className="flex text-base my-4 w-full gap-6">
                         <div className="w-full">
                             <label>Categoria</label>
                             <select
-                                className="cursor-pointer text-base placeholder-opacity-18 w-full border-1 border-[var(--color-gray)] bg-[var(--color-gray2)] rounded-md px-4 h-7 focus:outline-none focus:border-pink-500"
+                                className="cursor-pointer text-base placeholder-opacity-18 w-full border border-gray bg-gray2 rounded-md px-4 h-7 focus:outline-none focus:border-pink-500"
                                 required
                                 value={category}
                                 onChange={(e) => setCategory(e.target.value)}
                             >
                                 <option value="">Selecione uma categoria</option>
-                                <option value="resenha">Resenha</option>
-                                <option value="economia-politica">Economia Política</option>
+                                <option value="Resenha">Resenha</option>
+                                <option value="Economia Política">Economia Política</option>
                             </select>
                         </div>
                         <div className="w-full">
@@ -160,7 +161,7 @@ export default function FormNewsletter() {
                                 required
                                 value={date}
                                 onChange={(e) => setDate(e.target.value)}
-                                className="text-base placeholder-opacity-18 w-full border-1 border-[var(--color-gray)] bg-[var(--color-gray2)] rounded-md px-4 h-7 focus:outline-none focus:border-pink-500" />
+                                className="text-base placeholder-opacity-18 w-full border border-gray bg-gray2 rounded-md px-4 h-7 focus:outline-none focus:border-pink-500" />
                         </div>
                     </div>
                 </section>
@@ -183,7 +184,7 @@ export default function FormNewsletter() {
                                 placeholder="Digite o nome do autor"
                                 value={authorName ?? ''}
                                 onChange={(e) => setAuthorName(e.target.value)}
-                                className={`text-base placeholder-opacity-18 w-full border-1 border-gray bg-gray2 rounded-md px-4 h-7 focus:outline-none focus:border-pink-500`}
+                                className={`text-base placeholder-opacity-18 w-full border border-gray bg-gray2 rounded-md px-4 h-7 focus:outline-none focus:border-pink-500`}
                             />
                         </div>
                     </div>
@@ -211,7 +212,7 @@ export default function FormNewsletter() {
                                 required
                                 value={reference}
                                 onChange={(e) => setReference(e.target.value)}
-                                className="text-base placeholder-opacity-18 w-full border border-[var(--color-gray)] bg-[var(--color-gray2)] rounded-md px-4 h-7 focus:outline-none focus:border-pink-500" />
+                                className="text-base placeholder-opacity-18 w-full border border-gray bg-gray2 rounded-md px-4 h-7 focus:outline-none focus:border-pink-500" />
                         </div>
                         <div className="w-full">
                             <label>Revisão e Edição</label>
@@ -221,7 +222,7 @@ export default function FormNewsletter() {
                                 required
                                 value={proofreader}
                                 onChange={(e) => setProofreader(e.target.value)}
-                                className="text-base placeholder-opacity-18 w-full border-1 border-[var(--color-gray)] bg-[var(--color-gray2)] rounded-md px-4 h-7 focus:outline-none focus:border-pink-500" />
+                                className="text-base placeholder-opacity-18 w-full border border-gray bg-gray2 rounded-md px-4 h-7 focus:outline-none focus:border-pink-500" />
                         </div>
                     </div>
 
@@ -234,7 +235,7 @@ export default function FormNewsletter() {
                             placeholder="Digite a legenda da imagem"
                             value={legendImage}
                             onChange={(e) => setLegendImage(e.target.value)}
-                            className="text-base placeholder-opacity-18 w-full border-1 border-[var(--color-gray)] bg-[var(--color-gray2)] rounded-md px-4 h-7 focus:outline-none focus:border-pink-500" />
+                            className="text-base placeholder-opacity-18 w-full border border-gray bg-gray2 rounded-md px-4 h-7 focus:outline-none focus:border-pink-500" />
                     </div>
                 </section>
 
