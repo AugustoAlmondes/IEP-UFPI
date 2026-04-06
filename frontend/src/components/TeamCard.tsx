@@ -2,6 +2,7 @@
 // import styles from './TeamCard.module.css';
 
 import type { MemberApiData } from "../types/member";
+import defaultUser from "@/assets/images/default_user.png";
 
 export default function TeamCard({ member }: { member: MemberApiData }) {
     return (
@@ -9,9 +10,9 @@ export default function TeamCard({ member }: { member: MemberApiData }) {
             <div className="w-full h-full flex justify-center items-center">
                 <div className={`flex h-full flex-col gap-1 justify-between`}>
                     <div>
-
+                    
                     <div className="w-[200px] h-[200px] relative">
-                        <img className="w-full h-full object-cover" src={member.profile_image || "/images/default_user.png"} alt={member.name} />
+                        <img className="w-full h-full object-cover" src={member.profile_image || defaultUser} alt={member.name} />
                         <div className="absolute h-7 w-full bg-darkpink bottom-0" />
                     </div>
                         <h3 className="w-[200px] mt-2 text-lg font-bold leading-tight">{member.name}</h3>

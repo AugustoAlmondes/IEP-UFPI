@@ -5,7 +5,7 @@ import { useAuth } from "../context/AuthContext";
 import { FaPen, FaTrash } from "react-icons/fa6";
 import { apiFetch } from "../service/api";
 import { toast } from "react-toastify";
-import boletimDefault from "../assets/images/boletim_default.jpg";
+import boletimDefault from "@/assets/images/boletim_default.jpg";
 
 export default function NewsletterCard({ newsletter, index, onDelete }: { newsletter: Boletins, index: number, onDelete?: (id: number) => void }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -90,14 +90,14 @@ export default function NewsletterCard({ newsletter, index, onDelete }: { newsle
                         <h3 className="text-xl font-bold mb-4 text-gray-800">Confirmar exclusão</h3>
                         <p className="text-gray-600 mb-6">Tem certeza que deseja remover o boletim "{newsletter.title}"? Esta ação não pode ser desfeita.</p>
                         <div className="flex justify-end gap-3">
-                            <button 
+                            <button
                                 onClick={() => setIsModalOpen(false)}
                                 className="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition cursor-pointer"
                                 disabled={isDeleting}
                             >
                                 Cancelar
                             </button>
-                            <button 
+                            <button
                                 onClick={handleDelete}
                                 className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition cursor-pointer"
                                 disabled={isDeleting}
