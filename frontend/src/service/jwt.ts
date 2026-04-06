@@ -13,6 +13,14 @@ export function decodeJwtPayload<T = Record<string, unknown>>(token: string): T 
     }
 }
 
+export function isTokenExpired(token: string | null): boolean {
+    if (!token) return true;
+    const payload = decodeJwtPayload<JwtPayload>(token);
+    if (!payload?.exp) return true;
+    const currentTime = Math.floor(Date.now() / 1000);
+    return payload.exp < currentTime;
+}
+
 export type JwtPayload = {
     sub: number;
     email: string;

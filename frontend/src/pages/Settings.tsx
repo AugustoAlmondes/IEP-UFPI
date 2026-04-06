@@ -60,11 +60,10 @@ export default function Settings() {
                 ...form,
                 role: (form.role?.trim() || "ALUNO") as 'ADMIN' | 'ALUNO',
                 curriculum: form.curriculum?.trim() || undefined,
-                profile_image: profileImageUrl, // Inclui a URL do Supabase aqui
+                profile_image: profileImageUrl,
                 password: import.meta.env.VITE_DEFAULT_PASSWORD ?? "changeme",
             };
 
-            // 1. Criar o membro (signup) - Agora já inclui a imagem
             await toast.promise(apiFetch("/auth/signup", {
                 method: "POST",
                 body: JSON.stringify(payload),

@@ -1,6 +1,6 @@
 import { AuthContext } from '../context/AuthContext';
-import { useState } from "react";
-import { decodeJwtPayload, type JwtPayload } from '../service/jwt';
+import { useState, useEffect, useCallback } from "react";
+import { decodeJwtPayload, isTokenExpired, type JwtPayload } from '../service/jwt';
 
 export interface SignInProps {
     email: string;
@@ -21,11 +21,32 @@ function getNameFromToken(token: string | null):string | null {
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
     const storedToken = localStorage.getItem('token');
-    const [token, setToken] = useState<string | null>(storedToken);
-    const [user, setUser] = useState<"ADMIN" | "ALUNO">(() => getRoleFromToken(storedToken));
-    const [name, setName] = useState<string | null>(() => getNameFromToken(storedToken));
+    
+    // Check if token is expired on initial load
+    const initialToken = isTokenExpired(storedToken) ? null : storedToken;
+    if (storedToken && !initialToken) {
+        localStorage.removeItem('token');
+    }
 
-    const isAuthenticated = !!token;
+    const [token, setToken] = useState<string | null>(initialToken);
+    const [user, setUser] = useState<"ADMIN" | "ALUNO">(() => getRoleFromToken(initialToken));
+    const [name, setName] = useState<string | null>(() => getNameFromToken(initialToken));
+
+    const signOut = useCallback(() => {
+        localStorage.removeItem('token');
+        setToken(null);
+        setUser("ALUNO");
+        window.location.href = "/";
+    }, []);
+
+    // Check token expiration on mount and periodically
+    useEffect(() => {
+        if (token && isTokenExpired(token)) {
+            signOut();
+        }
+    }, [token, signOut]);
+
+    const isAuthenticated = !!token && !isTokenExpired(token);
 
     async function signIn(props: SignInProps): Promise<boolean> {
         const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/signin`, {
@@ -48,12 +69,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         return false;
     }
 
-    function signOut() {
-        localStorage.removeItem('token');
-        setToken(null);
-        setUser("ALUNO");
-        window.location.href = "/";
-    }
+    // Removed old signOut implementation inside the component to use the memoized one
 
     return (
         <AuthContext.Provider
