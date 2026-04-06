@@ -5,6 +5,8 @@ import { useAuth } from "../context/AuthContext";
 import { useState } from "react";
 import { apiFetch } from "../service/api";
 import { toast } from "react-toastify";
+import { EditorContent, useEditor } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
 
 export default function InfoNewslatter({ onDelete }: { onDelete?: (id: number) => void }) {
     const location = useLocation();
@@ -33,6 +35,15 @@ export default function InfoNewslatter({ onDelete }: { onDelete?: (id: number) =
     if (!newsletter) {
         return <div>Boletim não encontrado.</div>;
     }
+
+    const editor = useEditor({
+        shouldRerenderOnTransaction: false,
+        editable: false,
+        content: newsletter.content,
+        extensions: [
+            StarterKit
+        ]
+    })
 
     return (
         <>
@@ -78,10 +89,11 @@ export default function InfoNewslatter({ onDelete }: { onDelete?: (id: number) =
                     <div className="mb-8 w-full max-w-none prose prose-slate [&_p]:mb-4 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mb-4 [&_h3]:text-xl [&_h3]:font-bold [&_h3]:mb-3 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-4 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-4 [&_img]:max-w-full [&_img]:rounded-md">
                         {/* Imagem principal do boletim */}
 
-                        <div
+                        {/* <div
                             className="text-justify"
                             dangerouslySetInnerHTML={{ __html: newsletter.content }}
-                        />
+                        /> */}
+                        <EditorContent editor={editor}/>
                         {newsletter.image && (
                             <div className="flex flex-col justify-center items-center my-8">
                                 <img src={newsletter.image} alt={newsletter.caption || 'Imagem do boletim'} className="max-w-[500px] w-full max-h-[400px] object-contain" />
