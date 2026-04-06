@@ -3,7 +3,6 @@ import { IoTrashOutline } from "react-icons/io5";
 import { IoMdLink } from "react-icons/io";
 import { MdOutlineMail } from "react-icons/md";
 import type { MemberApiData } from "../types/member";
-import DEFAULT_AVATAR from "../assets/images/default_user.png";
 
 interface MemberCardProps {
     member: MemberApiData;
@@ -25,7 +24,7 @@ export default function MemberCard({ member, loggedInUserId, onDelete }: MemberC
         }
     }
 
-    const avatarSrc = member.profile_image ?? DEFAULT_AVATAR;
+    const avatarSrc = member.profile_image ?? "https://github.com/AugustoAlmondes/IEP-UFPI/blob/main/frontend/src/assets/images/default_user.png";
     const isSelf = member.user.id === loggedInUserId;
     const isAdmin = member.role === "ADMIN";
     const canDelete = !isSelf && !isAdmin;
@@ -53,7 +52,7 @@ export default function MemberCard({ member, loggedInUserId, onDelete }: MemberC
                 <img
                     src={avatarSrc}
                     alt={member.name}
-                    onError={(e) => { (e.target as HTMLImageElement).src = DEFAULT_AVATAR; }}
+                    onError={(e) => { (e.target as HTMLImageElement).src = "https://github.com/AugustoAlmondes/IEP-UFPI/blob/main/frontend/src/assets/images/default_user.png"; }}
                     className="w-full sm:w-[90px] sm:h-[90px] h-40 object-cover"
                 />
             </div>
@@ -65,8 +64,8 @@ export default function MemberCard({ member, loggedInUserId, onDelete }: MemberC
                         {member.name}
                     </p>
                     <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${member.role === 'ADMIN'
-                            ? 'bg-green-100 text-green-700 border border-green-200'
-                            : 'bg-gray-100 text-gray-600 border border-gray-200'
+                        ? 'bg-green-100 text-green-700 border border-green-200'
+                        : 'bg-gray-100 text-gray-600 border border-gray-200'
                         }`}>
                         {roleName}
                     </span>
