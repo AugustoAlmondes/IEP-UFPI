@@ -3,8 +3,7 @@ import { IoTrashOutline } from "react-icons/io5";
 import { IoMdLink } from "react-icons/io";
 import { MdOutlineMail } from "react-icons/md";
 import type { MemberApiData } from "../types/member";
-
-const DEFAULT_AVATAR = "/images/default_user.png";
+import DEFAULT_AVATAR from "../assets/images/default_user.png";
 
 interface MemberCardProps {
     member: MemberApiData;
