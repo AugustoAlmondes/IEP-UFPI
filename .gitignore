@@ -44,6 +44,7 @@ Thumbs.db
 # IDEs
 .idea/
 .vscode/
+.agents
 *.suo
 .env
 *.ntvs*

@@ -15,7 +15,6 @@ export async function apiFetch(
         ...options.headers
     };
 
-    console.log(`${import.meta.env.VITE_API_URL}${endpoint}`);
     const response = await fetch(`${import.meta.env.VITE_API_URL}${endpoint}`, {
         ...options,
         headers

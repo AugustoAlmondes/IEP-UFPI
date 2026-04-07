@@ -1,19 +1,46 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { TbPointFilled } from "react-icons/tb";
+import useBoletins from "../context/BoletinsContext";
+import Loading from "../components/Loading";
 import { FaArrowLeft, FaPen, FaTrash } from "react-icons/fa6";
 import { useAuth } from "../context/AuthContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { apiFetch } from "../service/api";
 import { toast } from "react-toastify";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 
 export default function InfoNewslatter({ onDelete }: { onDelete?: (id: number) => void }) {
+
     const location = useLocation();
-    const { newsletter, index } = location.state || {};
     const { isAuthenticated } = useAuth();
+    const navigate = useNavigate()
+
+    const { index: urlIndex, slug } = useParams();
+    const { boletins, loading } = useBoletins();
+    const locationState = location.state || {};
+    const { newsletter: stateNewsletter, index: stateIndex } = locationState;
+
+    const newsletter = stateNewsletter || boletins.find(b => b.id === Number(urlIndex) - 1);
+    const index = stateIndex !== undefined ? stateIndex : (newsletter ? newsletter.id : null);
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
+
+    const editor = useEditor({
+        shouldRerenderOnTransaction: false,
+        editable: false,
+        content: newsletter?.content,
+        extensions: [
+            StarterKit
+        ]
+    })
+
+    useEffect(() => {
+        if (editor && newsletter?.content) {
+            editor.commands.setContent(newsletter.content)
+        }
+    }, [editor, newsletter?.content])
 
     const handleDelete = async () => {
         setIsDeleting(true);
@@ -32,25 +59,20 @@ export default function InfoNewslatter({ onDelete }: { onDelete?: (id: number) =
         }
     };
 
+    if (loading) {
+        return <Loading />
+    }
+
     if (!newsletter) {
         return <div>Boletim não encontrado.</div>;
     }
-
-    const editor = useEditor({
-        shouldRerenderOnTransaction: false,
-        editable: false,
-        content: newsletter.content,
-        extensions: [
-            StarterKit
-        ]
-    })
 
     return (
         <>
             <div className="bg-white pb-40 pt-30 px-4 min-h-screen">
                 <FaArrowLeft
                     size={25}
-                    onClick={() => window.history.back()}
+                    onClick={() => {navigate("/newsletter")}}
                     className="text-darkpink cursor-pointer rounded-full p-1 hover:text-white hover:bg-darkpink transition" />
                 <h1 className="text-3xl sm:text-4xl text-darkpink font-bold text-center mb-5">
                     BOLETIM GAEP
@@ -93,7 +115,7 @@ export default function InfoNewslatter({ onDelete }: { onDelete?: (id: number) =
                             className="text-justify"
                             dangerouslySetInnerHTML={{ __html: newsletter.content }}
                         /> */}
-                        <EditorContent editor={editor}/>
+                        <EditorContent editor={editor} />
                         {newsletter.image && (
                             <div className="flex flex-col justify-center items-center my-8">
                                 <img src={newsletter.image} alt={newsletter.caption || 'Imagem do boletim'} className="max-w-[500px] w-full max-h-[400px] object-contain" />

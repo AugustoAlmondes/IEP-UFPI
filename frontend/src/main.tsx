@@ -22,6 +22,7 @@ import InfoNewslatter from './pages/InfoNewslatter'
 import ErrorPage from './pages/ErrorPage'
 import Podcast from './pages/Podcast'
 import { BoletinsProvider } from './providers/BoletinsProvider'
+import ScrollToTop from './components/ScrollToTop'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -43,6 +44,7 @@ createRoot(document.getElementById('root')!).render(
     <AuthProvider>
       <BoletinsProvider>
         <Router>
+          <ScrollToTop />
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<Home />} />
