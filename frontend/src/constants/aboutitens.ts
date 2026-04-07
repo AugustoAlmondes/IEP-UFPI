@@ -11,7 +11,7 @@ export const aboutItems:AboutItem[] = [
         side: "left"
     }, {
         title: "INSTITUCIONAL",
-        description: "O Instituto de Economia Política (IEP) da Universidade Federal do Piauí (IEP), surgiu no ano de 2025 a partir da necessidade de ampliação das atividades debates no ceio do Grupo de Análise de Economia Política (GAEP) (UFPI) (fundado em maio de 2024), em função de promover as publicidades dos debates e pesquisas do Grupo e incorporar as atividades inseridas no Programa da Pesquisas sobre o Nordeste (ProNordeste) (UFPI) (2025). ",
+        description: "O Instituto de Economia Política (IEP) da Universidade Federal do Piauí (UFPI), surgiu no ano de 2025 a partir da necessidade de ampliação das atividades debates no ceio do Grupo de Análise de Economia Política (GAEP) (UFPI) (fundado em maio de 2024), em função de promover as publicidades dos debates e pesquisas do Grupo e incorporar as atividades inseridas no Programa da Pesquisas sobre o Nordeste (ProNordeste) (UFPI) (2025). ",
         imageUrl: InstitutionalImage,
         url: "/institutional",
         side: "right"
