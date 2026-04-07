@@ -16,7 +16,7 @@ export default function InfoNewslatter({ onDelete }: { onDelete?: (id: number) =
     const { isAuthenticated } = useAuth();
     const navigate = useNavigate()
 
-    const { index: urlIndex, slug } = useParams();
+    const { index: urlIndex } = useParams();
     const { boletins, loading } = useBoletins();
     const locationState = location.state || {};
     const { newsletter: stateNewsletter, index: stateIndex } = locationState;
