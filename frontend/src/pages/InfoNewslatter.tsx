@@ -9,6 +9,7 @@ import { apiFetch } from "../service/api";
 import { toast } from "react-toastify";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
+import Helmet from "../components/Helmet";
 
 export default function InfoNewslatter({ onDelete }: { onDelete?: (id: number) => void }) {
 
@@ -69,6 +70,11 @@ export default function InfoNewslatter({ onDelete }: { onDelete?: (id: number) =
 
     return (
         <>
+        <Helmet
+            title={`Boletim Gaep, N. ${index + 1}, ${newsletter.created_in.replace('-', '/').replace('-', '/').replace("T", " ").split(".")[0]}`}
+            description={`Boletim Gaep, N. ${index + 1}, ${newsletter.created_in.replace('-', '/').replace('-', '/').replace("T", " ").split(".")[0]}`}
+            link="https://iep-ufpi.vercel.app"
+        />
             <div className="bg-white pb-40 pt-30 px-4 min-h-screen">
                 <FaArrowLeft
                     size={25}

@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import Tiptap from "../components/Titap";
 import { useAuth } from "../context/AuthContext";
 import Loading from "../components/Loading";
+import Helmet from "../components/Helmet";
 
 
 export default function FormNewsletter() {
@@ -115,6 +116,12 @@ export default function FormNewsletter() {
     }
 
     return (
+        <>
+        <Helmet
+            title={id ? "Editar Boletim - IEP/UFPI" : "Formulário de Boletim - IEP/UFPI"}
+            description={id ? "Editar Boletim - IEP/UFPI" : "Formulário de Boletim - IEP/UFPI"}
+            link="https://iep-ufpi.vercel.app/form-newsletter"
+        />
         <div className="bg-white pb-20 pt-30 px-4">
             <h2 className="text-4xl sm:text-5xl text-darkpink font-bold text-center mb-10">
                 {id ? "Editar Boletim" : "Formulário de Boletim"}
@@ -250,5 +257,6 @@ export default function FormNewsletter() {
                 </div>
             </form>
         </div>
+        </>
     );
 }

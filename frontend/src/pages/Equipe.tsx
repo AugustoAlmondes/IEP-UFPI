@@ -6,6 +6,7 @@ import { apiFetch } from "../service/api";
 import type { MemberApiData } from "../types/member";
 import Loading from "../components/Loading";
 import TeamBg from "../assets/image_1.jpeg";
+import Helmet from "../components/Helmet";
 
 export default function Equipe() {
 
@@ -62,6 +63,11 @@ export default function Equipe() {
 
     return (
         <>
+            <Helmet
+                title="Equipe - IEP/UFPI"
+                description="Conheça a equipe do IEP - Instituto de Educação Profissional da UFPI"
+                link="https://iep-ufpi.vercel.app/equipe"
+            />
             <div className=" bg-white">
                 <div 
                     style={{ backgroundImage: `url(${TeamBg})` }}

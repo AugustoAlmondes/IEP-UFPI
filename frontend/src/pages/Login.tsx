@@ -7,6 +7,7 @@ import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import BackgroundLogin from "../assets/Background_Login.png";
+import Helmet from "../components/Helmet";
 
 export default function Login() {
 
@@ -53,9 +54,15 @@ export default function Login() {
     }
 
     return (
-        <div
-            style={{ backgroundImage: `url(${BackgroundLogin})` }}
-            className="
+        <>
+            <Helmet
+                title="Login - IEP/UFPI"
+                description="Página de login do IEP/UFPI"
+                link="https://iep-ufpi.vercel.app/login"
+            />
+            <div
+                style={{ backgroundImage: `url(${BackgroundLogin})` }}
+                className="
                 h-screen 
                 bg-cover 
                 bg-black/90 
@@ -63,38 +70,38 @@ export default function Login() {
                 grid-cols-1 
                 lg:grid-cols-2
             "
-        >
-            {/* Coluna esquerda */}
-            <div className="
+            >
+                {/* Coluna esquerda */}
+                <div className="
                 hidden 
                 lg:flex 
                 justify-center 
                 items-center 
                 gap-5
             ">
-                <img className="w-40 h-40" src={Logo} alt="Logo" />
-                <div>
-                    <h1 className="text-white text-7xl font-bold mb-2">
-                        IEP/UFPI
-                    </h1>
-                    <h3 className="text-white text-2xl font-extralight leading-6">
-                        Instituto de Economia Política <br />
-                        Universidade Federal do Piauí
-                    </h3>
+                    <img className="w-40 h-40" src={Logo} alt="Logo" />
+                    <div>
+                        <h1 className="text-white text-7xl font-bold mb-2">
+                            IEP/UFPI
+                        </h1>
+                        <h3 className="text-white text-2xl font-extralight leading-6">
+                            Instituto de Economia Política <br />
+                            Universidade Federal do Piauí
+                        </h3>
+                    </div>
                 </div>
-            </div>
 
-            {/* Coluna direita (Login) */}
-            <form
-                onSubmit={handleSubmit}
-                className="
+                {/* Coluna direita (Login) */}
+                <form
+                    onSubmit={handleSubmit}
+                    className="
                 flex 
                 flex-col 
                 items-center 
                 justify-center 
                 px-6
             ">
-                <h2 className="
+                    <h2 className="
                     text-pink 
                     text-3xl 
                     sm:text-4xl 
@@ -103,24 +110,24 @@ export default function Login() {
                     mb-14 
                     sm:mb-15
                 ">
-                    LOGIN
-                </h2>
+                        LOGIN
+                    </h2>
 
-                {/* Email */}
-                <div className="relative mb-10 w-full max-w-xs">
-                    <label className="text-white absolute -top-5 left-2 font-light text-sm">
-                        Email
-                    </label>
-                    <MdEmail
-                        size={20}
-                        className="text-pink absolute bottom-2 -left-7"
-                    />
-                    <input
-                        value={dataform.email}
-                        disabled={loading}
-                        onChange={(e) => setDataform({ ...dataform, email: e.target.value })}
-                        type="email"
-                        className="
+                    {/* Email */}
+                    <div className="relative mb-10 w-full max-w-xs">
+                        <label className="text-white absolute -top-5 left-2 font-light text-sm">
+                            Email
+                        </label>
+                        <MdEmail
+                            size={20}
+                            className="text-pink absolute bottom-2 -left-7"
+                        />
+                        <input
+                            value={dataform.email}
+                            disabled={loading}
+                            onChange={(e) => setDataform({ ...dataform, email: e.target.value })}
+                            type="email"
+                            className="
                             bg-gray2/35 
                             text-white 
                             border 
@@ -135,43 +142,43 @@ export default function Login() {
                             placeholder:font-extralight
                             placeholder:text-sm
                         "
-                        placeholder="Digite seu Email"
-                    />
-                </div>
-
-                {/* Senha */}
-                <div className="relative w-full max-w-xs">
-                    <label className="text-white absolute -top-5 left-2 font-light text-sm">
-                        Senha
-                    </label>
-
-                    <div className="absolute bottom-2 right-3">
-                        {viewPassword ? (
-                            <IoEyeOff
-                                size={17}
-                                onClick={() => setViewPassword(false)}
-                                className="text-white/60 cursor-pointer"
-                            />
-                        ) : (
-                            <IoEye
-                                size={17}
-                                onClick={() => setViewPassword(true)}
-                                className="text-white/60 cursor-pointer"
-                            />
-                        )}
+                            placeholder="Digite seu Email"
+                        />
                     </div>
 
-                    <RiKeyFill
-                        size={20}
-                        className="text-pink absolute bottom-2 -left-7"
-                    />
+                    {/* Senha */}
+                    <div className="relative w-full max-w-xs">
+                        <label className="text-white absolute -top-5 left-2 font-light text-sm">
+                            Senha
+                        </label>
 
-                    <input
-                        value={dataform.password}
-                        disabled={loading}
-                        onChange={(e) => setDataform({ ...dataform, password: e.target.value })}
-                        type={viewPassword ? "password" : "text"}
-                        className="
+                        <div className="absolute bottom-2 right-3">
+                            {viewPassword ? (
+                                <IoEyeOff
+                                    size={17}
+                                    onClick={() => setViewPassword(false)}
+                                    className="text-white/60 cursor-pointer"
+                                />
+                            ) : (
+                                <IoEye
+                                    size={17}
+                                    onClick={() => setViewPassword(true)}
+                                    className="text-white/60 cursor-pointer"
+                                />
+                            )}
+                        </div>
+
+                        <RiKeyFill
+                            size={20}
+                            className="text-pink absolute bottom-2 -left-7"
+                        />
+
+                        <input
+                            value={dataform.password}
+                            disabled={loading}
+                            onChange={(e) => setDataform({ ...dataform, password: e.target.value })}
+                            type={viewPassword ? "password" : "text"}
+                            className="
                             bg-gray2/35
                             text-white 
                             border 
@@ -186,16 +193,17 @@ export default function Login() {
                             placeholder:font-extralight
                             placeholder:text-sm
                         "
-                        placeholder="Digite sua Senha"
-                    />
-                </div>
+                            placeholder="Digite sua Senha"
+                        />
+                    </div>
 
-                <div className="w-64 h-1 border bg-pink/40 my-10"></div>
+                    <div className="w-64 h-1 border bg-pink/40 my-10"></div>
 
-                <button type="submit" className="btn-pink flex items-center justify-center h-8">
-                    {loading ? <RiLoader2Fill size={20} className="animate-spin" /> : "Entrar"}
-                </button>
-            </form>
-        </div>
+                    <button type="submit" className="btn-pink flex items-center justify-center h-8">
+                        {loading ? <RiLoader2Fill size={20} className="animate-spin" /> : "Entrar"}
+                    </button>
+                </form>
+            </div>
+        </>
     );
 }

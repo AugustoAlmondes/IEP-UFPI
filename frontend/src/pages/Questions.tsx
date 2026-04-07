@@ -6,10 +6,16 @@ import Typography from '@mui/material/Typography';
 import { FaCircle } from 'react-icons/fa6';
 import { IoMdArrowDropup } from 'react-icons/io';
 import { questions } from "../constants/questions";
+import Helmet from '../components/Helmet';
 
 export default function Questions() {
     return (
         <>
+            <Helmet
+                title="Perguntas Frequentes - IEP/UFPI"
+                description="Página de perguntas frequentes do IEP/UFPI"
+                link="https://iep-ufpi.vercel.app/questions"
+            />
             <section className="bg-white h-80vh pb-40 pt-50">
                 <h2 className="text-3xl sm:text-4xl text-darkpink font-bold text-center mb-10">
                     PERGUNTAS FREQUENTES

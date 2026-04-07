@@ -4,6 +4,7 @@ import Loading from "../components/Loading";
 import useBoletins from "../context/BoletinsContext";
 import { useState } from "react";
 import { Search, X } from "lucide-react";
+import Helmet from "../components/Helmet";
 
 export default function Newsletter() {
 
@@ -38,6 +39,11 @@ export default function Newsletter() {
 
     return (
         <>
+            <Helmet
+                title="Boletins - IEP/UFPI"
+                description="Página de boletins do IEP/UFPI"
+                link="https://iep-ufpi.vercel.app/newsletter"
+            />
             <div className="bg-white pb-40 min-h-screen pt-30 px-4">
                 <h1 className="text-3xl sm:text-4xl text-darkpink font-bold text-center mb-5">
                     BOLETINS
